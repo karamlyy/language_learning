@@ -1,52 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:language_learning/data/endpoint/auth/verification_endpoint.dart';
+import 'package:language_learning/data/model/auth/register_model.dart';
+import 'package:language_learning/data/service/preferences/preferences.dart';
 
 class VerificationProvider extends ChangeNotifier {
-  bool _isOtpCompleted = false;
-  bool _isOtpCorrect = true;
-  bool _isOtpExpired = false;
 
-  bool get isOtpCompleted => _isOtpCompleted;
 
-  bool get isOtpCorrect => _isOtpCorrect;
+  String _code = '';
+  String _userId = '';
+  String? _error;
 
-  bool get isOtpExpired => _isOtpExpired;
 
-  void setOtpCompleted(bool value) {
-    _isOtpCompleted = value;
+  String get code => _code;
+  String get userId => _userId;
+  String? get error => _error;
+
+
+
+
+
+  void loadUser() async {
+    final prefs = await PreferencesService.instance;
+    _userId = prefs.userId!;
     notifyListeners();
   }
 
-  void setOtpCorrect(bool value) {
-    _isOtpCorrect = value;
-    notifyListeners();
-  }
-
-  void setOtpExpired(bool value) {
-    _isOtpExpired = value;
-    notifyListeners();
-  }
-
-  void verifyOtp(String enteredOtp) {
-    String actualOtp = "1234";
-
-    if (enteredOtp == actualOtp) {
-      setOtpCompleted(true);
-      setOtpCorrect(true);
-      setOtpExpired(false);
+  void updateEmail(String email) {
+    _code = code;
+    if (code.length == 4) {
+      _error = null;
     } else {
-      setOtpCompleted(true);
-      setOtpCorrect(false);
-      setOtpExpired(false);
+      _error = 'Otp is wrong';
     }
+    notifyListeners();
   }
 
-  void checkOtpExpiration() async {
-    await Future.delayed(Duration(seconds: 2));
 
-    if (_isOtpCompleted && !_isOtpCorrect) {
-      return;
-    }
+  VerificationInput get verificationInput => VerificationInput(userId: _userId, code: _code);
 
-    setOtpExpired(true);
-  }
 }

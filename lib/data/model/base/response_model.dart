@@ -1,4 +1,3 @@
-
 import 'package:language_learning/data/model/auth/login_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
 
@@ -38,7 +37,10 @@ class ResponseModel<T> {
       data: json["data"] == null
           ? getData(json)
           : getData(
-              (json["data"].runtimeType == List || json["data"].runtimeType == int) ? json : json["data"],
+              (json["data"].runtimeType == List ||
+                      json["data"].runtimeType == int)
+                  ? json
+                  : json["data"],
             ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/presenter/screens/auth/verification/provider/verification_provider.dart';
+import 'package:language_learning/presenter/screens/auth/verification/view/verification_button.dart';
 import 'package:language_learning/presenter/widgets/heading_text.dart';
 import 'package:language_learning/presenter/widgets/primary_button.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
@@ -58,14 +59,7 @@ class VerificationForm extends StatelessWidget {
             ),
           ),
           30.verticalSpace,
-          PrimaryButton(
-            title: 'Verify',
-            hasBorder: false,
-            isActive: true,
-            onTap: () {
-              Navigation.push(Routes.setLanguage);
-            },
-          ),
+          VerificationButton(),
         ],
       ),
     );
