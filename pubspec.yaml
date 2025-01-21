@@ -1,0 +1,77 @@
+name: language_learning
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #http requests
+  dio: ^5.7.0
+
+  #error handling
+  dartz: ^0.10.1
+
+  #toast message
+  toastification: ^2.3.0
+
+  #screen sizing
+  flutter_screenutil: ^5.9.3
+
+  #svg
+  flutter_svg: ^2.0.16
+
+  #otp view
+  pinput: ^5.0.0
+
+  #keyboard visibility detector
+  flutter_keyboard_visibility: ^6.0.0
+
+  #localization:
+  easy_localization: ^3.0.7
+
+  # state management
+  provider: ^6.1.2
+  flutter_bloc: ^8.1.6
+
+  retry: ^3.1.2
+  shared_preferences: ^2.3.5
+  get_it: ^8.0.3
+  equatable: ^2.0.7
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+      - assets/images/onboarding_hero.svg
+      - assets/images/
+      - assets/images/background.png
+      - assets/images/flags/
+      - assets/images/features/
+
+  fonts:
+    - family: DMSans
+      fonts:
+        - asset: assets/fonts/DMSans.ttf
+          weight: 400
+
+    - family: DMSerifDisplay
+      fonts:
+        - asset: assets/fonts/DMSerifDisplay-Regular.ttf
+          weight: 400

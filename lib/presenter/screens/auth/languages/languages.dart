@@ -1,0 +1,4 @@
+enum Languages {
+  nativeLanguage,
+  targetLanguage;
+}
