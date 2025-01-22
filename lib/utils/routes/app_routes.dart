@@ -4,6 +4,7 @@ enum Routes {
   login( 'login'),
   register( 'register'),
   verification( 'verification'),
+  verifyCode( 'verify-code'),
   forgotPassword( 'forgot-password'),
   resetPassword( 'reset-password'),
   passwordChanged( 'password-changed'),

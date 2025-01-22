@@ -23,14 +23,14 @@ class VerificationForm extends StatelessWidget {
           return const CircularProgressIndicator();
         }
         return Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0).r,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const HeadingText(
                 headingText: 'Verify your E-mail address',
                 secondaryText:
-                'We’ve sent an activation code to your email  konul@gmail.com',
+                'We’ve sent an activation code to your email',
               ),
 
               42.verticalSpace,
