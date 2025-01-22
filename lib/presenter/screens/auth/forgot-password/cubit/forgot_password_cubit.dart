@@ -19,7 +19,8 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       (error) => emit(ForgotPasswordFailure(errorMessage: error.error)),
       (data) {
         emit(ForgotPasswordSuccess(forgotPasswordModel: data));
-        Navigation.push(Routes.resetPassword, arguments: data);
+        print('forgot password email sent successfully');
+        Navigation.push(Routes.resetPassword);
       },
     );
   }

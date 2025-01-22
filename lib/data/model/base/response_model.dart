@@ -1,4 +1,5 @@
 
+import 'package:language_learning/data/model/auth/forgot_password_model.dart';
 import 'package:language_learning/data/model/auth/login_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
 import 'package:language_learning/data/model/auth/verification_model.dart';
@@ -29,6 +30,8 @@ class ResponseModel<T> {
           return RegisterModel.fromJson(data) as T;
         case const (VerificationModel):
           return VerificationModel.fromJson(data) as T;
+        case const (ForgotPasswordModel):
+          return ForgotPasswordModel.fromJson(data) as T;
       }
       return data["data"];
     }
