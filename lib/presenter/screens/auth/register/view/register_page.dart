@@ -22,7 +22,8 @@ class RegisterPage extends StatelessWidget {
               if (state is RegisterSuccess) {
                 print("Successful registration");
               } else if (state is RegisterFailure) {
-                PrimaryBottomSheet.show(context, text: state.errorMessage.message);
+                PrimaryBottomSheet.show(context,
+                    text: state.errorMessage.message);
               }
             },
             child: const RegisterBody(),

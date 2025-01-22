@@ -9,6 +9,7 @@ class RegisterProvider extends ChangeNotifier {
 
   String _email = '';
   String _password = '';
+  String _userId = '';
 
   String? _emailError;
   String? _passwordError;
@@ -22,6 +23,8 @@ class RegisterProvider extends ChangeNotifier {
   String get email => _email;
 
   String get password => _password;
+
+  String get userId => _userId;
 
   String? get emailError => _emailError;
 

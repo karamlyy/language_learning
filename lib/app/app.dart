@@ -5,8 +5,6 @@ import 'package:language_learning/app/app_cubit.dart';
 import 'package:language_learning/app/app_state.dart';
 import 'package:language_learning/presenter/screens/auth/login/view/login_page.dart';
 import 'package:language_learning/presenter/screens/auth/onboarding/view/onboarding_page.dart';
-import 'package:language_learning/presenter/screens/auth/reset-password/view/password_changed_page.dart';
-import 'package:language_learning/presenter/screens/auth/reset-password/view/reset_password_page.dart';
 import 'package:language_learning/presenter/screens/home/view/home_page.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:language_learning/utils/routes/app_routes.dart';
@@ -37,7 +35,7 @@ class App extends StatelessWidget {
           ),
           debugShowCheckedModeBanner: false,
           navigatorKey: Navigation.navigatorKey,
-          //initialRoute: Routes.onboarding.path,
+          initialRoute: Routes.onboarding.path,
           onGenerateRoute: generateRoute,
           home: MultiProvider(
             providers: [BlocProvider(create: (_) => AppCubit())],
@@ -45,15 +43,13 @@ class App extends StatelessWidget {
               builder: (BuildContext context, AppState state) {
                 if (state is Authorized) {
                   return const HomePage();
-                } else if (state is UnAuthorized) {
-                  return const LoginPage();
-                } else {
-                  return const OnboardingPage();
                 }
+                if (state is UnAuthorized) {
+                  return const LoginPage();
+                }
+                return const OnboardingPage();
               },
-              listener: (BuildContext context, AppState state) {
-                print('AppState changed: $state');
-              },
+              listener: (BuildContext context, AppState state) {},
             ),
           ),
         );

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:language_learning/presenter/screens/auth/forgot-password/cubit/forgot_password_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/provider/forgot_password_provider.dart';
 import 'package:language_learning/presenter/widgets/heading_text.dart';
 import 'package:language_learning/presenter/widgets/primary_button.dart';
@@ -13,10 +14,11 @@ import 'package:provider/provider.dart';
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     final forgotPasswordProvider = context.watch<ForgotPasswordProvider>();
-
+    final forgotPasswordCubit = context.read<ForgotPasswordCubit>();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -28,7 +30,7 @@ class ForgotPasswordForm extends StatelessWidget {
           PrimaryTextFormField(
             headText: "Email address",
             hint: 'Enter email address',
-            onChanged: (value) => forgotPasswordProvider.updateEmail(value),
+            onChanged: forgotPasswordProvider.updateEmail,
             isObscureText: false,
             hasError: forgotPasswordProvider.emailError != null,
             suffixIcon: IconButton(
@@ -49,7 +51,7 @@ class ForgotPasswordForm extends StatelessWidget {
             hasBorder: false,
             isActive: forgotPasswordProvider.isEmailValid(),
             onTap: () {
-              Navigation.push(Routes.resetPassword);
+              forgotPasswordCubit.applyForgotPassword(forgotPasswordProvider.forgotPasswordInput);
             },
           ),
         ],

@@ -22,7 +22,6 @@ class VerificationButton extends StatelessWidget {
           title: 'Verify Account',
           isActive: true,
           onTap: () async {
-            //registerCubit.register(registerProvider.registerInput);
             verificationCubit.confirmEmail(verificationProvider.verificationInput);
 
           },

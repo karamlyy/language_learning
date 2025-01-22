@@ -1,5 +1,7 @@
+
 import 'package:language_learning/data/model/auth/login_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
+import 'package:language_learning/data/model/auth/verification_model.dart';
 
 class ResponseModel<T> {
   int status;
@@ -25,7 +27,8 @@ class ResponseModel<T> {
           return LoginModel.fromJson(data) as T;
         case const (RegisterModel):
           return RegisterModel.fromJson(data) as T;
-
+        case const (VerificationModel):
+          return VerificationModel.fromJson(data) as T;
       }
       return data["data"];
     }
@@ -37,11 +40,8 @@ class ResponseModel<T> {
       data: json["data"] == null
           ? getData(json)
           : getData(
-              (json["data"].runtimeType == List ||
-                      json["data"].runtimeType == int)
-                  ? json
-                  : json["data"],
-            ),
+        (json["data"].runtimeType == List || json["data"].runtimeType == int) ? json : json["data"],
+      ),
     );
   }
 

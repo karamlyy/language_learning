@@ -1,15 +1,15 @@
-class RegisterModel {
+class ForgotPasswordModel {
   String? userId;
   String? codeExpiry;
 
 
 
-  RegisterModel({
+  ForgotPasswordModel({
     this.userId,
     this.codeExpiry,
   });
 
-  factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
+  factory ForgotPasswordModel.fromJson(Map<String, dynamic> json) => ForgotPasswordModel(
     userId: json["userId"],
     codeExpiry: json["codeExpiry"],
   );

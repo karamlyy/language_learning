@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:language_learning/data/endpoint/auth/forgot_password_endpoint.dart';
 import 'package:language_learning/utils/extensions/validation.dart';
 
 class ForgotPasswordProvider extends ChangeNotifier {
@@ -19,6 +20,8 @@ class ForgotPasswordProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  ForgotPasswordInput get forgotPasswordInput => ForgotPasswordInput(email: _email);
 
   bool isEmailValid() {
     final isValid = _emailError == null && _email.isNotEmpty;

@@ -4,7 +4,9 @@ import 'package:language_learning/presenter/screens/auth/verification/view/verif
 import 'package:language_learning/presenter/widgets/primary_header.dart';
 
 class VerificationBody extends StatelessWidget {
-  const VerificationBody({super.key});
+  final String userId;
+  final String codeExpiry;
+  const VerificationBody({super.key, required this.userId, required this.codeExpiry});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +14,12 @@ class VerificationBody extends StatelessWidget {
       child: Column(
         children: [
           const Header(),
+          Text('user id: $userId'),
+          Text('code expiry: $codeExpiry'),
           Expanded(
             child: ListView(
-              children: const [
+              children: [
+
                 VerificationForm(),
               ],
             ),

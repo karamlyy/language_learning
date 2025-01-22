@@ -22,7 +22,8 @@ class LoginPage extends StatelessWidget {
               if (state is LoginSuccess) {
                 print("Successful login");
               } else if (state is LoginFailure) {
-                PrimaryBottomSheet.show(context, text: state.errorMessage.message);
+                PrimaryBottomSheet.show(context,
+                    text: state.errorMessage.message);
               }
             },
             child: const LoginBody(),
