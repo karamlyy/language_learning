@@ -88,7 +88,7 @@ class HomeMain extends StatelessWidget {
             ),
             12.horizontalSpace,
             Expanded(
-              flex: 1,
+
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(16).r),

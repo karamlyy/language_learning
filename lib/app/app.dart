@@ -8,10 +8,11 @@ import 'package:language_learning/presenter/screens/auth/onboarding/view/onboard
 import 'package:language_learning/presenter/screens/home/view/home_page.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:language_learning/utils/routes/app_routes.dart';
+import 'package:language_learning/utils/routes/navigation.dart';
+import 'package:language_learning/utils/routes/route_generator.dart';
 import 'package:provider/provider.dart';
 
-import '../utils/routes/navigation.dart';
-import '../utils/routes/route_generator.dart';
+
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -35,7 +36,7 @@ class App extends StatelessWidget {
           ),
           debugShowCheckedModeBanner: false,
           navigatorKey: Navigation.navigatorKey,
-          initialRoute: Routes.onboarding.path,
+          //initialRoute: Routes.onboarding.path,
           onGenerateRoute: generateRoute,
           home: MultiProvider(
             providers: [BlocProvider(create: (_) => AppCubit())],
@@ -49,7 +50,9 @@ class App extends StatelessWidget {
                 }
                 return const OnboardingPage();
               },
-              listener: (BuildContext context, AppState state) {},
+              listener: (BuildContext context, AppState state) {
+                print('app state is: $AppState');
+              },
             ),
           ),
         );
