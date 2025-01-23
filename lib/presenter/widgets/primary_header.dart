@@ -23,8 +23,8 @@ class Header extends StatelessWidget {
           GestureDetector(
             onTap: onTap ?? () => Navigation.pop(),
             child: Ink(
-              height: 39.h,
-              width: 39.h,
+              height: 40.h,
+              width: 40.h,
               decoration: BoxDecoration(
                 color: AppColors.background,
                 border: Border.all(

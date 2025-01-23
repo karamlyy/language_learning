@@ -22,6 +22,7 @@ class LoginCubit extends Cubit<LoginState> {
         prefs.setAccessToken(data.accessToken ?? "");
         prefs.setRefreshToken(data.refreshToken ?? "");
         prefs.setAuthorizationPassed(true);
+        prefs.setOnBoardingPassed(true);
         emit(LoginSuccess(loginModel: data));
         Navigation.pushNamedAndRemoveUntil(Routes.home);
       },

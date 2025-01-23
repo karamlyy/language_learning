@@ -15,6 +15,7 @@ class PreferencesService {
   }
 
   final _authorizationPassed = "authorizationPassed";
+  final _confirmationPassed = "confirmationPassed";
   final _accessToken = "accessToken";
   final _refreshToken = "refreshToken";
   final _userId = "userId";
@@ -23,6 +24,7 @@ class PreferencesService {
   final _fcmToken = "fcmToken";
 
   setAuthorizationPassed(bool value) async => await _preferences?.setBool(_authorizationPassed, value);
+  setConfirmationPassed(bool value) async => await _preferences?.setBool(_confirmationPassed, value);
   setAccessToken(String value) async => await _preferences?.setString(_accessToken, value);
   setRefreshToken(String value) async => await _preferences?.setString(_refreshToken, value);
   setFullName(String value) async => await _preferences?.setString(_fullName, value);
@@ -31,6 +33,7 @@ class PreferencesService {
   setOnBoardingPassed(bool value) async => await _preferences?.setBool(_onBoardingPassed, value);
 
   bool get wasAuthorizationPassed => _preferences?.getBool(_authorizationPassed) ?? false;
+  bool get wasConfirmationPassed => _preferences?.getBool(_confirmationPassed) ?? false;
   String? get accessToken => _preferences?.getString(_accessToken);
   String? get fcmToken => _preferences?.getString(_fcmToken);
   String? get refreshToken => _preferences?.getString(_refreshToken);

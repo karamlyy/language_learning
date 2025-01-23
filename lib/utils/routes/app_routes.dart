@@ -1,5 +1,6 @@
 enum Routes {
 
+  splash('splash'),
   onboarding( 'onboarding'),
   login( 'login'),
   register( 'register'),

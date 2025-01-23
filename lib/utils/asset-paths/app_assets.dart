@@ -5,6 +5,8 @@ class Images {
 
   static const String loginBanner = '$baseAssetsPath/star.png';
 
+  static const String splashLogo = '$baseAssetsPath/splash_logo.png';
+
   static const String registerBackground = '$baseAssetsPath/background.png';
 
   static const String registerHeaderStars = '$baseAssetsPath/headerStars.svg';

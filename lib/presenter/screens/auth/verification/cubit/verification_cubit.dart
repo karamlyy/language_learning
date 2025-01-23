@@ -19,9 +19,13 @@ class VerificationCubit extends Cubit<VerificationState> {
 
     result.fold((error) => emit(VerificationFailure(errorMessage: error.error)),
         (data) {
-          //prefs.setUserId(message.userId ?? "");
-          Navigation.pushNamedAndRemoveUntil(Routes.setLanguage);
-          print('successful verification data:  ');
-        });
+      //prefs.setUserId(message.userId ?? "");
+      prefs.setAccessToken(data.accessToken ?? '');
+      prefs.setRefreshToken(data.refreshToken ?? "");
+
+      prefs.setConfirmationPassed(true);
+      Navigation.pushNamedAndRemoveUntil(Routes.setLanguage);
+      print('successful verification data:  ');
+    });
   }
 }

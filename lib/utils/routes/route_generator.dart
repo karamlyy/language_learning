@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
 import 'package:language_learning/presenter/screens/auth/languages/view/set_language_page.dart';
+import 'package:language_learning/presenter/screens/auth/splash/view/splash_page.dart';
 import 'package:language_learning/presenter/screens/auth/timing/view/timing_page.dart';
 import 'package:language_learning/presenter/screens/auth/verify-code/view/verify_code_page.dart';
 import 'package:language_learning/presenter/screens/home/view/home_page.dart';
@@ -30,6 +31,8 @@ Route<dynamic> createPageRoute(Widget page, [RouteSettings? settings]) {
 Route<dynamic> generateRoute(RouteSettings settings) {
   final routeName = Routes.fromString(settings.name);
   switch (routeName) {
+    case Routes.splash:
+      return createPageRoute(const SplashPage(), settings);
     case Routes.onboarding:
       return createPageRoute(const OnboardingPage(), settings);
     case Routes.login:

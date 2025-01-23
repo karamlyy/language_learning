@@ -7,19 +7,24 @@ class AppCubit extends Cubit<AppState> {
     check();
   }
 
+  void passOnboarding() async {
+    final prefs = await PreferencesService.instance;
+    prefs.setOnBoardingPassed(true);
+  }
+
   check() async {
     final prefs = await PreferencesService.instance;
     try {
-      print("Authorization Passed: ${prefs.wasAuthorizationPassed}");
-
-      if (prefs.wasAuthorizationPassed) {
+      if (prefs.wasOnBoardingPassed == false) {
+        emit(Onboarding());
+      } else if (prefs.wasConfirmationPassed) {
+        emit(Verified());
+      } else if (prefs.wasAuthorizationPassed) {
         emit(Authorized());
       } else {
-        prefs.clear();
         emit(UnAuthorized());
       }
     } catch (error) {
-      print("Error during check: $error");
       prefs.clear();
       emit(Splash());
     }

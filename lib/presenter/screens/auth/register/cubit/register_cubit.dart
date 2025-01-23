@@ -22,6 +22,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       (data) {
 
         prefs.setUserId(data.userId ?? "");
+
         emit(RegisterSuccess(registerModel: data));
         Navigation.pushNamedAndRemoveUntil(Routes.verification, arguments: data);
         print('successful data:  ${data.userId} ${data.codeExpiry}');

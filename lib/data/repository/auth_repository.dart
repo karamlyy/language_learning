@@ -48,6 +48,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<HttpException, ForgotPasswordModel>> applyForgotPassword(
       ForgotPasswordInput input) async {
-    return await apiService.task<ForgotPasswordModel>(ForgotPasswordEndpoint(input));
+    return await apiService
+        .task<ForgotPasswordModel>(ForgotPasswordEndpoint(input));
   }
 }

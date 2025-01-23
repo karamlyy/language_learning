@@ -34,12 +34,15 @@ class LoginForm extends StatelessWidget {
                     onChanged: loginProvider.updateEmail,
                     isObscureText: false,
                     hasError: loginProvider.emailError != null,
-                    suffixIcon: Icon(
-                      loginProvider.emailError != null
-                          ? null
-                          : (loginProvider.email.isNotEmpty ? CupertinoIcons.check_mark_circled_solid : CupertinoIcons.mail_solid),
-                      color: AppColors.primaryText.withValues(alpha: 0.6),
-                      size: 18.sp,
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(16.0).r,
+                      child: Icon(
+                        loginProvider.emailError != null
+                            ? null
+                            : (loginProvider.email.isNotEmpty ? CupertinoIcons.check_mark_circled_solid : CupertinoIcons.mail_solid),
+                        color: AppColors.primaryText.withValues(alpha: 0.6),
+                        size: 18.sp,
+                      ),
                     ),
                   ),
                   16.verticalSpace,
