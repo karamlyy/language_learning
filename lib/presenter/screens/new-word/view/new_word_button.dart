@@ -22,12 +22,14 @@ class NewWordButton extends StatelessWidget {
         hasBorder: false,
         isActive: newWordProvider.isWordFormValid(),
         onTap: () {
-          newWordProvider.resetFields();
+          //newWordProvider.resetFields();
+          print(newWordProvider.word);
+          print(newWordProvider.translation);
 
           toastification.show(
             context: context,
             title: PrimaryText(
-              text: 'Word saved succesfully!',
+              text: 'Word saved successfully!',
               color: AppColors.inputBackground,
               fontWeight: FontWeight.w300,
               textAlign: TextAlign.start,

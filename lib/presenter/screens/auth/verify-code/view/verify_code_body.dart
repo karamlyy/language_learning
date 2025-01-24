@@ -3,7 +3,9 @@ import 'package:language_learning/presenter/screens/auth/verify-code/view/verify
 import 'package:language_learning/presenter/widgets/primary_header.dart';
 
 class VerifyCodeBody extends StatelessWidget {
-  const VerifyCodeBody({super.key});
+  final String userId;
+  final String codeExpiry;
+  const VerifyCodeBody({super.key, required this.userId, required this.codeExpiry});
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +13,8 @@ class VerifyCodeBody extends StatelessWidget {
       child: Column(
         children: [
           const Header(),
+          Text('user id: $userId'),
+          Text('code expiry: $codeExpiry'),
           Expanded(
             child: ListView(
               children: [

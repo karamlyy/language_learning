@@ -7,11 +7,39 @@ class NewWordProvider extends ChangeNotifier {
   String _word = '';
   String _translation = '';
 
+
+  String? _wordError;
+  String? _translationError;
+
   bool get isAddedLearning => _isAddedLearning;
 
   String get word => _word;
 
   String get translation => _translation;
+
+  String? get wordError => _wordError;
+
+  String? get translationError => _translationError;
+
+  void updateWord(String word) {
+    _word = word;
+    if(word.wordAdded()) {
+      _wordError = null;
+    } else {
+      _wordError = 'written word is too short to add';
+    }
+    notifyListeners();
+  }
+
+  void updateTranslation(String translation) {
+    _translation = translation;
+    if (translation.wordAdded()) {
+      _translationError = null;
+    } else {
+      _translationError = 'written word is too short';
+    }
+    notifyListeners();
+  }
 
   void addLearning(bool value) {
     _isAddedLearning = value;
@@ -22,18 +50,6 @@ class NewWordProvider extends ChangeNotifier {
     _word = '';
     _translation = '';
     _isAddedLearning = false;
-    notifyListeners();
-  }
-
-  void setWord(String value) {
-    _word = value;
-    print('soz: $_word');
-    notifyListeners();
-  }
-
-  void setTranslation(String value) {
-    _translation = value;
-    print('translation soz: $_translation');
     notifyListeners();
   }
 

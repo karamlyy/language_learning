@@ -14,8 +14,8 @@ class NewWordInputs extends StatelessWidget {
   Widget build(BuildContext context) {
     final newWordProvider = context.watch<NewWordProvider>();
 
-    final wordController = TextEditingController(text: newWordProvider.word);
-    final translationController = TextEditingController(text: newWordProvider.translation);
+    //final wordController = TextEditingController(text: newWordProvider.word);
+    //final translationController = TextEditingController(text: newWordProvider.translation);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
@@ -40,12 +40,13 @@ class NewWordInputs extends StatelessWidget {
                     fontFamily: 'DMSerifDisplay',
                   ),
                   PrimaryTextFormField(
-                    onChanged: (value) => newWordProvider.setWord(value),
+                    initialText: newWordProvider.word,
+                    onChanged: (value) => newWordProvider.updateWord(value),
                     isFilled: false,
                     defaultBorderColor: Colors.transparent,
                     defaultEnabledBorderColor: Colors.transparent,
                     defaultFocusedBorderColor: Colors.transparent,
-                    controller: wordController,
+                    //controller: wordController,
                   )
                 ],
               ),
@@ -71,12 +72,13 @@ class NewWordInputs extends StatelessWidget {
                     fontFamily: 'DMSerifDisplay',
                   ),
                   PrimaryTextFormField(
-                    onChanged: (value) => newWordProvider.setTranslation(value),
+                    initialText: newWordProvider.translation,
+                    onChanged: (value) =>
+                        newWordProvider.updateTranslation(value),
                     isFilled: false,
                     defaultBorderColor: Colors.transparent,
                     defaultEnabledBorderColor: Colors.transparent,
                     defaultFocusedBorderColor: Colors.transparent,
-                    controller: translationController,
                   ),
                 ],
               ),

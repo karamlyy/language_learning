@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:language_learning/data/endpoint/auth/reset_password_endpoint.dart';
 import 'package:language_learning/utils/extensions/validation.dart';
 
 class ResetPasswordProvider extends ChangeNotifier {
   String _password = '';
   String _confirmPassword = '';
+  String _userId = '';
 
   String? _passwordError;
   String? _confirmPasswordError;
@@ -11,19 +13,22 @@ class ResetPasswordProvider extends ChangeNotifier {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
 
-  bool _isTextFieldClicked = false;
-
   String get password => _password;
+
   String get confirmPassword => _confirmPassword;
 
+  String get userId => _userId;
 
   String? get passwordError => _passwordError;
+
   String? get confirmPasswordError => _confirmPasswordError;
 
   bool get isPasswordVisible => _isPasswordVisible;
+
   bool get isConfirmPasswordVisible => _isConfirmPasswordVisible;
 
-  bool get isTextFormClicked => _isTextFieldClicked;
+  ResetPasswordInput get resetPasswordInput =>
+      ResetPasswordInput(userId: _userId, newPassword: _confirmPassword);
 
   void changePasswordVisibility(bool value) {
     _isPasswordVisible = value;
@@ -32,6 +37,11 @@ class ResetPasswordProvider extends ChangeNotifier {
 
   void changeConfirmPasswordVisibility(bool value) {
     _isConfirmPasswordVisible = value;
+    notifyListeners();
+  }
+
+  void setUserId(String userId) {
+    _userId = userId;
     notifyListeners();
   }
 
@@ -55,20 +65,19 @@ class ResetPasswordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   bool isPasswordValid() {
-    return _password.length >= 8 ;
+    return _password.isValidPassword();
   }
 
   bool isConfirmPasswordValid() {
-    return _confirmPassword.length >= 8;
+    return _confirmPassword.isValidPassword();
   }
 
   bool isPasswordMatch() {
-    return _password == _confirmPassword && isPasswordValid() && isConfirmPasswordValid();
+    return _password == _confirmPassword;
   }
 
   bool isFormValid() {
-    return isPasswordValid();
+    return isPasswordValid() && isConfirmPasswordValid() && isPasswordMatch();
   }
 }

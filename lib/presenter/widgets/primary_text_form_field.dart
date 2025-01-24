@@ -6,6 +6,7 @@ import 'package:language_learning/utils/colors/app_colors.dart';
 class PrimaryTextFormField extends StatelessWidget {
   final String? hint;
   final String? errorText;
+  final String? initialText;
 
   final ValueChanged<String> onChanged;
   final bool isObscureText;
@@ -25,6 +26,7 @@ class PrimaryTextFormField extends StatelessWidget {
     super.key,
     this.hint,
     this.errorText,
+    this.initialText,
     this.isFilled = true,
     required this.onChanged,
     this.isObscureText = false,
@@ -58,6 +60,7 @@ class PrimaryTextFormField extends StatelessWidget {
           ),
         6.verticalSpace,
         TextFormField(
+          initialValue: initialText,
           obscureText: isObscureText,
           style: TextStyle(fontSize: 16.sp),
           onChanged: onChanged,

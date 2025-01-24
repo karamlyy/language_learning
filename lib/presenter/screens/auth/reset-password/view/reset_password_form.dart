@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/presenter/screens/auth/reset-password/provider/resetPasswordProvider.dart';
+import 'package:language_learning/presenter/screens/auth/reset-password/view/reset_password_button.dart';
 import 'package:language_learning/presenter/widgets/heading_text.dart';
 import 'package:language_learning/presenter/widgets/primary_button.dart';
 import 'package:language_learning/presenter/widgets/primary_text_form_field.dart';
@@ -74,14 +75,7 @@ class ResetPasswordForm extends StatelessWidget {
             ),
           ),
           32.verticalSpace,
-          PrimaryButton(
-            title: 'Reset password',
-            hasBorder: false,
-            isActive: resetPasswordProvider.isPasswordMatch(),
-            onTap: () {
-              Navigation.push(Routes.passwordChanged);
-            },
-          ),
+          ResetPasswordButton(),
         ],
       ),
     );

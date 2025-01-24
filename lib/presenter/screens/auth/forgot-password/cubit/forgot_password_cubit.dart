@@ -1,11 +1,10 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:language_learning/data/endpoint/auth/forgot_password_endpoint.dart';
 import 'package:language_learning/data/repository/auth_repository.dart';
 import 'package:language_learning/data/service/api/di.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/cubit/forgot_password_state.dart';
 import 'package:language_learning/utils/routes/app_routes.dart';
 import 'package:language_learning/utils/routes/navigation.dart';
-import 'package:meta/meta.dart';
 
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   ForgotPasswordCubit() : super(ForgotPasswordInitial());
@@ -20,7 +19,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       (data) {
         emit(ForgotPasswordSuccess(forgotPasswordModel: data));
         print('forgot password email sent successfully');
-        Navigation.push(Routes.verifyCode);
+        Navigation.push(Routes.verifyCode, arguments: data);
       },
     );
   }

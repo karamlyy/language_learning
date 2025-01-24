@@ -1,6 +1,6 @@
 extension StringValidation on String {
   bool wordAdded() {
-    return length > 3;
+    return length >= 2;
   }
 
   bool isValidEmail() {

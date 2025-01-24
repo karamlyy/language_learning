@@ -32,6 +32,8 @@ class ResponseModel<T> {
           return VerificationModel.fromJson(data) as T;
         case const (ForgotPasswordModel):
           return ForgotPasswordModel.fromJson(data) as T;
+        case const (ResponseModel):
+          return ResponseModel.fromJson(data) as T;
       }
       return data["data"];
     }

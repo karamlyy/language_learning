@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:language_learning/data/model/auth/forgot_password_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
 import 'package:language_learning/presenter/screens/auth/languages/view/set_language_page.dart';
 import 'package:language_learning/presenter/screens/auth/splash/view/splash_page.dart';
@@ -40,7 +41,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.register:
       return createPageRoute(const RegisterPage(), settings);
     case Routes.verification:
-      log("settings.arguments ${settings.arguments}");
       return createPageRoute(
         VerificationPage(
           registerModel: settings.arguments as RegisterModel,
@@ -48,11 +48,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings,
       );
     case Routes.verifyCode:
-      return createPageRoute(const VerifyCodePage(), settings);
+      return createPageRoute(
+          VerifyCodePage(
+            forgotPasswordModel: settings.arguments as ForgotPasswordModel,
+          ),
+          settings);
     case Routes.forgotPassword:
       return createPageRoute(const ForgotPasswordPage(), settings);
     case Routes.resetPassword:
-      return createPageRoute(const ResetPasswordPage(), settings);
+      log("settings.arguments ${settings.arguments}");
+      return createPageRoute(
+          ResetPasswordPage(
+            forgotPasswordModel: settings.arguments as ForgotPasswordModel,
+          ),
+          settings);
     case Routes.passwordChanged:
       return createPageRoute(const PasswordChangedPage(), settings);
     case Routes.setLanguage:

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/presenter/screens/auth/verification/cubit/verification_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/verification/cubit/verification_state.dart';
 import 'package:language_learning/presenter/screens/auth/verification/provider/verification_provider.dart';
-import 'package:language_learning/presenter/screens/auth/verification/view/verification_button.dart';
+import 'package:language_learning/presenter/screens/auth/verification/view/verification_info.dart';
 import 'package:language_learning/presenter/widgets/heading_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:pinput/pinput.dart';
@@ -69,7 +69,7 @@ class VerificationForm extends StatelessWidget {
                 ),
               ),
               30.verticalSpace,
-              VerificationButton(),
+              VerificationInfo(),
             ],
           ),
         );
