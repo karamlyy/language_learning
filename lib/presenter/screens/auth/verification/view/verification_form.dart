@@ -4,11 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/presenter/screens/auth/verification/cubit/verification_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/verification/cubit/verification_state.dart';
 import 'package:language_learning/presenter/screens/auth/verification/provider/verification_provider.dart';
-import 'package:language_learning/presenter/screens/auth/verification/view/verification_info.dart';
 import 'package:language_learning/presenter/widgets/heading_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:pinput/pinput.dart';
-import 'package:provider/provider.dart';
 
 class VerificationForm extends StatelessWidget {
   const VerificationForm({super.key});
@@ -28,9 +26,8 @@ class VerificationForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const HeadingText(
-                headingText: 'Verify your E-mail address',
-                secondaryText:
-                'We’ve sent an activation code to your email',
+                headingText: 'Verify your e-mail address',
+                secondaryText: 'We’ve sent an activation code to your email',
               ),
 
               42.verticalSpace,
@@ -39,7 +36,8 @@ class VerificationForm extends StatelessWidget {
                 length: 4,
                 onChanged: verificationProvider.updateVerificationCode,
                 onCompleted: (value) {
-                  verificationCubit.confirmEmail(verificationProvider.verificationInput);
+                  verificationCubit
+                      .confirmEmail(verificationProvider.verificationInput);
                 },
                 defaultPinTheme: PinTheme(
                   width: (double.infinity / 4),
@@ -69,13 +67,11 @@ class VerificationForm extends StatelessWidget {
                 ),
               ),
               30.verticalSpace,
-              VerificationInfo(),
+              //VerificationInfo(),
             ],
           ),
         );
-        
       },
     );
-    
   }
 }

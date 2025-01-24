@@ -12,6 +12,17 @@ class VerificationCubit extends Cubit<VerificationState> {
 
   final _authRepository = getIt<AuthRepository>();
 
+  void resendConfirmationEmail(String userId) async {
+    emit(VerificationInitial());
+    final result = await _authRepository.resendConfirmationEmail(userId);
+    result.fold(
+      (error) => emit(VerificationFailure(errorMessage: error.error)),
+      (data) {
+
+      },
+    );
+  }
+
   void confirmEmail(VerificationInput input) async {
     emit(VerificationInitial());
     final result = await _authRepository.confirmEmail(input);

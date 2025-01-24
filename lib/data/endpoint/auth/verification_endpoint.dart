@@ -14,16 +14,34 @@ class VerificationEndpoint extends Endpoint {
 
   @override
   Map<String, dynamic>? get body => input.toJson();
+}
 
+class ResendConfirmationEmail extends Endpoint {
+  final String userId;
+
+  ResendConfirmationEmail(
+    this.userId,
+  );
+
+  @override
+  String get route => ApiRoutes.resendConfirmationEmail;
+
+  @override
+  HttpMethod get httpMethod => HttpMethod.post;
+
+  @override
+  Map<String, dynamic>? get body => {
+        "userId": userId,
+      };
 }
 
 class VerificationInput {
   final String userId;
-  final String code;
+  final String? code;
 
   VerificationInput({
     required this.userId,
-    required this.code,
+    this.code,
   });
 
   Map<String, dynamic> toJson() {

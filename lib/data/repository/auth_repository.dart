@@ -21,6 +21,8 @@ abstract class AuthRepository {
   Future<Either<HttpException, VerificationModel>> confirmEmail(
       VerificationInput input);
 
+  Future<Either<HttpException, void>> resendConfirmationEmail(String userId);
+
   Future<Either<HttpException, ForgotPasswordModel>> applyForgotPassword(
       ForgotPasswordInput input);
 
@@ -50,6 +52,12 @@ class AuthRepositoryImpl extends AuthRepository {
       VerificationInput input) async {
     return await apiService
         .task<VerificationModel>(VerificationEndpoint(input));
+  }
+
+  @override
+  Future<Either<HttpException, void>> resendConfirmationEmail(
+      String userId) async {
+    return await apiService.task<void>(ResendConfirmationEmail(userId));
   }
 
   @override

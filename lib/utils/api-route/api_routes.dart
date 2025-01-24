@@ -4,7 +4,7 @@ class ApiRoutes {
   static const String register = 'Register';
   static const String login = 'Login';
   static const String confirmEmail = 'ConfirmEmail';
-  static const String resendConfirmation = 'ResendEmailConfirmationToken';
+  static const String resendConfirmationEmail = 'ResendEmailConfirmationCode';
   static const String verifyCode = 'ConfirmPasswordResetCode';
   static const String refreshToken = 'RefreshToken';
   static const String forgotPassword = 'ForgotPassword';

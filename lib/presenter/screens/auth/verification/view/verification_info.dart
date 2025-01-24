@@ -13,15 +13,16 @@ class VerificationInfo extends StatelessWidget {
     final verificationProvider = context.watch<VerificationProvider>();
     final verificationCubit = context.read<VerificationCubit>();
     return BlocBuilder<VerificationCubit, VerificationState>(
-        builder: (context, state) {
-      if (state is VerificationLoading) {
-        return const CircularProgressIndicator();
-      }
-      return PrimaryFooter(
-        onTap: () {},
-        mainText: '00:20 ',
-        secondaryText: 'Send code again',
-      );
-    });
+      builder: (context, state) {
+        if (state is VerificationLoading) {
+          return const CircularProgressIndicator();
+        }
+        return PrimaryFooter(
+          onTap: () {},
+          mainText: '00:20 ',
+          secondaryText: 'Send code again',
+        );
+      },
+    );
   }
 }
