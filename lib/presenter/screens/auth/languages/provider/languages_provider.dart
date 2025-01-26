@@ -47,7 +47,7 @@ class LanguagesProvider extends ChangeNotifier {
     if (pageIndex == 1) {
       pageController.jumpToPage(0);
     } else {
-      Navigation.pop();
+      Navigation.push(Routes.login);
     }
     notifyListeners();
   }

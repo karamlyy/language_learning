@@ -31,10 +31,6 @@ class VerificationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  VerificationInput get verificationInput => VerificationInput(userId: _userId, code: _code);
-
-
-
+  VerificationInput get verificationInput =>
+      VerificationInput(userId: _userId, code: _code);
 }

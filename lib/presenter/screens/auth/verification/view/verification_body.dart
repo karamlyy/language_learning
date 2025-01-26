@@ -6,7 +6,12 @@ import 'package:language_learning/presenter/widgets/primary_header.dart';
 class VerificationBody extends StatelessWidget {
   final String userId;
   final String codeExpiry;
-  const VerificationBody({super.key, required this.userId, required this.codeExpiry});
+
+  const VerificationBody({
+    super.key,
+    required this.userId,
+    required this.codeExpiry,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,6 @@ class VerificationBody extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-
                 VerificationForm(),
               ],
             ),

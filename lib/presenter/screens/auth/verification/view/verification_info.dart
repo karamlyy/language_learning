@@ -6,7 +6,14 @@ import 'package:language_learning/presenter/screens/auth/verification/provider/v
 import 'package:language_learning/presenter/widgets/primary_footer.dart';
 
 class VerificationInfo extends StatelessWidget {
-  const VerificationInfo({super.key});
+  final String userId;
+  final String codeExpiry;
+
+  const VerificationInfo({
+    super.key,
+    required this.userId,
+    required this.codeExpiry,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +24,7 @@ class VerificationInfo extends StatelessWidget {
         if (state is VerificationLoading) {
           return const CircularProgressIndicator();
         }
+
         return PrimaryFooter(
           onTap: () {},
           mainText: '00:20 ',
