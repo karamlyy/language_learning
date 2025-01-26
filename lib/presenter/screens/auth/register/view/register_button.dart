@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/auth/register/cubit/register_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/register/cubit/register_state.dart';
 import 'package:language_learning/presenter/screens/auth/register/provider/register_provider.dart';
@@ -12,9 +13,9 @@ class RegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final registerProvider = context.watch<RegisterProvider>();
     final registerCubit = context.read<RegisterCubit>();
-    return BlocBuilder<RegisterCubit, RegisterState>(
+    return BlocBuilder<RegisterCubit, BaseState>(
       builder: (context, state) {
-        if (state is RegisterLoading) {
+        if (state is LoadingState) {
           return const CircularProgressIndicator();
         }
         return PrimaryButton(

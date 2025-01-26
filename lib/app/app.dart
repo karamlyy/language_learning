@@ -42,12 +42,12 @@ class App extends StatelessWidget {
               builder: (BuildContext context, AppState state) {
                 if (state is Onboarding) {
                   return const OnboardingPage();
-                } else if (state is Verified) {
-                  return SetLanguagePage();
                 } else if (state is Authorized) {
                   return const HomePage();
                 } else if (state is UnAuthorized) {
                   return const LoginPage();
+                } else if (state is Verified) {
+                  return SetLanguagePage();
                 }
                 return const SplashPage();
               },

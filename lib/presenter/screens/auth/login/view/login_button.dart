@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/auth/login/cubit/login_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/login/cubit/login_state.dart';
 import 'package:language_learning/presenter/screens/auth/login/provider/login_provider.dart';
@@ -12,9 +13,9 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginProvider = context.watch<LoginProvider>();
     final loginCubit = context.read<LoginCubit>();
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocBuilder<LoginCubit, BaseState>(
       builder: (context, state) {
-        if (state is LoginLoading) {
+        if (state is LoadingState) {
           return const CircularProgressIndicator();
         }
         return PrimaryButton(
