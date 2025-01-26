@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:language_learning/generic/base_state.dart';
+import 'package:language_learning/data/model/auth/login_model.dart';import 'package:language_learning/generic/generic_listener.dart';
 import 'package:language_learning/presenter/screens/auth/login/cubit/login_cubit.dart';
-import 'package:language_learning/presenter/screens/auth/login/cubit/login_state.dart';
 import 'package:language_learning/presenter/screens/auth/login/provider/login_provider.dart';
 import 'package:language_learning/presenter/screens/auth/login/view/login_body.dart';
 import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
@@ -13,19 +12,17 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(),
+    return ChangeNotifierProvider(
+      create: (context) => LoginProvider(),
       child: Scaffold(
-        body: ChangeNotifierProvider(
-          create: (context) => LoginProvider(),
-          child: BlocListener<LoginCubit, BaseState>(
-            listener: (context, state) {
-              if (state is SuccessState) {
-                print("Successful login");
-              } else if (state is FailureState) {
-                PrimaryBottomSheet.show(context,
-                    text: state.errorMessage.message);
-              }
+        body: BlocProvider(
+          create: (context) => LoginCubit(),
+          child: GenericBlocListener<LoginCubit, LoginModel>(
+            onSuccess: (context, data) {
+              print("Successful login");
+            },
+            onFailure: (context, errorMessage) {
+              PrimaryBottomSheet.show(context, text: errorMessage.message);
             },
             child: const LoginBody(),
           ),
