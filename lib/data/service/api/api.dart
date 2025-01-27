@@ -35,7 +35,8 @@ class ApiService {
   void _disableSSLCertificateValidation() {
     (_dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
       final HttpClient client = HttpClient();
-      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
       return client;
     };
   }
@@ -59,6 +60,7 @@ class ApiService {
   }
 
   Future<Response> _executeRequest(Endpoint endpoint) async {
+    final options = Options(headers: endpoint.headers);
     switch (endpoint.httpMethod) {
       case HttpMethod.get:
         return _dio.get(
@@ -68,6 +70,7 @@ class ApiService {
       case HttpMethod.post:
         return _dio.post(
           endpoint.route,
+          options: options,
           data: endpoint.body,
           queryParameters: endpoint.queryParameters,
         );
@@ -95,11 +98,15 @@ class ApiService {
       } else if (request.isSuccessful && !request.hasData) {
         return request.message;
       } else {
-        return HttpException(error: ErrorMessage(message: request.message ?? "", code: request.status));
+        return HttpException(
+            error: ErrorMessage(
+                message: request.message ?? "", code: request.status));
       }
     } else {
       return HttpException(
-        error: ErrorMessage(message: response.statusMessage ?? "Unknown error", code: response.statusCode),
+        error: ErrorMessage(
+            message: response.statusMessage ?? "Unknown error",
+            code: response.statusCode),
       );
     }
   }
@@ -128,6 +135,8 @@ class ApiService {
 
   // Reduced retries to improve response speed in case of failures
   bool _shouldRetry(DioException e) {
-    return e.type == DioExceptionType.connectionTimeout || e.type == DioExceptionType.receiveTimeout || e.type == DioExceptionType.sendTimeout;
+    return e.type == DioExceptionType.connectionTimeout ||
+        e.type == DioExceptionType.receiveTimeout ||
+        e.type == DioExceptionType.sendTimeout;
   }
 }
