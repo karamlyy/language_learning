@@ -12,7 +12,6 @@ class SetLanguageEndpoint extends Endpoint {
   @override
   HttpMethod get httpMethod => HttpMethod.post;
 
-
   @override
   Map<String, dynamic>? get body => input.toJson();
 }

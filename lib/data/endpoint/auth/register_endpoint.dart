@@ -14,6 +14,8 @@ class RegisterEndpoint extends Endpoint {
 
   @override
   Map<String, dynamic>? get body => input.toJson();
+
+
 }
 
 class RegisterInput {

@@ -3,6 +3,7 @@ import 'package:language_learning/data/endpoint/auth/forgot_password_endpoint.da
 import 'package:language_learning/data/endpoint/auth/login_endpoint.dart';
 import 'package:language_learning/data/endpoint/auth/register_endpoint.dart';
 import 'package:language_learning/data/endpoint/auth/reset_password_endpoint.dart';
+import 'package:language_learning/data/endpoint/auth/set_language_endpoint.dart';
 import 'package:language_learning/data/endpoint/auth/verification_endpoint.dart';
 import 'package:language_learning/data/endpoint/auth/verify_code_endpoint.dart';
 import 'package:language_learning/data/exception/error.dart';
@@ -28,6 +29,8 @@ abstract class AuthRepository {
   Future<Either<HttpException, void>> verifyCode(VerifyCodeInput input);
 
   Future<Either<HttpException, void>> resetPassword(ResetPasswordInput input);
+
+  Future<Either<HttpException, void>> setLanguage(SetLanguageInput input);
 }
 
 class AuthRepositoryImpl extends AuthRepository {
@@ -74,5 +77,10 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<HttpException, void>> resetPassword(ResetPasswordInput input) async {
     return await apiService.task<void>(ResetPasswordEndpoint(input));
+  }
+
+  @override
+  Future<Either<HttpException, void>> setLanguage(SetLanguageInput input) async {
+    return await apiService.task<void>(SetLanguageEndpoint(input));
   }
 }

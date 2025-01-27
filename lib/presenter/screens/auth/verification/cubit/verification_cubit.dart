@@ -16,10 +16,10 @@ class VerificationCubit extends Cubit<VerificationState> {
     emit(VerificationInitial());
     final result = await _authRepository.resendConfirmationEmail(userId);
     result.fold(
-      (error) => emit(VerificationFailure(errorMessage: error.error)),
-      (data) {
-
-      },
+      (error) => emit(
+        VerificationFailure(errorMessage: error.error),
+      ),
+      (data) {},
     );
   }
 
@@ -31,7 +31,8 @@ class VerificationCubit extends Cubit<VerificationState> {
     result.fold((error) => emit(VerificationFailure(errorMessage: error.error)),
         (data) {
       prefs.setAccessToken(data.accessToken ?? '');
-      prefs.setRefreshToken(data.refreshToken ?? "");
+      prefs.setRefreshToken(data.refreshToken ?? '');
+      prefs.setUserId(data.userId ?? '');
 
       prefs.setConfirmationPassed(true);
       Navigation.pushNamedAndRemoveUntil(Routes.setLanguage);
