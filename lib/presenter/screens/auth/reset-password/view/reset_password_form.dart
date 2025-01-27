@@ -3,13 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/presenter/screens/auth/reset-password/provider/resetPasswordProvider.dart';
 import 'package:language_learning/presenter/screens/auth/reset-password/view/reset_password_button.dart';
 import 'package:language_learning/presenter/widgets/heading_text.dart';
-import 'package:language_learning/presenter/widgets/primary_button.dart';
 import 'package:language_learning/presenter/widgets/primary_text_form_field.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
-import 'package:language_learning/utils/routes/app_routes.dart';
-import 'package:language_learning/utils/routes/navigation.dart';
 import 'package:provider/provider.dart';
-
 
 class ResetPasswordForm extends StatelessWidget {
   const ResetPasswordForm({super.key});
@@ -28,7 +24,6 @@ class ResetPasswordForm extends StatelessWidget {
             secondaryText: 'Please type something you’ll remember',
           ),
           39.verticalSpace,
-
           PrimaryTextFormField(
             headText: 'New password',
             hint: 'must be 8 characters',
@@ -51,7 +46,6 @@ class ResetPasswordForm extends StatelessWidget {
             ),
           ),
           16.verticalSpace,
-
           PrimaryTextFormField(
             headText: 'Confirm password',
             hint: 'repeat password',

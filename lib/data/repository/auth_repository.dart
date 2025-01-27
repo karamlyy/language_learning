@@ -10,7 +10,6 @@ import 'package:language_learning/data/model/auth/forgot_password_model.dart';
 import 'package:language_learning/data/model/auth/login_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
 import 'package:language_learning/data/model/auth/verification_model.dart';
-import 'package:language_learning/data/model/base/response_model.dart';
 import 'package:language_learning/data/service/api/api.dart';
 
 abstract class AuthRepository {

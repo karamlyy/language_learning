@@ -13,14 +13,16 @@ class ApiInterceptor extends Interceptor {
   ApiInterceptor({required this.dio});
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     final prefs = await PreferencesService.instance;
 
     // Set common headers
     options.headers.addAll({
       "accept": "text/plain",
       "Accept-Encoding": "gzip, deflate, br",
-      if (prefs.accessToken != null) "Authorization": "Bearer ${prefs.accessToken}",
+      if (prefs.accessToken != null)
+        "Authorization": "Bearer ${prefs.accessToken}",
     });
 
     log("HEADERS: ${options.headers}");

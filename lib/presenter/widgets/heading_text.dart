@@ -5,7 +5,7 @@ import 'package:language_learning/utils/colors/app_colors.dart';
 
 class HeadingText extends StatelessWidget {
   final String headingText;
-  final String secondaryText;
+  final String? secondaryText;
   final CrossAxisAlignment? crossAxisAlignment;
   final TextAlign? textAlign;
 
@@ -13,7 +13,7 @@ class HeadingText extends StatelessWidget {
   const HeadingText({
     super.key,
     required this.headingText,
-    required this.secondaryText,
+    this.secondaryText,
     this.crossAxisAlignment,
     this.textAlign,
 
@@ -35,7 +35,7 @@ class HeadingText extends StatelessWidget {
         Opacity(
           opacity: 0.7,
           child: PrimaryText(
-            text: secondaryText,
+            text: secondaryText ?? '',
             color: AppColors.primaryText,
             fontWeight: FontWeight.w400,
             fontSize: 16,

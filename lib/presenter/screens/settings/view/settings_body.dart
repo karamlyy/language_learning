@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:language_learning/presenter/screens/settings/view/settings_logout_button.dart';
-import 'package:language_learning/presenter/widgets/primary_text.dart';
-import 'package:language_learning/utils/colors/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:language_learning/presenter/screens/settings/view/setting_header_text.dart';
+import 'package:language_learning/presenter/widgets/settings_card.dart';
 
 class SettingsBody extends StatelessWidget {
   const SettingsBody({super.key});
@@ -9,18 +9,27 @@ class SettingsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-          const PrimaryText(
-            text: 'Settings',
-            color: AppColors.primaryText,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-          const SizedBox(height: 20),
-          const SettingsLogoutButton(),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(16.0).r,
+        child: Column(
+          children: [
+            SettingHeaderText(),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  
+                  Column(
+                    children: [
+                      Text('salam11'),
+                      Text('sagol22'),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
