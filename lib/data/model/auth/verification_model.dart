@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class VerificationModel {
   String? accessToken;
   String? refreshToken;
@@ -9,10 +11,12 @@ class VerificationModel {
     this.userId,
   });
 
-  factory VerificationModel.fromJson(Map<String, dynamic> json) =>
-      VerificationModel(
-        accessToken: json["accessToken"],
-        refreshToken: json["refreshToken"],
-        userId: json["userId"],
-      );
+  factory VerificationModel.fromJson(Map<String, dynamic> json) {
+    log("VerificationModel $json");
+    return VerificationModel(
+      accessToken: json["accessToken"],
+      refreshToken: json["refreshToken"],
+      userId: json["userId"],
+    );
+  }
 }

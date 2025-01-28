@@ -11,6 +11,6 @@ class ApiRoutes {
   static const String confirmResetToken = 'ConfirmPasswordResetToken';
   static const String resetPassword = 'ResetPassword';
 
-
+  static const String getAllLanguages = 'Language/GetAll';
   static const String setUserLanguage = 'UserLanguage/Create';
 }

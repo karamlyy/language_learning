@@ -65,6 +65,7 @@ class ApiService {
       case HttpMethod.get:
         return _dio.get(
           endpoint.route,
+          options: options,
           queryParameters: endpoint.queryParameters,
         );
       case HttpMethod.post:

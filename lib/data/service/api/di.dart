@@ -1,6 +1,7 @@
 // Create a singleton instance of GetIt for dependency injection.
 import 'package:get_it/get_it.dart';
 import 'package:language_learning/data/repository/auth_repository.dart';
+import 'package:language_learning/data/repository/language_repository.dart';
 import 'package:language_learning/data/service/api/api.dart';
 
 GetIt getIt = GetIt.instance;
@@ -21,6 +22,9 @@ class Injector {
 
   // Placeholder method for registering repositories. Currently, it's empty but can be used to register repository dependencies.
   static _registerRepositories() {
-    getIt.registerFactory<AuthRepository>(() => AuthRepositoryImpl(getIt.get()));
+    getIt
+        .registerFactory<AuthRepository>(() => AuthRepositoryImpl(getIt.get()));
+    getIt.registerFactory<LanguageRepository>(
+        () => LanguageRepositoryImpl(getIt.get()));
   }
 }

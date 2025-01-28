@@ -3,7 +3,6 @@ import 'package:language_learning/presenter/screens/auth/languages/provider/lang
 import 'package:language_learning/presenter/widgets/heading_text.dart';
 import 'package:provider/provider.dart';
 
-
 class SetLanguageHeader extends StatelessWidget {
   const SetLanguageHeader({
     super.key,
@@ -18,15 +17,10 @@ class SetLanguageHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           HeadingText(
-            headingText: languageProvider.pageIndex == 0
-                ? 'Choose native language'
-                : 'Choose the Language to Learn',
-            secondaryText: languageProvider.pageIndex == 0
-                ? 'Select your native language to personalize your learning experience easily.'
-                : 'Pick a language you want to master and start your journey today!',
-          ),
+              headingText: 'Choose native language',
+              secondaryText:
+                  'Select your native language to personalize your learning experience easily.'),
         ],
       ),
     );

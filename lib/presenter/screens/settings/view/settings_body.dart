@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:language_learning/presenter/screens/settings/view/setting_header_text.dart';
-import 'package:language_learning/presenter/widgets/settings_card.dart';
+import 'package:language_learning/presenter/screens/settings/view/setting_footer_buttons.dart';
+import 'package:language_learning/presenter/screens/settings/view/settings_main.dart';
 
 class SettingsBody extends StatelessWidget {
   const SettingsBody({super.key});
@@ -12,22 +12,10 @@ class SettingsBody extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0).r,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SettingHeaderText(),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  
-                  Column(
-                    children: [
-                      Text('salam11'),
-                      Text('sagol22'),
-                    ],
-                  )
-                ],
-              ),
-            ),
+            SettingsMain(),
+            SettingsFooterButtons(),
           ],
         ),
       ),

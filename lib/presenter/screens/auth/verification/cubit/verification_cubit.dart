@@ -28,15 +28,22 @@ class VerificationCubit extends Cubit<VerificationState> {
     final result = await _authRepository.confirmEmail(input);
     final prefs = await PreferencesService.instance;
 
-    result.fold((error) => emit(VerificationFailure(errorMessage: error.error)),
-        (data) {
-      prefs.setAccessToken(data.accessToken ?? '');
-      prefs.setRefreshToken(data.refreshToken ?? '');
-      prefs.setUserId(data.userId ?? '');
+    result.fold(
+      (error) => emit(
+        VerificationFailure(errorMessage: error.error),
+      ),
+      (data) {
+        prefs.setAccessToken(data.accessToken ?? '');
+        prefs.setRefreshToken(data.refreshToken ?? '');
+        prefs.setUserId(data.userId ?? '');
 
-      prefs.setConfirmationPassed(true);
-      Navigation.pushNamedAndRemoveUntil(Routes.setLanguage);
-      print('successful verification');
-    });
+        prefs.setConfirmationPassed(true);
+        Navigation.pushNamedAndRemoveUntil(
+          Routes.setLanguage,
+          arguments: data
+        );
+        print('successful verification');
+      },
+    );
   }
 }

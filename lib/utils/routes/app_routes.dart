@@ -10,6 +10,7 @@ enum Routes {
   resetPassword( 'reset-password'),
   passwordChanged( 'password-changed'),
   setLanguage('set-language'),
+
   setTiming('set-timing'),
   home('home'),
   wordList('word-list'),

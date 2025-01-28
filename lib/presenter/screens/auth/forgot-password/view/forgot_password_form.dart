@@ -3,17 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/cubit/forgot_password_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/provider/forgot_password_provider.dart';
+import 'package:language_learning/presenter/screens/auth/forgot-password/view/forgot_password_button.dart';
 import 'package:language_learning/presenter/widgets/heading_text.dart';
-import 'package:language_learning/presenter/widgets/primary_button.dart';
 import 'package:language_learning/presenter/widgets/primary_text_form_field.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
-import 'package:language_learning/utils/routes/app_routes.dart';
-import 'package:language_learning/utils/routes/navigation.dart';
 import 'package:provider/provider.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,9 @@ class ForgotPasswordForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const HeadingText(
-              headingText: 'Forgot Password?', secondaryText: 'Don’t worry! It happens. Please enter the email associated with your account.'),
+              headingText: 'Forgot Password?',
+              secondaryText:
+                  'Don’t worry! It happens. Please enter the email associated with your account.'),
           32.verticalSpace,
           PrimaryTextFormField(
             headText: "Email address",
@@ -40,20 +39,17 @@ class ForgotPasswordForm extends StatelessWidget {
               icon: Icon(
                 forgotPasswordProvider.emailError != null
                     ? null
-                    : (forgotPasswordProvider.email.isNotEmpty ? CupertinoIcons.check_mark_circled_solid : CupertinoIcons.mail_solid),
-                color: AppColors.primaryText.withOpacity(0.6),
+                    : (forgotPasswordProvider.email.isNotEmpty
+                        ? CupertinoIcons.check_mark_circled_solid
+                        : CupertinoIcons.mail_solid),
+                color: AppColors.primaryText.withValues(
+                  alpha: 0.6,
+                ),
               ),
             ),
           ),
           32.verticalSpace,
-          PrimaryButton(
-            title: 'Send code',
-            hasBorder: false,
-            isActive: forgotPasswordProvider.isEmailValid(),
-            onTap: () {
-              forgotPasswordCubit.applyForgotPassword(forgotPasswordProvider.forgotPasswordInput);
-            },
-          ),
+          ForgotPasswordButton(),
         ],
       ),
     );

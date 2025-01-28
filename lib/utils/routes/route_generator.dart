@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:language_learning/data/model/auth/forgot_password_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
+import 'package:language_learning/data/model/auth/verification_model.dart';
 import 'package:language_learning/presenter/screens/auth/languages/view/set_language_page.dart';
 import 'package:language_learning/presenter/screens/auth/splash/view/splash_page.dart';
 import 'package:language_learning/presenter/screens/auth/timing/view/timing_page.dart';
@@ -49,10 +50,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case Routes.verifyCode:
       return createPageRoute(
-          VerifyCodePage(
-            forgotPasswordModel: settings.arguments as ForgotPasswordModel,
-          ),
-          settings);
+        VerifyCodePage(
+          forgotPasswordModel: settings.arguments as ForgotPasswordModel,
+        ),
+        settings,
+      );
     case Routes.forgotPassword:
       return createPageRoute(const ForgotPasswordPage(), settings);
     case Routes.resetPassword:
@@ -65,7 +67,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.passwordChanged:
       return createPageRoute(const PasswordChangedPage(), settings);
     case Routes.setLanguage:
-      return createPageRoute(const SetLanguagePage(), settings);
+      return createPageRoute(
+        SetLanguagePage(
+          verificationModel: settings.arguments as VerificationModel,
+        ),
+        settings,
+      );
     case Routes.setTiming:
       return createPageRoute(const TimingPage(), settings);
     case Routes.home:

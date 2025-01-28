@@ -46,9 +46,10 @@ class App extends StatelessWidget {
                   return const HomePage();
                 } else if (state is UnAuthorized) {
                   return const LoginPage();
-                } else if (state is Verified) {
-                  return SetLanguagePage();
                 }
+                //else if (state is Verified) {
+                //  return SetLanguagePage();
+                //}
                 return const SplashPage();
               },
               listener: (BuildContext context, AppState state) {

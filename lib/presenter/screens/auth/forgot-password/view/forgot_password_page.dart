@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:language_learning/generic/base_state.dart';
+import 'package:language_learning/generic/generic_listener.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/cubit/forgot_password_cubit.dart';
-import 'package:language_learning/presenter/screens/auth/forgot-password/cubit/forgot_password_state.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/provider/forgot_password_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
 import 'package:provider/provider.dart';
@@ -18,16 +19,14 @@ class ForgotPasswordPage extends StatelessWidget {
       child: Scaffold(
         body: ChangeNotifierProvider(
           create: (context) => ForgotPasswordProvider(),
-          child: BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
-            listener: (context, state) {
-              if (state is ForgotPasswordSuccess) {
-                print("Successful forgot password");
-              } else if (state is ForgotPasswordFailure) {
-                PrimaryBottomSheet.show(context,
-                    text: 'failed to send email');
-              }
+          child: GenericBlocListener<ForgotPasswordCubit, BaseState>(
+            onFailure: (context, errorMessage) {
+              PrimaryBottomSheet.show(
+                context,
+                text: errorMessage.message,
+              );
             },
-            child: const ForgotPasswordBody(),
+            child: ForgotPasswordBody(),
           ),
         ),
       ),
