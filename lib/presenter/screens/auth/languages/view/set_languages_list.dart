@@ -20,9 +20,9 @@ class SetLanguagesList extends StatelessWidget {
 
   Widget _buildLanguageImage(String? base64String) {
     if (base64String == null || base64String.isEmpty) {
-      return const SizedBox(
-        width: 40, // Placeholder size
-        height: 40,
+      return SizedBox(
+        width: 32.w,
+        height: 32.h,
         child: Icon(Icons.language, size: 30, color: Colors.grey),
       );
     }
@@ -31,8 +31,8 @@ class SetLanguagesList extends StatelessWidget {
       Uint8List bytes = base64Decode(base64String);
       return Image.memory(
         bytes,
-        width: 40,
-        height: 40,
+        width: 32,
+        height: 32,
         fit: BoxFit.cover,
       );
     } catch (e) {
@@ -63,7 +63,7 @@ class SetLanguagesList extends StatelessWidget {
             },
             child: Container(
               margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12).r,
               decoration: BoxDecoration(
                 color: isSelected
                     ? AppColors.itemBackground

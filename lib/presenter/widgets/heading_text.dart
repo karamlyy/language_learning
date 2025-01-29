@@ -29,18 +29,15 @@ class HeadingText extends StatelessWidget {
           color: AppColors.primaryText,
           fontWeight: FontWeight.w400,
           fontFamily: 'DMSerifDisplay',
-          fontSize: 30,
+          fontSize: 28,
         ),
         12.verticalSpace,
-        Opacity(
-          opacity: 0.7,
-          child: PrimaryText(
-            text: secondaryText ?? '',
-            color: AppColors.primaryText,
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
-            textAlign: textAlign ?? TextAlign.start,
-          ),
+        PrimaryText(
+          text: secondaryText ?? '',
+          color: AppColors.primaryText.withValues(alpha: 0.6),
+          fontWeight: FontWeight.w400,
+          fontSize: 16,
+          textAlign: textAlign ?? TextAlign.start,
         ),
       ],
     );

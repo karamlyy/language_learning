@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:language_learning/data/model/auth/verification_model.dart';
 import 'package:language_learning/data/model/language/language_model.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/auth/languages/cubit/language_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/languages/provider/languages_provider.dart';
+import 'package:language_learning/presenter/screens/auth/languages/view/set_language_button.dart';
 import 'package:language_learning/presenter/screens/auth/languages/view/set_language_header.dart';
-import 'package:language_learning/presenter/screens/auth/languages/view/set_language_page.dart';
 import 'package:language_learning/presenter/screens/auth/languages/view/set_languages_list.dart';
-import 'package:language_learning/presenter/widgets/primary_button.dart';
-import 'package:language_learning/presenter/widgets/primary_text.dart';
-import 'package:language_learning/utils/colors/app_colors.dart';
-import 'package:language_learning/utils/routes/navigation.dart';
+import 'package:language_learning/presenter/widgets/primary_header.dart';
 
 class SetLanguageBody extends StatelessWidget {
   const SetLanguageBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final languageCubit = context.read<LanguageCubit>();
     final languagesProvider = context.watch<LanguagesProvider>();
 
     return BlocBuilder<LanguageCubit, BaseState>(
@@ -29,80 +24,31 @@ class SetLanguageBody extends StatelessWidget {
         } else if (state is SuccessState) {
           final languages = state.data as List<LanguageModel>;
 
-          return Padding(
-            padding: const EdgeInsets.all(16.0).r,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SetLanguageHeader(),
-                // PrimaryText(
-                //   text: languagesProvider.isSourceLanguageSelected
-                //       ? 'Choose Learning Language'
-                //       : 'Choose Native Language',
-                //   color: AppColors.primaryText,
-                //   fontWeight: FontWeight.w400,
-                //   fontSize: 26,
-                //   fontFamily: 'DMSerifDisplay',
-                // ),
-                // PrimaryText(
-                //     text: languagesProvider.isSourceLanguageSelected
-                //         ? 'Select the language you want to learn.'
-                //         : 'Select your native language to personalize your learning experience.',
-                //     color: AppColors.primaryText.withValues(alpha: 0.7),
-                //     fontWeight: FontWeight.w400,
-                //     fontSize: 16),
-                SetLanguagesList(
-                  languages: languages,
-                  selectedLanguageId: languagesProvider.isSourceLanguageSelected
-                      ? languagesProvider.selectedTranslationLanguageId
-                      : languagesProvider.selectedSourceLanguageId,
-                  onLanguageSelected: (id) {
-                    if (languagesProvider.isSourceLanguageSelected) {
-                      languagesProvider.selectTranslationLanguage(id);
-                    } else {
-                      languagesProvider.selectSourceLanguage(id);
-                    }
-                  },
-                ),
-                PrimaryButton(
-                  title: 'Continue',
-                  hasBorder: false,
-                  isActive: true,
-                  onTap: () {
-                    if (languagesProvider.isSourceLanguageSelected) {
-                      if (languagesProvider.isTranslationLanguageSelected) {
-                        languageCubit
-                            .setLanguage(languagesProvider.setLanguageInput);
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Please select a learning language'),
-                          ),
-                        );
-                      }
-                    } else {
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0).r,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  SetLanguageHeader(),
+                  42.verticalSpace,
+                  SetLanguagesList(
+                    languages: languages,
+                    selectedLanguageId: languagesProvider.isSourceLanguageSelected
+                        ? languagesProvider.selectedTranslationLanguageId
+                        : languagesProvider.selectedSourceLanguageId,
+                    onLanguageSelected: (id) {
                       if (languagesProvider.isSourceLanguageSelected) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SetLanguagePage(
-                              verificationModel: VerificationModel(
-                                userId: languagesProvider.userId,
-                              ),
-                            ),
-                          ),
-                        );
+                        languagesProvider.selectTranslationLanguage(id);
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Please select a native language'),
-                          ),
-                        );
+                        languagesProvider.selectSourceLanguage(id);
                       }
-                    }
-                  },
-                ),
-              ],
+                    },
+                  ),
+                  SetLanguageButton(),
+                ],
+              ),
             ),
           );
         } else if (state is FailureState) {

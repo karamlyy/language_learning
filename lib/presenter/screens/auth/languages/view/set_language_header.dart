@@ -12,21 +12,13 @@ class SetLanguageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final languagesProvider = context.watch<LanguagesProvider>();
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HeadingText(
-            headingText: languagesProvider.isSourceLanguageSelected
-                ? 'Choose Learning Language'
-                : 'Choose Native Language',
-            secondaryText: languagesProvider.isSourceLanguageSelected
-                ? 'Select the language you want to learn.'
-                : 'Select your native language to personalize your learning experience.',
-          ),
-        ],
-      ),
+    return HeadingText(
+      headingText: languagesProvider.isSourceLanguageSelected
+          ? 'Choose Learning Language'
+          : 'Choose Native Language',
+      secondaryText: languagesProvider.isSourceLanguageSelected
+          ? 'Select the language you want to learn.'
+          : 'Select your native language to personalize your learning experience.',
     );
   }
 }

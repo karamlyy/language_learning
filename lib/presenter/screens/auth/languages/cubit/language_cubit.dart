@@ -28,12 +28,11 @@ class LanguageCubit extends Cubit<BaseState> {
 
   void setLanguage(SetLanguageInput input) async {
     emit(LoadingState());
-    print('Sending request with body: ${input.toJson()}');
     final result = await _authRepository.setLanguage(input);
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
-        Navigation.push(Routes.setTiming);
+        Navigation.push(Routes.setTiming, arguments: verificationModel);
       },
     );
   }

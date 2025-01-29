@@ -13,4 +13,5 @@ class ApiRoutes {
 
   static const String getAllLanguages = 'Language/GetAll';
   static const String setUserLanguage = 'UserLanguage/Create';
+  static const String setUserTiming = 'NotificationSetting/Create';
 }

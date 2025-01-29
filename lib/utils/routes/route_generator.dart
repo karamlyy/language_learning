@@ -74,7 +74,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
 
     case Routes.setTiming:
-      return createPageRoute(const TimingPage(), settings);
+      return createPageRoute(
+        TimingPage(
+          verificationModel: settings.arguments as VerificationModel,
+        ),
+        settings,
+      );
     case Routes.home:
       return createPageRoute(const HomePage(), settings);
     case Routes.wordList:

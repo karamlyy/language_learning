@@ -81,8 +81,7 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<HttpException, void>> setLanguage(
-      SetLanguageInput input) async {
+  Future<Either<HttpException, void>> setLanguage( SetLanguageInput input) async {
     return await apiService.task<void>(SetLanguageEndpoint(input));
   }
 }
