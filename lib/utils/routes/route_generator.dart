@@ -4,9 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:language_learning/data/model/auth/forgot_password_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
 import 'package:language_learning/data/model/auth/verification_model.dart';
+import 'package:language_learning/presenter/screens/auth/forgot-password/view/forgot_password_page.dart';
 import 'package:language_learning/presenter/screens/auth/languages/view/set_language_page.dart';
+import 'package:language_learning/presenter/screens/auth/login/view/login_page.dart';
+import 'package:language_learning/presenter/screens/auth/onboarding/view/onboarding_page.dart';
+import 'package:language_learning/presenter/screens/auth/register/view/register_page.dart';
+import 'package:language_learning/presenter/screens/auth/reset-password/view/password_changed_page.dart';
+import 'package:language_learning/presenter/screens/auth/reset-password/view/reset_password_page.dart';
 import 'package:language_learning/presenter/screens/auth/splash/view/splash_page.dart';
 import 'package:language_learning/presenter/screens/auth/timing/view/timing_page.dart';
+import 'package:language_learning/presenter/screens/auth/verification/view/verification_page.dart';
 import 'package:language_learning/presenter/screens/auth/verify-code/view/verify_code_page.dart';
 import 'package:language_learning/presenter/screens/home/view/home_page.dart';
 import 'package:language_learning/presenter/screens/new-word/view/new_word_page.dart';
@@ -14,14 +21,6 @@ import 'package:language_learning/presenter/screens/settings/view/settings_page.
 import 'package:language_learning/presenter/screens/vocabulary/view/vocabulary_page.dart';
 import 'package:language_learning/presenter/screens/word-list/view/word_list_page.dart';
 import 'package:language_learning/utils/routes/app_routes.dart';
-
-import '../../presenter/screens/auth/forgot-password/view/forgot_password_page.dart';
-import '../../presenter/screens/auth/login/view/login_page.dart';
-import '../../presenter/screens/auth/onboarding/view/onboarding_page.dart';
-import '../../presenter/screens/auth/register/view/register_page.dart';
-import '../../presenter/screens/auth/reset-password/view/password_changed_page.dart';
-import '../../presenter/screens/auth/reset-password/view/reset_password_page.dart';
-import '../../presenter/screens/auth/verification/view/verification_page.dart';
 
 Route<dynamic> createPageRoute(Widget page, [RouteSettings? settings]) {
   return MaterialPageRoute(
@@ -73,6 +72,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         ),
         settings,
       );
+
     case Routes.setTiming:
       return createPageRoute(const TimingPage(), settings);
     case Routes.home:

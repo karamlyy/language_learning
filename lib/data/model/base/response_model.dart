@@ -1,8 +1,8 @@
-
 import 'package:language_learning/data/model/auth/forgot_password_model.dart';
 import 'package:language_learning/data/model/auth/login_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
 import 'package:language_learning/data/model/auth/verification_model.dart';
+import 'package:language_learning/data/model/language/language_model.dart';
 
 class ResponseModel<T> {
   int status;
@@ -34,6 +34,10 @@ class ResponseModel<T> {
           return ForgotPasswordModel.fromJson(data) as T;
         case const (ResponseModel):
           return ResponseModel.fromJson(data) as T;
+        case const (List<LanguageModel>):
+          return (data["data"] as List)
+              .map((e) => LanguageModel.fromJson(e))
+              .toList() as T;
       }
       return data["data"];
     }
@@ -45,8 +49,11 @@ class ResponseModel<T> {
       data: json["data"] == null
           ? getData(json)
           : getData(
-        (json["data"].runtimeType == List || json["data"].runtimeType == int) ? json : json["data"],
-      ),
+              (json["data"].runtimeType == List ||
+                      json["data"].runtimeType == int)
+                  ? json
+                  : json["data"],
+            ),
     );
   }
 

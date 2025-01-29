@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/app/app_cubit.dart';
 import 'package:language_learning/app/app_state.dart';
+import 'package:language_learning/data/model/auth/verification_model.dart';
 import 'package:language_learning/presenter/screens/auth/languages/view/set_language_page.dart';
 import 'package:language_learning/presenter/screens/auth/login/view/login_page.dart';
 import 'package:language_learning/presenter/screens/auth/onboarding/view/onboarding_page.dart';
@@ -47,9 +48,9 @@ class App extends StatelessWidget {
                 } else if (state is UnAuthorized) {
                   return const LoginPage();
                 }
-                //else if (state is Verified) {
-                //  return SetLanguagePage();
-                //}
+                // else if (state is Verified) {
+                //  return SetLanguagePage(verificationModel: VerificationModel(),);
+                // }
                 return const SplashPage();
               },
               listener: (BuildContext context, AppState state) {

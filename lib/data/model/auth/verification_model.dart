@@ -3,12 +3,12 @@ import 'dart:developer';
 class VerificationModel {
   String? accessToken;
   String? refreshToken;
-  String? userId;
+  String userId;
 
   VerificationModel({
     this.accessToken,
     this.refreshToken,
-    this.userId,
+    required this.userId,
   });
 
   factory VerificationModel.fromJson(Map<String, dynamic> json) {

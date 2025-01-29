@@ -26,15 +26,13 @@ class SetLanguageInput {
 
   SetLanguageInput({
     required this.userId,
-    this.sourceLanguageId,
-    this.translationLanguageId,
+    required this.sourceLanguageId,
+    required this.translationLanguageId,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
-      "userId": userId,
-      "sourceLanguageId": sourceLanguageId,
-      "translationLanguageId": translationLanguageId,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+    'userId': userId,
+    'sourceLanguageId': sourceLanguageId,
+    'translationLanguageId': translationLanguageId,
+  };
 }

@@ -7,6 +7,8 @@ import 'package:language_learning/presenter/screens/auth/languages/provider/lang
 import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
+import 'set_language_body.dart';
+
 class SetLanguagePage extends StatelessWidget {
   final VerificationModel verificationModel;
 
@@ -21,19 +23,23 @@ class SetLanguagePage extends StatelessWidget {
       create: (context) => LanguageCubit(verificationModel)..getAllLanguages(),
       child: Scaffold(
         body: ChangeNotifierProvider(
-          create: (context) => LanguagesProvider(),
+          create: (context) {
+            final languageProvider = LanguagesProvider();
+            languageProvider.setUserId(verificationModel.userId);
+            return languageProvider;
+          },
           child: BlocListener<LanguageCubit, BaseState>(
             listener: (context, state) {
               if (state is SuccessState) {
-                print('Languages selected successfully');
+                print('Languages fetched successfully');
               } else if (state is FailureState) {
                 PrimaryBottomSheet.show(
                   context,
-                  text: 'test error ',
+                  text: 'Failed to fetch languages: ${state.errorMessage}',
                 );
               }
             },
-            //child: SetLanguageBody(),
+            child: SetLanguageBody(),
           ),
         ),
       ),
