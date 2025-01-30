@@ -2,6 +2,7 @@ import 'package:language_learning/data/model/auth/forgot_password_model.dart';
 import 'package:language_learning/data/model/auth/login_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
 import 'package:language_learning/data/model/auth/verification_model.dart';
+import 'package:language_learning/data/model/home/category_model.dart';
 import 'package:language_learning/data/model/language/language_model.dart';
 
 class ResponseModel<T> {
@@ -37,6 +38,10 @@ class ResponseModel<T> {
         case const (List<LanguageModel>):
           return (data["data"] as List)
               .map((e) => LanguageModel.fromJson(e))
+              .toList() as T;
+        case const (List<CategoryModel>):
+          return (data["data"] as List)
+              .map((e) => CategoryModel.fromJson(e))
               .toList() as T;
       }
       return data["data"];

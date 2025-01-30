@@ -15,8 +15,6 @@ class HomeAppbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TextButton.icon(
-            style: ButtonStyle(
-                padding: WidgetStatePropertyAll(EdgeInsets.all(0.0).r)),
             onPressed: () {},
             label: PrimaryText(
               text: 'Change language',

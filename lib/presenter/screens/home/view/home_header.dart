@@ -4,7 +4,6 @@ import 'package:language_learning/presenter/screens/home/provider/home_provider.
 import 'package:language_learning/presenter/screens/home/widgets/vocabulary_card.dart';
 import 'package:provider/provider.dart';
 
-
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
 
@@ -14,7 +13,7 @@ class HomeHeader extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(top: 12.h, bottom: 12.h, left: 12.w),
-      child: Container(
+      child: SizedBox(
         height: 115.h,
         child: ListView.builder(
           itemCount: homeProvider.wordGroups.length,
@@ -26,9 +25,7 @@ class HomeHeader extends StatelessWidget {
               allWords: wordGroup.allWords,
               masteredWords: wordGroup.masteredWords,
               icon: wordGroup.icon,
-              onTap: () {
-
-              },
+              onTap: () {},
             );
           },
         ),

@@ -26,3 +26,6 @@ class SettingsProvider extends ChangeNotifier {
 
   List<SettingsCard> get settings => _settings;
 }
+
+
+

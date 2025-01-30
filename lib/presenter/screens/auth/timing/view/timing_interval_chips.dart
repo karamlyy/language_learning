@@ -25,7 +25,6 @@ class TimingIntervalChips extends StatelessWidget {
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
           ),
-
           selected: isSelected,
           onSelected: (selected) {
             if (selected) {
@@ -35,11 +34,9 @@ class TimingIntervalChips extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.h),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(44.0).r,
-              side: const BorderSide(color: AppColors.itemBorder)
-          ),
+              side: const BorderSide(color: AppColors.itemBorder)),
           selectedColor: AppColors.itemBackground,
           backgroundColor: AppColors.unselectedItemBackground,
-
         );
       }).toList(),
     );

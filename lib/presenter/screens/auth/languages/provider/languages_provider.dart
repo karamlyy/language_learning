@@ -19,14 +19,12 @@ class LanguagesProvider extends ChangeNotifier {
     translationLanguageId: selectedTranslationLanguageId,
   );
 
-  /// Set the user ID
   void setUserId(String userId) {
     _userId = userId;
     debugPrint('[LanguagesProvider] User ID set: $_userId');
     notifyListeners();
   }
 
-  /// Select source (native) language
   void selectSourceLanguage(int id) {
     _selectedSourceLanguageId = id;
     isSourceLanguageSelected = true;
@@ -34,7 +32,6 @@ class LanguagesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Select translation (learning) language
   void selectTranslationLanguage(int id) {
     _selectedTranslationLanguageId = id;
     isTranslationLanguageSelected = true;
@@ -42,29 +39,4 @@ class LanguagesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Reset only the source language selection
-  void resetSourceLanguage() {
-    _selectedSourceLanguageId = null;
-    isSourceLanguageSelected = false;
-    debugPrint('[LanguagesProvider] Reset source language selection.');
-    notifyListeners();
-  }
-
-  /// Reset only the translation language selection
-  void resetTranslationLanguage() {
-    _selectedTranslationLanguageId = null;
-    isTranslationLanguageSelected = false;
-    debugPrint('[LanguagesProvider] Reset translation language selection.');
-    notifyListeners();
-  }
-
-  /// Reset both language selections
-  void resetLanguages() {
-    _selectedSourceLanguageId = null;
-    _selectedTranslationLanguageId = null;
-    isSourceLanguageSelected = false;
-    isTranslationLanguageSelected = false;
-    debugPrint('[LanguagesProvider] Reset all language selections.');
-    notifyListeners();
-  }
 }
