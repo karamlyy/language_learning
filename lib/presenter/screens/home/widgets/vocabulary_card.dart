@@ -8,7 +8,7 @@ class VocabularyCard extends StatelessWidget {
   final String groupName;
   final int allWords;
   final int masteredWords;
-  final SvgPicture icon;
+  //final SvgPicture icon;
 
   final VoidCallback onTap;
 
@@ -18,7 +18,7 @@ class VocabularyCard extends StatelessWidget {
     required this.groupName,
     required this.allWords,
     required this.masteredWords,
-    required this.icon,
+    //required this.icon,
 
     required this.onTap,
 
@@ -58,13 +58,13 @@ class VocabularyCard extends StatelessWidget {
                 ],
               ),
               40.horizontalSpace,
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-
-                children: [
-                  icon,
-                ],
-              )
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //
+              //   children: [
+              //     icon,
+              //   ],
+              // )
             ],
           ),
         ),

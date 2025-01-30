@@ -19,8 +19,6 @@ class VerificationBody extends StatelessWidget {
       child: Column(
         children: [
           const Header(),
-          Text('user id: $userId'),
-          Text('code expiry: $codeExpiry'),
           Expanded(
             child: ListView(
               children: [

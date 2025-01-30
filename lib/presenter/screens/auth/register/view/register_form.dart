@@ -69,19 +69,22 @@ class RegisterForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Checkbox(
+
                   visualDensity: VisualDensity.compact,
                   value: registerProvider.isTermsAndConditionsAccepted,
                   onChanged: (value) {
                     registerProvider.acceptTermsAndConditions(value ?? false);
                   },
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0).r,
+
+                    borderRadius: BorderRadius.circular(5.0).r,
                   ),
                   activeColor: AppColors.background,
                   checkColor: AppColors.primary,
                   side: BorderSide(
                     width: 1.0,
-                    color: Theme.of(context).unselectedWidgetColor,
+
+                    color: AppColors.primary,
                   ),
                 ),
                 const PrimaryText(

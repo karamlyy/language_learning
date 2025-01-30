@@ -22,7 +22,7 @@ class VerificationFooter extends StatelessWidget {
             verificationCubit.resendConfirmationEmail(verificationProvider.userId);
           },
           mainText: ' Resend',
-          secondaryText: 'I did not receive a code ',
+          secondaryText: 'I didn’t receive a code. ',
         );
       },
     );

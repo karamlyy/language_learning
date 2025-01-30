@@ -23,11 +23,11 @@ class VerificationForm extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.all(16.0).r,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const HeadingText(
                 headingText: 'Verify your e-mail address',
-                secondaryText: 'We’ve sent an activation code to your email',
+                secondaryText: 'We’ve sent an activation code to your email.',
               ),
 
               42.verticalSpace,
@@ -36,8 +36,9 @@ class VerificationForm extends StatelessWidget {
                 length: 4,
                 onChanged: verificationProvider.updateVerificationCode,
                 onCompleted: (value) {
-                  verificationCubit
-                      .confirmEmail(verificationProvider.verificationInput);
+                  verificationCubit.confirmEmail(
+                    verificationProvider.verificationInput,
+                  );
                 },
                 defaultPinTheme: PinTheme(
                   width: (double.infinity / 4),
@@ -53,7 +54,7 @@ class VerificationForm extends StatelessWidget {
                   ),
                 ),
                 focusedPinTheme: PinTheme(
-                  width: (double.infinity / 5),
+                  width: (double.infinity / 4),
                   height: 72.h,
                   textStyle: const TextStyle(
                     fontSize: 28,

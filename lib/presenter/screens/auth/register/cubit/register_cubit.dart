@@ -4,7 +4,6 @@ import 'package:language_learning/data/repository/auth_repository.dart';
 import 'package:language_learning/data/service/api/di.dart';
 import 'package:language_learning/data/service/preferences/preferences.dart';
 import 'package:language_learning/generic/base_state.dart';
-import 'package:language_learning/presenter/screens/auth/register/cubit/register_state.dart';
 import 'package:language_learning/utils/routes/app_routes.dart';
 import 'package:language_learning/utils/routes/navigation.dart';
 
@@ -23,9 +22,10 @@ class RegisterCubit extends Cubit<BaseState> {
         prefs.setUserId(data.userId ?? "");
 
         emit(SuccessState(data: data));
-        Navigation.pushNamedAndRemoveUntil(Routes.verification,
-            arguments: data);
-        print('successful data:  ${data.userId} ${data.codeExpiry}');
+        Navigation.push(
+          Routes.verification,
+          arguments: data,
+        );
       },
     );
   }

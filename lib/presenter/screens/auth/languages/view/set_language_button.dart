@@ -40,16 +40,17 @@ class SetLanguageButton extends StatelessWidget {
               }
             } else {
               if (languagesProvider.isSourceLanguageSelected) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SetLanguagePage(
-                      verificationModel: VerificationModel(
-                        userId: languagesProvider.userId,
-                      ),
-                    ),
-                  ),
-                );
+
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => SetLanguagePage(
+                //       verificationModel: VerificationModel(
+                //         userId: languagesProvider.userId,
+                //       ),
+                //     ),
+                //   ),
+                // );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
