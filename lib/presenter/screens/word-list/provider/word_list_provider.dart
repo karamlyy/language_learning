@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../utils/asset-paths/app_assets.dart';
 import '../../home/model/word.dart';
-import '../../home/model/word_group.dart';
+import '../../home/model/category.dart';
 
 class WordListProvider extends ChangeNotifier {
 
@@ -31,22 +31,6 @@ class WordListProvider extends ChangeNotifier {
     Word(id: 19, word: 'Music', translation: 'Musiqi'),
   ];
 
-  final List<WordGroup> wordGroups = [
-    WordGroup(
-      id: 0,
-      groupName: 'Vegetables',
-      icon: SvgPicture.asset(Images.vegetables),
-      masteredWords: 3,
-      allWords: 25,
-    ),
-    WordGroup(
-      id: 1,
-      groupName: 'Fruits',
-      icon: SvgPicture.asset(Images.fruits),
-      masteredWords: 10,
-      allWords: 25,
-    ),
-  ];
 
   int? _selectedWordId;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
+import 'package:language_learning/utils/asset-paths/app_assets.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 
 class HomeQuizButton extends StatelessWidget {
@@ -9,15 +10,13 @@ class HomeQuizButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 21.w,
-        vertical: 12.h,
-      ),
+      padding:
+      EdgeInsets.symmetric(horizontal: 21.w, vertical: 12.h),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/buttonBg.png'),
+          image: const DecorationImage(
+            image: AssetImage(Images.quizButtonBackground),
             fit: BoxFit.fill,
           ),
           borderRadius: BorderRadius.circular(16).r,

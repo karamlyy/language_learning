@@ -13,14 +13,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(),
+      create: (context) => HomeCubit()
+        ..getAllWords(1, 3),
+        //..getAllCategories(),
       child: Scaffold(
         body: ChangeNotifierProvider(
-          create: (context) {
-            final homeProvider = HomeProvider();
-            homeProvider.setUserId();
-            return homeProvider;
-          },
+          create: (context) => HomeProvider(),
           child: BlocListener<HomeCubit, BaseState>(
             listener: (context, state) {
               if (state is SuccessState) {

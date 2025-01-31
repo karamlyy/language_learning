@@ -9,31 +9,33 @@ class HomeAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 16.r, right: 16.r, bottom: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextButton.icon(
-            onPressed: () {},
-            label: PrimaryText(
-              text: 'Change language',
-              color: AppColors.primary,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: PrimaryText(
+                text: 'Change language',
+                color: AppColors.primary,
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+              ),
             ),
-            icon: const Icon(
+            Icon(
               Icons.keyboard_arrow_down_outlined,
               color: AppColors.primary,
+              size: 24.w,
             ),
-            iconAlignment: IconAlignment.end,
-          ),
-          Icon(
-            CupertinoIcons.bell_solid,
-            size: 28.h,
-          ),
-        ],
-      ),
+          ],
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(CupertinoIcons.bell),
+          iconSize: 28.w,
+        )
+      ],
     );
   }
 }

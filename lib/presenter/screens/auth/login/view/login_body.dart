@@ -18,14 +18,10 @@ class LoginBody extends StatelessWidget {
           children: [
             Expanded(
               child: ListView(
-                children: const [
-                  Column(
-                    children: [
-                      LoginHeader(),
-                      LoginForm(),
-                      LoginButton(),
-                    ],
-                  )
+                children: [
+                  LoginHeader(),
+                  LoginForm(),
+                  LoginButton()
                 ],
               ),
             ),

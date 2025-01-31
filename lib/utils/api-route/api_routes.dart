@@ -16,4 +16,6 @@ class ApiRoutes {
   static const String setUserTiming = 'NotificationSetting/Create';
 
   static const String getAllCategories = 'Category/GetAllByUserId';
+
+  static const String getAllWords = 'UserVocabulary/GetPaginatedByUserId';
 }

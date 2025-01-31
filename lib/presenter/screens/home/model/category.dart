@@ -1,17 +1,17 @@
 import 'package:flutter_svg/flutter_svg.dart';
 
-class WordGroup {
+class Category {
   final int id;
   final String groupName;
   final int masteredWords;
   final int allWords;
-  final SvgPicture icon;
+  final SvgPicture? icon;
 
-  WordGroup({
+  Category({
     required this.id,
     required this.groupName,
     required this.masteredWords,
     required this.allWords,
-    required this.icon,
+    this.icon,
   });
 }
