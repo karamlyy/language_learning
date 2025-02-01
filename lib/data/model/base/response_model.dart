@@ -3,6 +3,7 @@ import 'package:language_learning/data/model/auth/login_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
 import 'package:language_learning/data/model/auth/verification_model.dart';
 import 'package:language_learning/data/model/home/category_model.dart';
+import 'package:language_learning/data/model/home/language_pair_model.dart';
 import 'package:language_learning/data/model/home/user_vocabulary_model.dart';
 import 'package:language_learning/data/model/language/language_model.dart';
 
@@ -44,7 +45,10 @@ class ResponseModel<T> {
           return (data["data"] as List)
               .map((e) => CategoryModel.fromJson(e))
               .toList() as T;
-
+        case const (List<LanguagePairModel>):
+          return (data["data"] as List)
+              .map((e) => LanguagePairModel.fromJson(e))
+              .toList() as T;
         case const (UserVocabularyModel):
           return UserVocabularyModel.fromJson(data) as T;
 

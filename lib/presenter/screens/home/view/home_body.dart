@@ -10,6 +10,7 @@ import 'package:language_learning/presenter/screens/home/view/home_appbar.dart';
 import 'package:language_learning/presenter/screens/home/view/home_quiz_button.dart';
 import 'package:language_learning/presenter/screens/home/widgets/catergory_card.dart';
 import 'package:language_learning/presenter/screens/home/widgets/list_card.dart';
+import 'package:language_learning/presenter/screens/home/widgets/word_card.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/presenter/widgets/secondary_floating_bottom_navbar.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
@@ -24,10 +25,12 @@ class HomeBody extends StatelessWidget {
     return BlocBuilder<HomeCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         } else if (state is SuccessState) {
-          //final categories = state.data as List<CategoryModel>;
-          final wordPairs = state.data as UserVocabularyModel;
+          final data = state.data as Map<String, dynamic>;
+          final categories = data["categories"] as List<CategoryModel>;
+          final wordPairs = data["words"] as UserVocabularyModel;
+
           return SafeArea(
             child: Stack(
               children: [
@@ -40,39 +43,38 @@ class HomeBody extends StatelessWidget {
                             floating: true,
                             pinned: true,
                             automaticallyImplyLeading: false,
-                            forceMaterialTransparency: false,
                             backgroundColor: AppColors.background,
                             collapsedHeight: 50.h,
                             expandedHeight: 50.h,
                             toolbarHeight: 50.h,
                             title: HomeAppbar(),
                           ),
-                          // SliverToBoxAdapter(
-                          //   child: SingleChildScrollView(
-                          //     scrollDirection: Axis.horizontal,
-                          //     child: Padding(
-                          //       padding: EdgeInsets.all(16.0).r,
-                          //       child: Row(
-                          //         children: List.generate(
-                          //           categories.length,
-                          //           (index) {
-                          //             final category = categories[index];
-                          //             return CategoryCard(
-                          //               id: category.id,
-                          //               groupName: category.name,
-                          //               allWords: category.vocabularyCount,
-                          //               masteredWords: category.masteredCount,
-                          //               onTap: () {},
-                          //             );
-                          //           },
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+
+                          // Categories List
+                          SliverToBoxAdapter(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Padding(
+                                padding: EdgeInsets.all(16.0).r,
+                                child: Row(
+                                  children: categories.map((category) {
+                                    return CategoryCard(
+                                      id: category.id,
+                                      groupName: category.name,
+                                      allWords: category.vocabularyCount,
+                                      masteredWords: category.masteredCount,
+                                      onTap: () {},
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                          ),
+
                           SliverToBoxAdapter(
                             child: HomeQuizButton(),
                           ),
+
                           SliverToBoxAdapter(
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
@@ -81,7 +83,7 @@ class HomeBody extends StatelessWidget {
                                 child: Row(
                                   children: List.generate(
                                     homeProvider.lists.length,
-                                    (index) {
+                                        (index) {
                                       final list = homeProvider.lists[index];
                                       return ListCard(
                                         id: list.id,
@@ -95,6 +97,7 @@ class HomeBody extends StatelessWidget {
                               ),
                             ),
                           ),
+
                           SliverToBoxAdapter(
                             child: Padding(
                               padding: EdgeInsets.only(left: 16).r,
@@ -109,27 +112,21 @@ class HomeBody extends StatelessWidget {
                           ),
 
                           SliverToBoxAdapter(
-                            child: SingleChildScrollView(
-                              child: Padding(
-                                padding: EdgeInsets.all(16.0).r,
-                                child: Row(
-                                  children: List.generate(
-                                    wordPairs.items.length,
-                                      (index) {
-                                      final wordPair = wordPairs.items[index];
-                                      return Row(
-                                        children: [
-                                          PrimaryText(text: wordPair.source, color: AppColors.primaryText, fontWeight: FontWeight.w400),
-                                          SizedBox(width: 12,),
-                                          PrimaryText(text: wordPair.translation, color: AppColors.primaryText, fontWeight: FontWeight.w400),
-                                        ],
-                                      );
-                                      }
-                                  ),
-                                ),
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0).r,
+                              child: Column(
+                                children: wordPairs.items.map((wordPair) {
+                                  return WordCard(
+                                    id: wordPair.id,
+                                    word: wordPair.source,
+                                    translation: wordPair.translation,
+                                    onTap: () {},
+                                    onBookmarkTap: () {},
+                                  );
+                                }).toList(),
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -146,9 +143,9 @@ class HomeBody extends StatelessWidget {
             ),
           );
         } else if (state is FailureState) {
-          return Center(child: Text('Failed to load home data'));
+          return Center(child: Text('Failed to load home data: ${state.errorMessage}'));
         } else {
-          return Center(child: Text('Initializing...'));
+          return const Center(child: Text('Initializing...'));
         }
       },
     );

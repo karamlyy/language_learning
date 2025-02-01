@@ -49,7 +49,7 @@ class VocabularyMain extends StatelessWidget {
                     id: word.id,
                     word: word.word,
                     translation: word.translation,
-                    isLearned: word.isLearned,
+
                     onTap: () {
                       Navigation.push(Routes.newWord);
                     },

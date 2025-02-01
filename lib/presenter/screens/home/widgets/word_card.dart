@@ -7,7 +7,7 @@ class WordCard extends StatelessWidget {
   final int id;
   final String word;
   final String translation;
-  final bool isLearned;
+
   final VoidCallback onTap;
   final VoidCallback onBookmarkTap;
 
@@ -16,7 +16,6 @@ class WordCard extends StatelessWidget {
     required this.id,
     required this.word,
     required this.translation,
-    required this.isLearned,
     required this.onTap,
     required this.onBookmarkTap,
   });
@@ -31,7 +30,7 @@ class WordCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(24.0).r,
         ),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -51,14 +50,6 @@ class WordCard extends StatelessWidget {
                   ),
                 ],
               ),
-              IconButton(
-                onPressed: onBookmarkTap,
-                icon: Icon(
-                  isLearned ? Icons.bookmark : Icons.bookmark_outline,
-                  size: 20.w,
-                  color: AppColors.bookMarkBackground,
-                ),
-              )
             ],
           ),
         ),

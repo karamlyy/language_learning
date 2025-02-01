@@ -18,4 +18,6 @@ class ApiRoutes {
   static const String getAllCategories = 'Category/GetAllByUserId';
 
   static const String getAllWords = 'UserVocabulary/GetPaginatedByUserId';
+
+  static const String getUserLanguagePairs = 'UserLanguage/GetAllByUserId';
 }

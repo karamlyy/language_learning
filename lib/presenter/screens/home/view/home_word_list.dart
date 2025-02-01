@@ -35,7 +35,7 @@ class HomeWordList extends StatelessWidget {
                     id: 1,
                     word: 'hello',
                     translation: 'salam',
-                    isLearned: true,
+                    //isLearned: true,
                     onTap: () {
                       //print('${word.id} id-li soz kliklendi');
                     },

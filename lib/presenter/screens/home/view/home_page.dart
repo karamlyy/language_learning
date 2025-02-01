@@ -13,9 +13,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit()
-        ..getAllWords(1, 3),
-        //..getAllCategories(),
+      create: (context) => HomeCubit()..loadHomeData(),
+
       child: Scaffold(
         body: ChangeNotifierProvider(
           create: (context) => HomeProvider(),

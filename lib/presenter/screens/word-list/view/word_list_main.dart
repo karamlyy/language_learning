@@ -22,7 +22,7 @@ class WordListMain extends StatelessWidget {
               id: word.id,
               word: word.word,
               translation: word.translation,
-              isLearned: word.isLearned,
+              //isLearned: word.isLearned,
               onTap: () {},
               onBookmarkTap: () {},
             ),

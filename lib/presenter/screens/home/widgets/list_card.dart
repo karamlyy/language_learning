@@ -22,6 +22,7 @@ class ListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
+
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: 12.h,
