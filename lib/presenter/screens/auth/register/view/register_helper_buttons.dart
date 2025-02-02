@@ -28,7 +28,7 @@ class RegisterHelperButtons extends StatelessWidget {
             inactiveTrackColor: AppColors.toggleOffBackground,
             trackOutlineWidth: WidgetStateProperty.all(0.1),
           ),
-          8.horizontalSpace,
+          4.horizontalSpace,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,7 +40,7 @@ class RegisterHelperButtons extends StatelessWidget {
               ),
               4.verticalSpace,
               PrimaryText(
-                text: 'Get a weekly activity report via email.',
+                text: 'Get weekly activity report by email',
                 color: AppColors.primaryText.withValues(
                   alpha: 0.7,
                 ),

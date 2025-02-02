@@ -8,6 +8,7 @@ import 'package:language_learning/presenter/screens/auth/languages/view/set_lang
 import 'package:language_learning/presenter/screens/auth/login/view/login_page.dart';
 import 'package:language_learning/presenter/screens/auth/onboarding/view/onboarding_page.dart';
 import 'package:language_learning/presenter/screens/auth/splash/view/splash_page.dart';
+import 'package:language_learning/presenter/screens/auth/timing/view/timing_page.dart';
 import 'package:language_learning/presenter/screens/home/view/home_page.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:language_learning/utils/routes/navigation.dart';
@@ -43,19 +44,19 @@ class App extends StatelessWidget {
               builder: (BuildContext context, AppState state) {
                 if (state is Onboarding) {
                   return const OnboardingPage();
-                } else if (state is Authorized) {
-                  return const HomePage();
                 } else if (state is UnAuthorized) {
                   return const LoginPage();
+                } else if (state is Verified) {
+                  return SetLanguagePage();
+                } else if (state is SetLanguageCompleted) {
+                  return const TimingPage();
+                } else if (state is SetTimingCompleted) {
+                  return const HomePage();
                 }
-                // else if (state is Verified) {
-                //  return SetLanguagePage(verificationModel: VerificationModel(),);
-                // }
+
                 return const SplashPage();
               },
-              listener: (BuildContext context, AppState state) {
-                print('app state is: $AppState');
-              },
+              listener: (BuildContext context, AppState state) {},
             ),
           ),
         );

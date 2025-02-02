@@ -4,14 +4,11 @@ import 'package:language_learning/data/endpoint/auth/timing_endpoint.dart';
 import '../model/time_interval.dart';
 
 class TimingProvider with ChangeNotifier {
-
   final List<TimeInterval> intervals = [
     TimeInterval(id: 1, title: '15min'),
     TimeInterval(id: 2, title: '30min'),
     TimeInterval(id: 3, title: '1 hour'),
   ];
-
-
 
   int? _selectedIntervalId;
   bool _isIntervalSelected = false;
@@ -21,25 +18,20 @@ class TimingProvider with ChangeNotifier {
   DateTime? _endTime;
 
   int? get selectedIntervalId => _selectedIntervalId;
+
   bool? get isIntervalSelected => _isIntervalSelected;
+
   String get userId => _userId;
 
   DateTime? get startTime => _startTime;
 
   DateTime? get endTime => _endTime;
 
-  void setUserId(String userId) {
-    _userId = userId;
-    notifyListeners();
-    print('User ID: $userId');
-  }
-
   TimingInput get timingInput => TimingInput(
-    userId: _userId,
-    intervalId: _selectedIntervalId,
-    startTime: _startTime,
-    endTime: _endTime,
-  );
+        intervalId: _selectedIntervalId,
+        startTime: _startTime,
+        endTime: _endTime,
+      );
 
   void selectInterval(int id) {
     _selectedIntervalId = id;
@@ -48,10 +40,9 @@ class TimingProvider with ChangeNotifier {
     print('Selected Interval ID: $id');
   }
 
-  bool isSelectedInterval(){
+  bool isSelectedInterval() {
     return _isIntervalSelected;
   }
-
 
   void setStartTime(DateTime time) {
     _startTime = time;

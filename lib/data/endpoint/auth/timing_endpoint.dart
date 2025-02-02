@@ -15,34 +15,27 @@ class TimingEndpoint extends Endpoint {
 
   @override
   Map<String, dynamic>? get body => input.toJson();
-
-
 }
 
 class TimingInput {
-  final String userId;
   final int? intervalId;
   final DateTime? startTime;
   final DateTime? endTime;
 
   TimingInput({
-    required this.userId,
     required this.intervalId,
     required this.startTime,
     required this.endTime,
-
   });
 
   Map<String, dynamic> toJson() => {
-    'userId': userId,
-    'intervalId': intervalId,
-    'startTime': startTime?.toUtc().toIso8601String(),
-    'endTime': endTime?.toUtc().toIso8601String(),
-  };
+        'intervalId': intervalId,
+        'startTime': startTime?.toUtc().toIso8601String(),
+        'endTime': endTime?.toUtc().toIso8601String(),
+      };
 
   factory TimingInput.fromJson(Map<String, dynamic> json) {
     return TimingInput(
-      userId: json["userId"],
       intervalId: json["intervalId"],
       startTime: DateTime.parse(json["startTime"]),
       endTime: DateTime.parse(json["endTime"]),

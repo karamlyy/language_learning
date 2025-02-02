@@ -10,24 +10,20 @@ import 'package:provider/provider.dart';
 import 'set_language_body.dart';
 
 class SetLanguagePage extends StatelessWidget {
-  final VerificationModel verificationModel;
+
 
   const SetLanguagePage({
     super.key,
-    required this.verificationModel,
+
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LanguageCubit(verificationModel)..getAllLanguages(),
+      create: (context) => LanguageCubit()..getAllLanguages(),
       child: Scaffold(
         body: ChangeNotifierProvider(
-          create: (context) {
-            final languageProvider = LanguagesProvider();
-            languageProvider.setUserId(verificationModel.userId);
-            return languageProvider;
-          },
+          create: (context) => LanguagesProvider(),
           child: BlocListener<LanguageCubit, BaseState>(
             listener: (context, state) {
               if (state is SuccessState) {

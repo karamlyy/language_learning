@@ -9,25 +9,20 @@ import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class TimingPage extends StatelessWidget {
-  final VerificationModel verificationModel;
-
   const TimingPage({
     super.key,
-    required this.verificationModel,
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TimingCubit(verificationModel),
+      create: (context) => TimingCubit(),
       child: Scaffold(
         body: ChangeNotifierProvider(
-          create: (context) =>
-              TimingProvider()..setUserId(verificationModel.userId),
+          create: (context) => TimingProvider(),
           child: BlocListener<TimingCubit, BaseState>(
             listener: (context, state) {
               if (state is SuccessState) {
-
               } else if (state is FailureState) {
                 PrimaryBottomSheet.show(
                   context,
@@ -35,9 +30,7 @@ class TimingPage extends StatelessWidget {
                 );
               }
             },
-            child: TimingBody(
-              userId: verificationModel.userId,
-            ),
+            child: TimingBody(),
           ),
         ),
       ),

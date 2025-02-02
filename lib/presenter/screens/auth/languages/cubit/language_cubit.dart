@@ -4,14 +4,14 @@ import 'package:language_learning/data/model/auth/verification_model.dart';
 import 'package:language_learning/data/repository/auth_repository.dart';
 import 'package:language_learning/data/repository/language_repository.dart';
 import 'package:language_learning/data/service/api/di.dart';
+import 'package:language_learning/data/service/preferences/preferences.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/utils/routes/app_routes.dart';
 import 'package:language_learning/utils/routes/navigation.dart';
 
 class LanguageCubit extends Cubit<BaseState> {
-  LanguageCubit(this.verificationModel) : super(InitialState());
+  LanguageCubit() : super(InitialState());
 
-  final VerificationModel verificationModel;
   final _authRepository = getIt<AuthRepository>();
   final _languageRepository = getIt<LanguageRepository>();
 
@@ -28,11 +28,13 @@ class LanguageCubit extends Cubit<BaseState> {
 
   void setLanguage(SetLanguageInput input) async {
     emit(LoadingState());
+    final prefs = await PreferencesService.instance;
     final result = await _authRepository.setLanguage(input);
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
-        Navigation.push(Routes.setTiming, arguments: verificationModel);
+        prefs.setLanguagePassed(true);
+        Navigation.push(Routes.setTiming, );
       },
     );
   }

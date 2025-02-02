@@ -6,9 +6,9 @@ import 'package:language_learning/presenter/widgets/heading_text.dart';
 import 'package:language_learning/presenter/widgets/primary_header.dart';
 
 class TimingBody extends StatelessWidget {
-  final String userId;
 
-  const TimingBody({super.key, required this.userId});
+
+  const TimingBody({super.key});
 
   @override
   Widget build(BuildContext context) {

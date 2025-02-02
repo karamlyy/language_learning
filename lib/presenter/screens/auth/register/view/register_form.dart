@@ -77,7 +77,7 @@ class RegisterForm extends StatelessWidget {
                   },
                   shape: RoundedRectangleBorder(
 
-                    borderRadius: BorderRadius.circular(5.0).r,
+                    borderRadius: BorderRadius.circular(10.0).r,
                   ),
                   activeColor: AppColors.background,
                   checkColor: AppColors.primary,

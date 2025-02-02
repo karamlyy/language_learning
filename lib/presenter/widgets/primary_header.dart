@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
+import 'package:language_learning/utils/routes/app_routes.dart';
 import 'package:language_learning/utils/routes/navigation.dart';
 
 class Header extends StatelessWidget {
-
-
   final VoidCallback? onTap;
 
   const Header({
@@ -21,7 +20,7 @@ class Header extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: onTap ?? () => Navigation.pop(),
+            onTap: onTap ?? () => Navigation.pushNamedAndRemoveUntil(Routes.login),
             child: Ink(
               height: 40.h,
               width: 40.h,

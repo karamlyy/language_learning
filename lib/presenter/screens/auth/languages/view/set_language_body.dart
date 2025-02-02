@@ -30,7 +30,7 @@ class SetLanguageBody extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
+                  Header(),
                   SetLanguageHeader(),
                   42.verticalSpace,
                   SetLanguagesList(

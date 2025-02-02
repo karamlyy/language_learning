@@ -31,32 +31,6 @@ class SetLanguageButton extends StatelessWidget {
             if (languagesProvider.isSourceLanguageSelected) {
               if (languagesProvider.isTranslationLanguageSelected) {
                 languageCubit.setLanguage(languagesProvider.setLanguageInput);
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Please select a learning language'),
-                  ),
-                );
-              }
-            } else {
-              if (languagesProvider.isSourceLanguageSelected) {
-
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => SetLanguagePage(
-                //       verificationModel: VerificationModel(
-                //         userId: languagesProvider.userId,
-                //       ),
-                //     ),
-                //   ),
-                // );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Please select a native language'),
-                  ),
-                );
               }
             }
           },

@@ -17,10 +17,14 @@ class AppCubit extends Cubit<AppState> {
     try {
       if (prefs.wasOnBoardingPassed == false) {
         emit(Onboarding());
-      } else if (prefs.wasConfirmationPassed) {
+      } else if (prefs.wasConfirmationPassed && !prefs.wasLanguagePassed) {
         emit(Verified());
       } else if (prefs.wasAuthorizationPassed) {
         emit(Authorized());
+      } else if (prefs.wasLanguagePassed && !prefs.wasTimingPassed) {
+        emit(SetLanguageCompleted());
+      } else if (prefs.wasTimingPassed) {
+        emit(SetTimingCompleted());
       } else {
         emit(UnAuthorized());
       }

@@ -67,20 +67,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.passwordChanged:
       return createPageRoute(const PasswordChangedPage(), settings);
     case Routes.setLanguage:
-      return createPageRoute(
-        SetLanguagePage(
-          verificationModel: settings.arguments as VerificationModel,
-        ),
-        settings,
-      );
+      return createPageRoute(const SetLanguagePage(), settings);
 
     case Routes.setTiming:
-      return createPageRoute(
-        TimingPage(
-          verificationModel: settings.arguments as VerificationModel,
-        ),
-        settings,
-      );
+      return createPageRoute(const TimingPage(), settings);
     case Routes.home:
       return createPageRoute(const HomePage(), settings);
     case Routes.wordList:

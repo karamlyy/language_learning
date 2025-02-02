@@ -20,6 +20,16 @@ class Verified extends AppState {
   List<Object?> get props => throw UnimplementedError();
 }
 
+class SetLanguageCompleted extends AppState {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
+
+class SetTimingCompleted extends AppState {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
+
 class Authorized extends AppState {
   @override
   List<Object?> get props => throw UnimplementedError();
