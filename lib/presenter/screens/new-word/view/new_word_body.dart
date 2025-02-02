@@ -11,7 +11,7 @@ class NewWordBody extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          PrimaryAppbar(title: 'New Word'),
+
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

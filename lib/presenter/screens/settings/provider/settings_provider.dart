@@ -1,31 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:language_learning/presenter/widgets/settings_card.dart';
+import 'package:flutter/material.dart';
+import 'package:language_learning/presenter/screens/settings/settings_options.dart';
 
 class SettingsProvider extends ChangeNotifier {
-  final List<SettingsCard> _settings = [
-    SettingsCard(
-      title: 'Languages',
-      leadingIcon: Icon(CupertinoIcons.globe),
-    ),
-    SettingsCard(
-      title: 'Timing',
-      leadingIcon: Icon(CupertinoIcons.clock),
-    ),
-    SettingsCard(
-      title: 'Password',
-      leadingIcon: Icon(CupertinoIcons.lock_fill),
-    ),
-    SettingsCard(
-      title: 'Terms and Conditions',
-      leadingIcon: Icon(CupertinoIcons.book),
-      trailingIcon: Icon(CupertinoIcons.arrow_down_left),
-    ),
-
-
+  final List<SettingsOption> _settings = [
+    SettingsOption.languages,
+    SettingsOption.timing,
+    SettingsOption.password,
+    SettingsOption.terms,
   ];
 
-  List<SettingsCard> get settings => _settings;
+  List<SettingsOption> get settings => _settings;
 }
-
-
-

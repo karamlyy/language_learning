@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:language_learning/presenter/screens/settings/cubit/settings_cubit.dart';
 import 'package:language_learning/presenter/screens/settings/provider/settings_provider.dart';
 import 'package:language_learning/presenter/screens/settings/view/settings_body.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
@@ -10,19 +12,22 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: PrimaryText(
-          text: 'Settings',
-          color: AppColors.primaryText,
-          fontWeight: FontWeight.w400,
-          fontFamily: 'DMSerifDisplay',
-          fontSize: 20,
+    return BlocProvider(
+      create: (context) => SettingsCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: PrimaryText(
+            text: 'Settings',
+            color: AppColors.primaryText,
+            fontWeight: FontWeight.w400,
+            fontFamily: 'DMSerifDisplay',
+            fontSize: 20,
+          ),
         ),
-      ),
-      body: ChangeNotifierProvider(
-        create: (context) => SettingsProvider(),
-        child: SettingsBody(),
+        body: ChangeNotifierProvider(
+          create: (context) => SettingsProvider(),
+          child: SettingsBody(),
+        ),
       ),
     );
   }

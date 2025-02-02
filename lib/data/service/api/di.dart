@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:language_learning/data/repository/auth_repository.dart';
 import 'package:language_learning/data/repository/home_repository.dart';
 import 'package:language_learning/data/repository/language_repository.dart';
+import 'package:language_learning/data/repository/word_repository.dart';
 import 'package:language_learning/data/service/api/api.dart';
 
 GetIt getIt = GetIt.instance;
@@ -27,5 +28,6 @@ class Injector {
         .registerFactory<AuthRepository>(() => AuthRepositoryImpl(getIt.get()));
     getIt.registerFactory<LanguageRepository>(() => LanguageRepositoryImpl(getIt.get()));
     getIt.registerFactory<HomeRepository>(() => HomeRepositoryImpl(getIt.get()));
+    getIt.registerFactory<WordRepository>(() => WordRepositoryImpl(getIt.get()));
   }
 }

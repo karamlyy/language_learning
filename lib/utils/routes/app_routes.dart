@@ -16,7 +16,8 @@ enum Routes {
   wordList('word-list'),
   vocabulary('vocabulary'),
   newWord('new-word'),
-  settings('settings');
+  settings('settings'),
+  changePassword('change-password');
 
   const Routes( this.path);
 

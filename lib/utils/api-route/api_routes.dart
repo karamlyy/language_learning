@@ -11,6 +11,8 @@ class ApiRoutes {
   static const String confirmResetToken = 'ConfirmPasswordResetToken';
   static const String resetPassword = 'ResetPassword';
 
+  static const String deleteAccount = 'DeleteUser';
+
   static const String getAllLanguages = 'Language/GetAll';
   static const String setUserLanguage = 'UserLanguage/Create';
   static const String setUserTiming = 'NotificationSetting/Create';
@@ -20,4 +22,6 @@ class ApiRoutes {
   static const String getAllWords = 'UserVocabulary/GetPaginatedByUserId';
 
   static const String getUserLanguagePairs = 'UserLanguage/GetAllByUserId';
+
+  static const String newWord = 'UserVocabulary/Create';
 }

@@ -72,7 +72,7 @@ class HomeCubit extends Cubit<BaseState> {
     emit(LoadingState());
 
     final categoryResult = await _homeRepository.getAllCategories();
-    final wordResult = await _homeRepository.getAllWords(1, 7);
+    final wordResult = await _homeRepository.getAllWords(1, 20);
 
     categoryResult.fold(
       (error) => emit(FailureState(errorMessage: error.error)),

@@ -15,6 +15,7 @@ import 'package:language_learning/presenter/screens/auth/splash/view/splash_page
 import 'package:language_learning/presenter/screens/auth/timing/view/timing_page.dart';
 import 'package:language_learning/presenter/screens/auth/verification/view/verification_page.dart';
 import 'package:language_learning/presenter/screens/auth/verify-code/view/verify_code_page.dart';
+import 'package:language_learning/presenter/screens/change-password/view/change_password_page.dart';
 import 'package:language_learning/presenter/screens/home/view/home_page.dart';
 import 'package:language_learning/presenter/screens/new-word/view/new_word_page.dart';
 import 'package:language_learning/presenter/screens/settings/view/settings_page.dart';
@@ -90,6 +91,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return createPageRoute(const NewWordPage(), settings);
     case Routes.settings:
       return createPageRoute(const SettingsPage(), settings);
+    case Routes.changePassword:
+      return createPageRoute(const ChangePasswordPage(), settings);
 
     default:
       return createPageRoute(

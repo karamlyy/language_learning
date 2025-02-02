@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:language_learning/data/endpoint/word/new_word_endpoint.dart';
 import 'package:language_learning/utils/extensions/validation.dart';
 
 class NewWordProvider extends ChangeNotifier {
@@ -6,7 +7,6 @@ class NewWordProvider extends ChangeNotifier {
 
   String _word = '';
   String _translation = '';
-
 
   String? _wordError;
   String? _translationError;
@@ -21,9 +21,14 @@ class NewWordProvider extends ChangeNotifier {
 
   String? get translationError => _translationError;
 
+  NewWordInput get newWordInput => NewWordInput(
+        source: _word,
+        translation: _translation,
+      );
+
   void updateWord(String word) {
     _word = word;
-    if(word.wordAdded()) {
+    if (word.wordAdded()) {
       _wordError = null;
     } else {
       _wordError = 'written word is too short to add';
