@@ -1,14 +1,14 @@
 class CategoryModel {
   int id;
   String name;
-  String? image;
+  String image;
   int masteredCount;
   int vocabularyCount;
 
   CategoryModel({
     required this.id,
     required this.name,
-    this.image,
+    required this.image,
     required this.masteredCount,
     required this.vocabularyCount,
   });

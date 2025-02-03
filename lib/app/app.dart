@@ -54,7 +54,7 @@ class App extends StatelessWidget {
                   return const HomePage();
                 }
 
-                return const SplashPage();
+                return const HomePage();
               },
               listener: (BuildContext context, AppState state) {},
             ),

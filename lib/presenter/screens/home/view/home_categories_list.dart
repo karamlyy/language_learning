@@ -31,6 +31,7 @@ class HomeCategoriesList extends StatelessWidget {
             allWords: category.vocabularyCount,
             masteredWords: category.masteredCount,
             onTap: () {},
+            image: category.image,
           );
         },
       ),

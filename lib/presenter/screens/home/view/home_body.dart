@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/data/model/home/category_model.dart';
+import 'package:language_learning/data/model/home/language_pair_model.dart';
 import 'package:language_learning/data/model/home/user_vocabulary_model.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
@@ -30,6 +31,7 @@ class HomeBody extends StatelessWidget {
           final data = state.data as Map<String, dynamic>;
           final categories = data["categories"] as List<CategoryModel>;
           final wordPairs = data["words"] as UserVocabularyModel;
+          //final selectedLanguagePair = data["selectedPair"] as LanguagePairModel?;
 
           return SafeArea(
             child: Stack(
@@ -64,6 +66,7 @@ class HomeBody extends StatelessWidget {
                                       allWords: category.vocabularyCount,
                                       masteredWords: category.masteredCount,
                                       onTap: () {},
+                                      image: category.image,
                                     );
                                   }).toList(),
                                 ),
@@ -81,7 +84,9 @@ class HomeBody extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.all(16.0).r,
                                 child: Row(
+
                                   children: List.generate(
+
                                     homeProvider.lists.length,
                                         (index) {
                                       final list = homeProvider.lists[index];

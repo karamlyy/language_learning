@@ -89,7 +89,7 @@ class NewWordInputs extends StatelessWidget {
             pressedOpacity: 1,
             padding: EdgeInsets.zero,
             onPressed: () {
-              newWordProvider.addLearning(!newWordProvider.isAddedLearning);
+              newWordProvider.addLearning(!newWordProvider.isLearningNow);
             },
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
@@ -104,7 +104,7 @@ class NewWordInputs extends StatelessWidget {
                   ),
                   12.horizontalSpace,
                   Icon(
-                    newWordProvider.isAddedLearning
+                    newWordProvider.isLearningNow
                         ? Icons.bookmark
                         : Icons.bookmark_outline,
                     color: AppColors.primary,

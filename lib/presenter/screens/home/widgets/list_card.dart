@@ -28,6 +28,7 @@ class ListCard extends StatelessWidget {
           vertical: 12.h,
           horizontal: 16.w,
         ),
+        margin: EdgeInsets.only(right: 12.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12).r,
           color: isActive

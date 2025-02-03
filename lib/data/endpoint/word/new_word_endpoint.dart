@@ -19,18 +19,19 @@ class NewWordEndpoint extends Endpoint {
 class NewWordInput {
   final String source;
   final String translation;
+  final bool isLearningNow;
 
   NewWordInput({
     required this.source,
     required this.translation,
-
+    required this.isLearningNow,
   });
 
   Map<String, dynamic> toJson() {
     return {
       "source": source,
       "translation": translation,
-
+      "isLearningNow": isLearningNow,
     };
   }
 }
