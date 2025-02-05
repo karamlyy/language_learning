@@ -4,7 +4,6 @@ import 'package:language_learning/data/repository/auth_repository.dart';
 import 'package:language_learning/data/service/api/di.dart';
 import 'package:language_learning/data/service/preferences/preferences.dart';
 import 'package:language_learning/generic/base_state.dart';
-import 'package:language_learning/presenter/screens/auth/login/cubit/login_state.dart';
 import 'package:language_learning/utils/routes/app_routes.dart';
 import 'package:language_learning/utils/routes/navigation.dart';
 

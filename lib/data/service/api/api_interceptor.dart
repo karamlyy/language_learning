@@ -1,53 +1,35 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:language_learning/data/exception/error.dart';
 import 'package:language_learning/data/service/preferences/preferences.dart';
 import 'package:language_learning/utils/api-route/api_routes.dart';
+import 'package:language_learning/utils/routes/app_routes.dart';
+import 'package:language_learning/utils/routes/navigation.dart';
 
 class ApiInterceptor extends Interceptor {
   final Dio dio;
-  int _retryCount = 0;
-  bool _isSessionExpired = false;
 
   ApiInterceptor({required this.dio});
 
   @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     final prefs = await PreferencesService.instance;
 
-    // Set common headers
-    options.headers.addAll({
-      "accept": "text/plain",
-      "Accept-Encoding": "gzip, deflate, br",
-      if (prefs.accessToken != null)
-        "Authorization": "Bearer ${prefs.accessToken}",
-    });
+    options.headers["accept"] = "*/*";
+    options.headers["Accept-Encoding"] = "gzip, deflate, br";
+
+    if (prefs.accessToken != null) {
+      options.headers["Authorization"] = "Bearer ${prefs.accessToken}";
+    }
 
     log("HEADERS: ${options.headers}");
-
-    // Proceed with the request
-    handler.next(options);
+    return handler.next(options);
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) async {
-    final prefs = await PreferencesService.instance;
-
-    // If the response is successful and contains tokens, update stored tokens
-    if (response.statusCode == 200 && response.data is Map<String, dynamic>) {
-      final data = response.data;
-      if (data.containsKey('accessToken')) {
-        await prefs.setAccessToken(data['accessToken']);
-      }
-      if (data.containsKey('refreshToken')) {
-        await prefs.setRefreshToken(data['refreshToken']);
-      }
-      _retryCount = 0;
-    }
-
-    // Proceed with the response
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
     handler.next(response);
   }
 
@@ -55,57 +37,70 @@ class ApiInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     final prefs = await PreferencesService.instance;
 
-    // Handle 401 Unauthorized errors by attempting token refresh
-    if (err.response?.statusCode == 401 && _retryCount < 2) {
-      _retryCount++;
-      try {
-        final refreshResponse = await dio.post(
-          ApiRoutes.refreshToken,
-          data: {"refreshToken": prefs.refreshToken},
-        );
+    if (err.response?.statusCode == 401) {
+      final data = err.response?.data;
+      if (data is Map<String, dynamic> && data.containsKey('code')) {
+        final errorCode = data['code'];
 
-        // Update tokens and retry the failed request
-        final newAccessToken = refreshResponse.data["accessToken"];
-        await prefs.setAccessToken(newAccessToken);
+        if (errorCode == 100) {
+          // Clear session for code: 100
+          await _clearSession();
+          return handler.reject(err);
+        } else if (errorCode == 101) {
+          // Refresh token for code: 101
+          try {
+            final refreshResult = await dio.post(
+              ApiRoutes.refreshToken, // Replace with your refresh token endpoint
+              data: {
+                "refreshToken": prefs.refreshToken,
+              },
+            );
 
-        // Update the authorization header and retry
-        err.requestOptions.headers["Authorization"] = "Bearer $newAccessToken";
-        final retriedResponse = await dio.fetch(err.requestOptions);
-        return handler.resolve(retriedResponse);
-      } catch (e) {
-        log("Token refresh failed: $e");
+            // Update new token
+            final newAccessToken = refreshResult.data["token"];
+            await prefs.setAccessToken(newAccessToken);
+
+            // Retry the original request with the new token
+            final options = err.requestOptions;
+            options.headers["Authorization"] = "Bearer $newAccessToken";
+            final response = await dio.fetch(options);
+            return handler.resolve(response);
+          } catch (e) {
+            // If refresh token fails, clear session
+            await _clearSession();
+            return handler.reject(err);
+          }
+        }
       }
     }
 
-    // Clear session if token refresh fails or retries are exhausted
-    if (err.response?.statusCode == 401 && !_isSessionExpired) {
-      _isSessionExpired = true;
-      await _clearSession();
-    }
+    String errorMessage = "SAKJSNA";
 
-    // Handle other errors or failed retries
-    handler.reject(_mapToHttpException(err));
-  }
+    if (err.response != null) {
+      final data = err.response?.data;
+      final statusCode = err.response?.statusCode ?? 0;
 
-  DioException _mapToHttpException(DioException err) {
-    String errorMessage = "An unknown error occurred";
-
-    // Extract error message if available
-    if (err.response?.data is Map<String, dynamic>) {
-      final data = err.response!.data;
-      if (data.containsKey('title')) {
-        errorMessage = data['title'] ?? errorMessage;
+      if (data is Map<String, dynamic> && data.containsKey('errors')) {
+        if (data.containsKey('errors') && data['errors'] is List) {
+          errorMessage = data['errors'].join(", ");
+        }
+      } else if (data is String) {
+        errorMessage = data;
       }
+
+      log("ERROR[$statusCode] => MESSAGE: $errorMessage");
     }
 
-    return DioException(
-      requestOptions: err.requestOptions,
-      response: err.response,
-      type: err.type,
-      error: HttpException(
-        error: ErrorMessage(
-          message: errorMessage,
-          code: err.response?.statusCode,
+    handler.reject(
+      DioException(
+        requestOptions: err.requestOptions,
+        response: err.response,
+        type: err.type,
+        error: HttpException(
+          error: ErrorMessage(
+            message: errorMessage,
+            code: err.response?.statusCode,
+          ),
         ),
       ),
     );
@@ -115,7 +110,12 @@ class ApiInterceptor extends Interceptor {
     final prefs = await PreferencesService.instance;
     await prefs.clear();
     await prefs.setAuthorizationPassed(false);
-
-    //TODO: Navigate to login screen
+    await prefs.setOnBoardingPassed(true);
+    Navigation.pushNamedAndRemoveUntil(Routes.login, arguments: true);
+    ScaffoldMessenger.of(Navigation.navigatorKey.currentContext!).showSnackBar(
+      const SnackBar(
+        content: Text("Sessiyanın vaxtı bitib. Zəhmət olmasa, yenidən daxil olun."),
+      ),
+    );
   }
 }

@@ -5,7 +5,6 @@ import 'package:language_learning/generic/generic_listener.dart';
 import 'package:language_learning/presenter/screens/auth/login/cubit/login_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/login/provider/login_provider.dart';
 import 'package:language_learning/presenter/screens/auth/login/view/login_body.dart';
-import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
@@ -18,13 +17,8 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         body: ChangeNotifierProvider(
           create: (context) => LoginProvider(),
-          child: GenericBlocListener<LoginCubit, BaseState>(
-            onFailure: (context, errorMessage) {
-              PrimaryBottomSheet.show(
-                context,
-                text: errorMessage.message,
-              );
-            },
+          child: GenericListener<LoginCubit, BaseState>(
+            listener: (context, state) {},
             child: LoginBody(),
           ),
         ),

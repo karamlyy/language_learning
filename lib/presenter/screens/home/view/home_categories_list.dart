@@ -18,12 +18,10 @@ class HomeCategoriesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         itemBuilder: (context, index) {
           final category = categories[index];
-          final isSelected = selectedCategoryId == category.id;
 
           return CategoryCard(
             id: category.id,

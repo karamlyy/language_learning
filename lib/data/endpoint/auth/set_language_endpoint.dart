@@ -1,5 +1,4 @@
 import 'package:language_learning/data/endpoint/base/endpoint.dart';
-import 'package:language_learning/data/service/preferences/preferences.dart';
 import 'package:language_learning/utils/api-route/api_routes.dart';
 
 class SetLanguageEndpoint extends Endpoint {
@@ -15,8 +14,6 @@ class SetLanguageEndpoint extends Endpoint {
 
   @override
   Map<String, dynamic>? get body => input.toJson();
-
-
 }
 
 class SetLanguageInput {
@@ -31,8 +28,8 @@ class SetLanguageInput {
   });
 
   Map<String, dynamic> toJson() => {
-    'userId': userId,
-    'sourceLanguageId': sourceLanguageId,
-    'translationLanguageId': translationLanguageId,
-  };
+        'userId': userId,
+        'sourceLanguageId': sourceLanguageId,
+        'translationLanguageId': translationLanguageId,
+      };
 }

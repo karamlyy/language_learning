@@ -14,7 +14,7 @@ class SettingsFooterButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settingsCubit = context.read<SettingsCubit>();
-    return BaseBuilder<SettingsCubit, BaseState>(
+    return GenericBuilder<SettingsCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
           return const CircularProgressIndicator();

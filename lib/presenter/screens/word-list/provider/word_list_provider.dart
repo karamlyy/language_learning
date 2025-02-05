@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../../../../utils/asset-paths/app_assets.dart';
 import '../../home/model/word.dart';
-import '../../home/model/category.dart';
 
 class WordListProvider extends ChangeNotifier {
-
-
   final List<Word> words = [
     Word(id: 0, word: 'Hello', translation: 'Salam'),
     Word(id: 1, word: 'Book', translation: 'Kitab'),
@@ -30,7 +25,6 @@ class WordListProvider extends ChangeNotifier {
     Word(id: 18, word: 'Food', translation: 'Yemək'),
     Word(id: 19, word: 'Music', translation: 'Musiqi'),
   ];
-
 
   int? _selectedWordId;
 

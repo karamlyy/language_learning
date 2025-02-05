@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:language_learning/presenter/screens/auth/forgot-password/cubit/forgot_password_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/provider/forgot_password_provider.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/view/forgot_password_button.dart';
 import 'package:language_learning/presenter/widgets/heading_text.dart';
@@ -15,16 +14,13 @@ class ForgotPasswordForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final forgotPasswordProvider = context.watch<ForgotPasswordProvider>();
-    final forgotPasswordCubit = context.read<ForgotPasswordCubit>();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const HeadingText(
-              headingText: 'Forgot Password?',
-              secondaryText:
-                  'Don’t worry! It happens. Please enter the email associated with your account.'),
+              headingText: 'Forgot Password?', secondaryText: 'Don’t worry! It happens. Please enter the email associated with your account.'),
           32.verticalSpace,
           PrimaryTextFormField(
             headText: "Email address",
@@ -39,9 +35,7 @@ class ForgotPasswordForm extends StatelessWidget {
               icon: Icon(
                 forgotPasswordProvider.emailError != null
                     ? null
-                    : (forgotPasswordProvider.email.isNotEmpty
-                        ? CupertinoIcons.check_mark_circled_solid
-                        : CupertinoIcons.mail_solid),
+                    : (forgotPasswordProvider.email.isNotEmpty ? CupertinoIcons.check_mark_circled_solid : CupertinoIcons.mail_solid),
                 color: AppColors.primaryText.withValues(
                   alpha: 0.6,
                 ),

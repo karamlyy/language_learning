@@ -13,7 +13,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginProvider = context.watch<LoginProvider>();
     final loginCubit = context.read<LoginCubit>();
-    return BaseBuilder<LoginCubit, BaseState>(
+    return GenericBuilder<LoginCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
           return const CircularProgressIndicator();

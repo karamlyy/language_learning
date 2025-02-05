@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:language_learning/data/endpoint/auth/reset_password_endpoint.dart';
 import 'package:language_learning/utils/extensions/validation.dart';
 
 class ChangePasswordProvider extends ChangeNotifier {
@@ -33,7 +32,6 @@ class ChangePasswordProvider extends ChangeNotifier {
 
   bool get isConfirmPasswordVisible => _isConfirmPasswordVisible;
 
-
   void changePasswordVisibility(bool value) {
     _isPasswordVisible = value;
     notifyListeners();
@@ -48,8 +46,6 @@ class ChangePasswordProvider extends ChangeNotifier {
     _isConfirmPasswordVisible = value;
     notifyListeners();
   }
-
-
 
   void updatePassword(String password) {
     _password = password;
@@ -88,7 +84,6 @@ class ChangePasswordProvider extends ChangeNotifier {
   bool isNewPasswordValid() {
     return _newPassword.isValidPassword();
   }
-
 
   bool isPasswordMatch() {
     return _password == _newPassword;

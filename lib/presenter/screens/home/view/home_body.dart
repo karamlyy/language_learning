@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/data/model/home/category_model.dart';
-import 'package:language_learning/data/model/home/language_pair_model.dart';
 import 'package:language_learning/data/model/home/user_vocabulary_model.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
@@ -84,11 +83,9 @@ class HomeBody extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.all(16.0).r,
                                 child: Row(
-
                                   children: List.generate(
-
                                     homeProvider.lists.length,
-                                        (index) {
+                                    (index) {
                                       final list = homeProvider.lists[index];
                                       return ListCard(
                                         id: list.id,

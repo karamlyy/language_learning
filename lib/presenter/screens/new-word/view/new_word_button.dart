@@ -1,16 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/new-word/cubit/new_word_cubit.dart';
-import 'package:language_learning/presenter/screens/new-word/cubit/new_word_state.dart';
 import 'package:language_learning/presenter/screens/new-word/provider/new_word_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_button.dart';
-import 'package:language_learning/presenter/widgets/primary_text.dart';
-import 'package:language_learning/utils/colors/app_colors.dart';
-import 'package:provider/provider.dart';
-import 'package:toastification/toastification.dart';
 
 class NewWordButton extends StatelessWidget {
   const NewWordButton({super.key});

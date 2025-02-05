@@ -35,13 +35,10 @@ class VerificationCubit extends Cubit<VerificationState> {
       (data) {
         prefs.setAccessToken(data.accessToken ?? '');
         prefs.setRefreshToken(data.refreshToken ?? '');
-        prefs.setUserId(data.userId ?? '');
+        prefs.setUserId(data.userId);
 
         prefs.setConfirmationPassed(true);
-        Navigation.pushNamedAndRemoveUntil(
-          Routes.setLanguage,
-          arguments: data
-        );
+        Navigation.pushNamedAndRemoveUntil(Routes.setLanguage, arguments: data);
         print('successful verification');
       },
     );

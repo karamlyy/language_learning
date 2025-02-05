@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:language_learning/presenter/screens/new-word/view/new_word_button.dart';
 import 'package:language_learning/presenter/screens/new-word/view/new_word_inputs.dart';
-import 'package:language_learning/presenter/widgets/primary_appbar.dart';
 
 class NewWordBody extends StatelessWidget {
   const NewWordBody({super.key});
@@ -11,7 +10,6 @@ class NewWordBody extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

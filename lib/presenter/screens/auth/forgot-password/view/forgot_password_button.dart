@@ -6,7 +6,6 @@ import 'package:language_learning/presenter/screens/auth/forgot-password/cubit/f
 import 'package:language_learning/presenter/screens/auth/forgot-password/provider/forgot_password_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_button.dart';
 
-
 class ForgotPasswordButton extends StatelessWidget {
   const ForgotPasswordButton({super.key});
 
@@ -14,7 +13,7 @@ class ForgotPasswordButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final forgotPasswordProvider = context.watch<ForgotPasswordProvider>();
     final forgotPasswordCubit = context.read<ForgotPasswordCubit>();
-    return BaseBuilder<ForgotPasswordCubit, BaseState>(
+    return GenericBuilder<ForgotPasswordCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
           return const CircularProgressIndicator();
@@ -24,8 +23,7 @@ class ForgotPasswordButton extends StatelessWidget {
           hasBorder: false,
           isActive: forgotPasswordProvider.isEmailValid(),
           onTap: () {
-            forgotPasswordCubit.applyForgotPassword(
-                forgotPasswordProvider.forgotPasswordInput);
+            forgotPasswordCubit.applyForgotPassword(forgotPasswordProvider.forgotPasswordInput);
           },
         );
       },

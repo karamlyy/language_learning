@@ -4,7 +4,6 @@ import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/generic/generic_listener.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/cubit/forgot_password_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/provider/forgot_password_provider.dart';
-import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 import 'forgot_password_body.dart';
@@ -19,13 +18,8 @@ class ForgotPasswordPage extends StatelessWidget {
       child: Scaffold(
         body: ChangeNotifierProvider(
           create: (context) => ForgotPasswordProvider(),
-          child: GenericBlocListener<ForgotPasswordCubit, BaseState>(
-            onFailure: (context, errorMessage) {
-              PrimaryBottomSheet.show(
-                context,
-                text: errorMessage.message,
-              );
-            },
+          child: GenericListener<ForgotPasswordCubit, BaseState>(
+            listener: (context, state) {},
             child: ForgotPasswordBody(),
           ),
         ),

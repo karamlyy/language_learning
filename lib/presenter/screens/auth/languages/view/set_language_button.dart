@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:language_learning/data/model/auth/verification_model.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/auth/languages/cubit/language_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/languages/cubit/language_state.dart';
-import 'package:language_learning/presenter/screens/auth/languages/view/set_language_page.dart';
 import 'package:language_learning/presenter/widgets/primary_button.dart';
 
 import '../provider/languages_provider.dart';
@@ -25,8 +22,7 @@ class SetLanguageButton extends StatelessWidget {
         return PrimaryButton(
           title: 'Continue',
           hasBorder: false,
-          isActive: languagesProvider.isSourceLanguageSelected &&
-              languagesProvider.isTranslationLanguageSelected,
+          isActive: languagesProvider.isSourceLanguageSelected && languagesProvider.isTranslationLanguageSelected,
           onTap: () {
             if (languagesProvider.isSourceLanguageSelected) {
               if (languagesProvider.isTranslationLanguageSelected) {

@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:language_learning/data/endpoint/auth/set_language_endpoint.dart';
-import 'package:language_learning/data/model/auth/verification_model.dart';
 import 'package:language_learning/data/repository/auth_repository.dart';
 import 'package:language_learning/data/repository/language_repository.dart';
 import 'package:language_learning/data/service/api/di.dart';
@@ -34,7 +33,9 @@ class LanguageCubit extends Cubit<BaseState> {
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
         prefs.setLanguagePassed(true);
-        Navigation.push(Routes.setTiming, );
+        Navigation.push(
+          Routes.setTiming,
+        );
       },
     );
   }

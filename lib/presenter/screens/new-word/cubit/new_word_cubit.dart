@@ -4,8 +4,6 @@ import 'package:language_learning/data/repository/word_repository.dart';
 import 'package:language_learning/data/service/api/di.dart';
 import 'package:language_learning/generic/base_state.dart';
 
-import 'package:toastification/toastification.dart';
-
 class NewWordCubit extends Cubit<BaseState> {
   NewWordCubit() : super(InitialState());
 

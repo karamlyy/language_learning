@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:language_learning/data/model/auth/forgot_password_model.dart';
 import 'package:language_learning/data/model/auth/register_model.dart';
-import 'package:language_learning/data/model/auth/verification_model.dart';
 import 'package:language_learning/presenter/screens/auth/forgot-password/view/forgot_password_page.dart';
 import 'package:language_learning/presenter/screens/auth/languages/view/set_language_page.dart';
 import 'package:language_learning/presenter/screens/auth/login/view/login_page.dart';

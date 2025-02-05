@@ -13,7 +13,7 @@ class RegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final registerProvider = context.watch<RegisterProvider>();
     final registerCubit = context.read<RegisterCubit>();
-    return BaseBuilder<RegisterCubit, BaseState>(
+    return GenericBuilder<RegisterCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
           return const CircularProgressIndicator();

@@ -5,10 +5,6 @@ import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/auth/timing/cubit/timing_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/timing/provider/timing_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_button.dart';
-import 'package:language_learning/utils/routes/app_routes.dart';
-import 'package:language_learning/utils/routes/navigation.dart';
-import 'package:provider/provider.dart';
-
 
 class TimingButton extends StatelessWidget {
   const TimingButton({super.key});
@@ -28,7 +24,7 @@ class TimingButton extends StatelessWidget {
             title: 'Continue',
             hasBorder: false,
             isActive: timingProvider.isSelectedInterval(),
-            onTap: () async{
+            onTap: () async {
               timingCubit.setTiming(timingProvider.timingInput);
             },
           ),

@@ -24,7 +24,6 @@ class HomeMain extends StatelessWidget {
         itemCount: lists.length,
         itemBuilder: (context, index) {
           final list = lists[index];
-          final isSelected = selectedListId == list.id;
           return ListCard(
             id: list.id,
             listName: list.listName,

@@ -5,7 +5,6 @@ import 'package:language_learning/generic/generic_listener.dart';
 import 'package:language_learning/presenter/screens/settings/cubit/settings_cubit.dart';
 import 'package:language_learning/presenter/screens/settings/provider/settings_provider.dart';
 import 'package:language_learning/presenter/screens/settings/view/settings_body.dart';
-import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:provider/provider.dart';
@@ -29,13 +28,8 @@ class SettingsPage extends StatelessWidget {
         ),
         body: ChangeNotifierProvider(
           create: (context) => SettingsProvider(),
-          child: GenericBlocListener<SettingsCubit, BaseState>(
-            onFailure: (context, errorMessage) {
-              PrimaryBottomSheet.show(
-                context,
-                text: errorMessage.message,
-              );
-            },
+          child: GenericListener<SettingsCubit, BaseState>(
+            listener: (context, state) {},
             child: SettingsBody(),
           ),
         ),

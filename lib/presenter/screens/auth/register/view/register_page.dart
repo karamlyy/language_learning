@@ -5,7 +5,6 @@ import 'package:language_learning/generic/generic_listener.dart';
 import 'package:language_learning/presenter/screens/auth/register/cubit/register_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/register/provider/register_provider.dart';
 import 'package:language_learning/presenter/screens/auth/register/view/register_body.dart';
-import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -18,13 +17,8 @@ class RegisterPage extends StatelessWidget {
       child: Scaffold(
         body: ChangeNotifierProvider(
           create: (context) => RegisterProvider(),
-          child: GenericBlocListener<RegisterCubit, BaseState>(
-            onFailure: (context, errorMessage) {
-              PrimaryBottomSheet.show(
-                context,
-                text: errorMessage.message,
-              );
-            },
+          child: GenericListener<RegisterCubit, BaseState>(
+            listener: (context, errorMessage) {},
             child: RegisterBody(),
           ),
         ),
