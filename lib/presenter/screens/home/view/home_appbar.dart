@@ -19,7 +19,8 @@ class HomeAppbar extends StatelessWidget {
     return BlocBuilder<HomeCubit, BaseState>(
       builder: (context, state) {
         if (state is SuccessState) {
-          final selectedPair = homeProvider.selectedLanguagePair ?? homeProvider.getSelectedLanguagePair(state.data);
+          final selectedPair = homeProvider.selectedLanguagePair ??
+              homeProvider.getSelectedLanguagePair(state.data);
           final homeCubit = context.read<HomeCubit>();
 
           return Padding(
@@ -52,7 +53,6 @@ class HomeAppbar extends StatelessWidget {
                               onLanguagePairSelected: (id) {
                                 homeCubit.setSelectedLanguagePair(id);
                               },
-
                             );
                           },
                         );

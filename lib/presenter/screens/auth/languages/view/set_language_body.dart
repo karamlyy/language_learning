@@ -24,6 +24,7 @@ class SetLanguageBody extends StatelessWidget {
         } else if (state is SuccessState) {
           final languages = state.data as List<LanguageModel>;
 
+
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16.0).r,

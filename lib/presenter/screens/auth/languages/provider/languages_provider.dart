@@ -37,16 +37,13 @@ class LanguagesProvider extends ChangeNotifier {
   void selectSourceLanguage(int id) {
     _selectedSourceLanguageId = id;
     isSourceLanguageSelected = true;
-    debugPrint(
-        '[LanguagesProvider] Selected source language ID: $_selectedSourceLanguageId');
     notifyListeners();
   }
 
   void selectTranslationLanguage(int id) {
     _selectedTranslationLanguageId = id;
     isTranslationLanguageSelected = true;
-    debugPrint(
-        '[LanguagesProvider] Selected learning language ID: $_selectedTranslationLanguageId');
+
     notifyListeners();
   }
 }

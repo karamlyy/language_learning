@@ -19,4 +19,15 @@ class QuizCubit extends Cubit<BaseState> {
       },
     );
   }
+
+  void addToMaster(int id) async {
+    emit(LoadingState());
+    final result = await _quizRepository.addToMaster(id);
+    result.fold(
+      (error) => emit(FailureState(errorMessage: error.error)),
+      (data) {
+        print('added to master');
+      },
+    );
+  }
 }

@@ -21,6 +21,9 @@ class ApiRoutes {
 
   static const String getAllCategories = 'Category/GetAllByUserId';
   static const String addFromCategoryToLearning = 'UserVocabulary/AddFromVocabulary';
+  static const String addToLearning = 'UserVocabulary/SetLearning/';
+  static const String addToMaster = 'UserVocabulary/SetMastered/';
+
   static const String getAllCategoryVocabulary = 'Vocabulary/GetAllByCategoryId';
 
   static const String getAllCardsCounts = 'UserVocabulary/GetCountByUserId';

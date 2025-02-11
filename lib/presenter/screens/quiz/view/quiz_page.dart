@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:language_learning/data/model/quiz/question_model.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/quiz/cubit/quiz_cubit.dart';
 import 'package:language_learning/presenter/screens/quiz/provider/quiz_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_button.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
+import 'package:language_learning/utils/asset-paths/app_assets.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
@@ -33,26 +35,31 @@ class QuizPage extends StatelessWidget {
             actions: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Row(
-                  children: [
-                    Icon(
-                      CupertinoIcons.heart_fill,
-                      color: AppColors.primary,
-                      size: 20.w,
-                    ),
-                    Icon(
-                      CupertinoIcons.heart_fill,
-                      color: AppColors.primary,
-                      size: 20.w,
-                    ),
-                    Icon(
-                      CupertinoIcons.heart,
-                      color: AppColors.primary,
-                      size: 20.w,
-                    ),
-                  ],
+                child: Consumer<QuizProvider>(
+                  builder: (context, quizProvider, child) {
+                    return Row(
+                      children: List.generate(
+                        3,
+                        (index) {
+                          if (index < quizProvider.chances) {
+                            return Icon(
+                              CupertinoIcons.heart_fill,
+                              color: AppColors.primary,
+                              size: 20.w,
+                            );
+                          } else {
+                            return Icon(
+                              CupertinoIcons.heart,
+                              color: AppColors.primary,
+                              size: 20.w,
+                            );
+                          }
+                        },
+                      ),
+                    );
+                  },
                 ),
-              )
+              ),
             ],
           ),
           body: BlocListener<QuizCubit, BaseState>(
@@ -99,9 +106,8 @@ class QuizBody extends StatelessWidget {
               width: double.infinity,
               height: 100.h,
               decoration: BoxDecoration(
-                color: AppColors.unselectedItemBackground,
-                borderRadius: BorderRadius.circular(24).r,
-              ),
+                  color: AppColors.unselectedItemBackground,
+                  borderRadius: BorderRadius.circular(24).r),
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: 16.h,
@@ -153,41 +159,106 @@ class QuizBody extends StatelessWidget {
 
                         toastification.show(
                           context: context,
-                          icon:
-                              isCorrect ? Icon(Icons.check) : Icon(Icons.close),
-                          title: Text(
-                            isCorrect ? 'Correct :)' : 'Incorrect :( $answer',
-                            style: TextStyle(
-                              color: isCorrect
-                                  ? AppColors.success
-                                  : AppColors.wrong,
-                            ),
+                          closeButtonShowType: CloseButtonShowType.none,
+                          icon: isCorrect
+                              ? SvgPicture.asset(
+                                  Images.happyFace,
+                                  fit: BoxFit.cover,
+                                  width: 36.w,
+                                  height: 36.h,
+                                )
+                              : SvgPicture.asset(
+                                  Images.sadFace,
+                                  fit: BoxFit.cover,
+                                  width: 36.w,
+                                  height: 36.h,
+                                ),
+                          title: PrimaryText(
+                            color:
+                                isCorrect ? AppColors.success : AppColors.wrong,
+                            fontWeight: FontWeight.w600,
+                            text: isCorrect ? 'Correct !' : 'Incorrect',
+                            fontSize: 22,
                           ),
+                          description: isCorrect
+                              ? null
+                              : PrimaryText(
+                                  color: AppColors.wrong,
+                                  fontWeight: FontWeight.w600,
+                                  text: answer,
+                                  fontSize: 16,
+                                ),
                           autoCloseDuration: Duration(seconds: 2),
                           showProgressBar: false,
                           backgroundColor: isCorrect
                               ? AppColors.successBackground
                               : AppColors.wrongBackground,
-                          alignment: Alignment.topCenter,
-                          type: isCorrect
-                              ? ToastificationType.success
-                              : ToastificationType.error,
+                          alignment: Alignment.bottomCenter,
                         );
+
+                        if(isCorrect) {
+                          showDialog(context: context, builder: (context) => AlertDialog(
+                            icon: CupertinoButton(
+                              pressedOpacity: 1,
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                quizProvider.addToMaster(!quizProvider.isAddedToMaster);
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+                                child: Row(
+                                  children: [
+                                    const PrimaryText(
+                                      haveUnderline: TextDecoration.underline,
+                                      text: 'Add to Master words',
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                    12.horizontalSpace,
+                                    Icon(
+                                      quizProvider.isAddedToMaster
+                                          ? Icons.bookmark
+                                          : Icons.bookmark_outline,
+                                      color: AppColors.primary,
+                                      size: 20.w,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ));
+                        }
 
                         if (quizProvider.chances == 0) {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: Text('Quiz bitdi'),
-                              content: Text('3 defe sehv etdiniz.'),
+                              title: PrimaryText(
+                                color: AppColors.primaryText,
+                                fontWeight: FontWeight.w400,
+                                text: 'Finished',
+                                fontSize: 20,
+                                fontFamily: 'DMSerifDisplay',
+                              ),
+                              content: PrimaryText(
+                                color: AppColors.primaryText.withValues(
+                                  alpha: 0.7,
+                                ),
+                                fontWeight: FontWeight.w400,
+                                text: 'You did 3 mistakes',
+                                fontSize: 14,
+                              ),
                               actions: [
-                                TextButton(
-                                  onPressed: () {
+                                PrimaryButton(
+                                  title: 'Restart',
+                                  hasBorder: false,
+                                  isActive: true,
+                                  onTap: () {
                                     Navigator.of(context).pop();
                                     quizProvider.resetChances();
                                     quizCubit.getQuizQuestion([]);
                                   },
-                                  child: Text('yeniden basla'),
                                 ),
                               ],
                             ),
@@ -197,6 +268,35 @@ class QuizBody extends StatelessWidget {
                     ),
                   );
                 },
+              ),
+            ),
+            CupertinoButton(
+              pressedOpacity: 1,
+              padding: EdgeInsets.zero,
+              onPressed: () {
+                quizCubit.addToMaster(quizData.id);
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+                child: Row(
+                  children: [
+                    const PrimaryText(
+                      haveUnderline: TextDecoration.underline,
+                      text: 'Add to Master words',
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                    ),
+                    12.horizontalSpace,
+                    Icon(
+                      quizProvider.isAddedToMaster
+                          ? Icons.bookmark
+                          : Icons.bookmark_outline,
+                      color: AppColors.primary,
+                      size: 20.w,
+                    ),
+                  ],
+                ),
               ),
             ),
             PrimaryButton(
