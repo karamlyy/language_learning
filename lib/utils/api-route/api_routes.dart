@@ -28,6 +28,7 @@ class ApiRoutes {
   static const String addFromCategoryToLearning = 'UserVocabulary/AddFromVocabulary';
   static const String addToLearning = 'UserVocabulary/SetLearning/';
   static const String addToMaster = 'UserVocabulary/SetMastered/';
+  static const String searchWord = 'UserVocabulary/Search';
 
   static const String getAllCategoryVocabulary = 'Vocabulary/GetAllByCategoryId';
 

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:language_learning/data/endpoint/quiz/quiz_endpoint.dart';
 import 'package:language_learning/data/endpoint/vocabulary/category_vocabulary_endpoint.dart';
-import 'package:language_learning/data/endpoint/word/add_master.dart';
+import 'package:language_learning/data/endpoint/word/add_master_endpoint.dart';
 import 'package:language_learning/data/exception/error.dart';
 import 'package:language_learning/data/model/home/category_word_model.dart';
 import 'package:language_learning/data/model/quiz/question_model.dart';

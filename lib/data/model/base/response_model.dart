@@ -6,6 +6,7 @@ import 'package:language_learning/data/model/home/card_model.dart';
 import 'package:language_learning/data/model/home/category_model.dart';
 import 'package:language_learning/data/model/home/category_word_model.dart';
 import 'package:language_learning/data/model/home/language_pair_model.dart';
+import 'package:language_learning/data/model/home/search_word_model.dart';
 import 'package:language_learning/data/model/home/user_vocabulary_model.dart';
 import 'package:language_learning/data/model/language/language_model.dart';
 import 'package:language_learning/data/model/quiz/question_model.dart';
@@ -44,6 +45,10 @@ class ResponseModel<T> {
         case const (List<LanguageModel>):
           return (data["data"] as List)
               .map((e) => LanguageModel.fromJson(e))
+              .toList() as T;
+        case const (List<SearchWordModel>):
+          return (data["data"] as List)
+              .map((e) => SearchWordModel.fromJson(e))
               .toList() as T;
         case const (List<CategoryModel>):
           return (data["data"] as List)
