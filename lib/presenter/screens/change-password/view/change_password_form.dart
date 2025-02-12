@@ -26,7 +26,11 @@ class ChangePasswordForm extends StatelessWidget {
           suffixIcon: IconButton(
             iconSize: 20.h,
             padding: const EdgeInsets.all(16.0).r,
-            onPressed: () {},
+            onPressed: () {
+              changePasswordProvider.changePasswordVisibility(
+                !changePasswordProvider.isPasswordVisible,
+              );
+            },
             icon: Icon(
               changePasswordProvider.isPasswordVisible
                   ? Icons.visibility_off
@@ -34,47 +38,55 @@ class ChangePasswordForm extends StatelessWidget {
               color: AppColors.primaryText.withValues(alpha: 0.6),
             ),
           ),
-          onChanged: (String value) {},
+          onChanged: changePasswordProvider.updatePassword,
         ),
         16.verticalSpace,
         PrimaryTextFormField(
           headText: 'New password',
           hint: 'must be 8 characters',
-          isObscureText: !changePasswordProvider.isPasswordVisible,
+          isObscureText: !changePasswordProvider.isNewPasswordVisible,
           hasError: changePasswordProvider.passwordError != null,
+
           suffixIcon: IconButton(
             iconSize: 20.h,
             padding: const EdgeInsets.all(16.0).r,
-            onPressed: () {},
+            onPressed: () {
+              changePasswordProvider.changeNewPasswordVisibility(
+                !changePasswordProvider.isNewPasswordVisible,
+              );
+            },
             icon: Icon(
-              changePasswordProvider.isPasswordVisible
+              changePasswordProvider.isNewPasswordVisible
                   ? Icons.visibility_off
                   : Icons.visibility,
               color: AppColors.primaryText.withValues(alpha: 0.6),
             ),
           ),
-          onChanged: (String value) {},
+          onChanged: changePasswordProvider.updateNewPassword,
         ),
         16.verticalSpace,
         PrimaryTextFormField(
           headText: 'Password',
-          hint: 'must be 8 characters',
-          isObscureText: !changePasswordProvider.isPasswordVisible,
+          hint: 'repeat password',
+          isObscureText: !changePasswordProvider.isConfirmPasswordVisible,
           hasError: changePasswordProvider.passwordError != null,
           suffixIcon: IconButton(
             iconSize: 20.h,
             padding: const EdgeInsets.all(16.0).r,
-            onPressed: () {},
+            onPressed: () {
+              changePasswordProvider.changeConfirmPasswordVisibility(
+                !changePasswordProvider.isConfirmPasswordVisible,
+              );
+            },
             icon: Icon(
-              changePasswordProvider.isPasswordVisible
+              changePasswordProvider.isConfirmPasswordVisible
                   ? Icons.visibility_off
                   : Icons.visibility,
               color: AppColors.primaryText.withValues(alpha: 0.6),
             ),
           ),
-          onChanged: (String value) {},
+          onChanged: changePasswordProvider.updateConfirmPassword,
         ),
-
       ],
     );
   }

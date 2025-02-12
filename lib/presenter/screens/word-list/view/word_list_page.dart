@@ -38,27 +38,25 @@ class WordListPage extends StatelessWidget {
             listener: (context, state) {},
             child: Padding(
               padding: const EdgeInsets.all(16.0).r,
-              child: Expanded(
-                child: ListView.builder(
-                  itemCount: categoryWords.length,
-                  itemBuilder: (context, index) {
-                    final categoryWord = categoryWords[index];
-                    final categoryProvider = context.watch<WordListProvider>();
-                    final categoryCubit = context.read<CategoryCubit>();
-                    return BlocBuilder<CategoryCubit, BaseState>(
-                      builder: (context, state) {
-                        return WordCard(
-                          word: categoryWord.source,
-                          translation: categoryWord.translation,
-                          onBookmarkTap: () {
-                            categoryCubit.changeWordStatus(categoryProvider.categoryWordInput ?? 1);
-                          },
+              child: ListView.builder(
+                itemCount: categoryWords.length,
+                itemBuilder: (context, index) {
+                  final categoryWord = categoryWords[index];
+                  final categoryProvider = context.watch<WordListProvider>();
+                  final categoryCubit = context.read<CategoryCubit>();
+                  return BlocBuilder<CategoryCubit, BaseState>(
+                    builder: (context, state) {
+                      return WordCard(
+                        word: categoryWord.source,
+                        translation: categoryWord.translation,
+                        onBookmarkTap: () {
+                          categoryCubit.changeWordStatus(categoryWord.id);
+                        },
 
-                        );
-                      },
-                    );
-                  },
-                ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ),

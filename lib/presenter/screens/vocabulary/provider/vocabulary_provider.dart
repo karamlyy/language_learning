@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
-
-import '../../home/model/word.dart';
+import 'package:flutter/material.dart';
 
 class VocabularyProvider extends ChangeNotifier {
   bool _isSearchActive = false;
@@ -15,4 +13,9 @@ class VocabularyProvider extends ChangeNotifier {
   int? _selectedWordId;
 
   int? get selectedWordId => _selectedWordId;
+
+  void selectWord(int id) {
+    _selectedWordId = id;
+    notifyListeners();
+  }
 }

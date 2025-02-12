@@ -18,6 +18,10 @@ class Images {
   static const String bottomNavigationBackground =
       '$baseAssetsPath/navbarBg.svg';
 
+  static const String happyFace = '$baseAssetsPath/happy.svg';
+  static const String sadFace = '$baseAssetsPath/sad.svg';
+
+
   static const String vegetables = '$baseFeaturesPath/vegetables.svg';
 
   static const String fruits = '$baseFeaturesPath/fruits.svg';

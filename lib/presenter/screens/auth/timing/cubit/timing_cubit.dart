@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:language_learning/data/endpoint/auth/fcm_token_endpoint.dart';
 import 'package:language_learning/data/endpoint/auth/timing_endpoint.dart';
 import 'package:language_learning/data/repository/language_repository.dart';
 import 'package:language_learning/data/service/api/di.dart';
@@ -13,18 +12,6 @@ class TimingCubit extends Cubit<BaseState> {
 
   final _languageRepository = getIt<UserConfigurationRepository>();
 
-
-
-  Future<void> setFcmToken(String token) async {
-    final result = await _languageRepository
-        .setFcmToken(FcmTokenInput(token: token, timeZone: 'Asia/Baku'));
-
-    result.fold(
-          (error) => print('fcm token did not set'),
-          (data) => print('fcm token set successfully'),
-    );
-  }
-
   Future<void> setTiming(TimingInput input) async {
     emit(LoadingState());
 
@@ -34,8 +21,10 @@ class TimingCubit extends Cubit<BaseState> {
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) async {
+        prefs.setAuthorizationPassed(true);
+        prefs.setOnBoardingPassed(true);
+        prefs.setLanguagePassed(true);
         prefs.setTimingPassed(true);
-        setFcmToken(prefs.fcmToken ?? 'timing test fcm token');
         Navigation.pushNamedAndRemoveUntil(Routes.home);
       },
     );

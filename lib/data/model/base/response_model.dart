@@ -9,6 +9,7 @@ import 'package:language_learning/data/model/home/language_pair_model.dart';
 import 'package:language_learning/data/model/home/user_vocabulary_model.dart';
 import 'package:language_learning/data/model/language/language_model.dart';
 import 'package:language_learning/data/model/quiz/question_model.dart';
+import 'package:language_learning/data/model/settings/timing_model.dart';
 
 class ResponseModel<T> {
   int status;
@@ -62,6 +63,8 @@ class ResponseModel<T> {
           return QuestionModel.fromJson(data) as T;
         case const (CardModel):
           return CardModel.fromJson(data) as T;
+        case const (TimingModel):
+          return TimingModel.fromJson(data) as T;
       }
       return data["data"];
     }

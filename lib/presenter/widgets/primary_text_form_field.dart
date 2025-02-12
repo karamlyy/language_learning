@@ -72,7 +72,10 @@ class PrimaryTextFormField extends StatelessWidget {
             hintStyle: TextStyle(color: AppColors.inputText, fontSize: 16.sp),
             hintText: hint,
             errorText: errorText,
-            suffixIcon: suffixIcon,
+            suffixIcon: Padding(
+              padding: const EdgeInsets.all(10.0).r,
+              child: suffixIcon,
+            ),
             filled: true,
             fillColor: filledBackgroundColor,
             border: OutlineInputBorder(

@@ -7,8 +7,8 @@ class ChangeTimingHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HeadingText(
-      headingText: 'Choosen time for learning',
-      secondaryText: 'Choosen time for receiving notifications',
+      headingText: 'Chosen time for learning',
+      secondaryText: 'Chosen time for receiving notifications',
     );
   }
 }

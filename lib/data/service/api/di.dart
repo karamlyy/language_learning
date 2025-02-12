@@ -5,6 +5,7 @@ import 'package:language_learning/data/repository/category_repository.dart';
 import 'package:language_learning/data/repository/home_repository.dart';
 import 'package:language_learning/data/repository/language_repository.dart';
 import 'package:language_learning/data/repository/quiz_repository.dart';
+import 'package:language_learning/data/repository/settings_repository.dart';
 import 'package:language_learning/data/repository/vocabulary_repository.dart';
 import 'package:language_learning/data/repository/word_repository.dart';
 import 'package:language_learning/data/service/api/api.dart';
@@ -39,7 +40,10 @@ class Injector {
         () => CategoryRepositoryImpl(getIt.get()));
     getIt.registerFactory<VocabularyRepository>(
         () => VocabularyRepositoryImpl(getIt.get()));
-    getIt.registerFactory<QuizRepository>(
-            () => QuizRepositoryImpl(getIt.get()));
+    getIt
+        .registerFactory<QuizRepository>(() => QuizRepositoryImpl(getIt.get()));
+
+    getIt.registerFactory<SettingsRepository>(
+        () => SettingsRepositoryImpl(getIt.get()));
   }
 }

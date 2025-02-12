@@ -7,7 +7,7 @@ class WordCard extends StatelessWidget {
   final int? id;
   final String? word;
   final String? translation;
-
+  final bool? isAdded;
   final VoidCallback? onTap;
   final VoidCallback? onBookmarkTap;
 
@@ -16,6 +16,7 @@ class WordCard extends StatelessWidget {
     this.id,
     this.word,
     this.translation,
+    this.isAdded,
     this.onTap,
     this.onBookmarkTap,
   });
@@ -54,7 +55,7 @@ class WordCard extends StatelessWidget {
               IconButton(
                 onPressed: onBookmarkTap,
                 icon: Icon(
-                  Icons.bookmark,
+                  isAdded ?? false ? Icons.bookmark : Icons.bookmark_border,
                   color: AppColors.toggleOffBackground,
                   size: 20.w,
                 ),

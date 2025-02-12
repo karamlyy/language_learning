@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:language_learning/data/endpoint/auth/change_password_endpoint.dart';
 import 'package:language_learning/data/endpoint/auth/delete_user_endpoint.dart';
 import 'package:language_learning/data/endpoint/auth/forgot_password_endpoint.dart';
 import 'package:language_learning/data/endpoint/auth/login_endpoint.dart';
@@ -30,6 +31,8 @@ abstract class AuthRepository {
   Future<Either<HttpException, void>> verifyCode(VerifyCodeInput input);
 
   Future<Either<HttpException, void>> resetPassword(ResetPasswordInput input);
+
+  Future<Either<HttpException, void>> changePassword(ChangePasswordInput input);
 
   Future<Either<HttpException, void>> setLanguage(SetLanguageInput input);
 
@@ -84,7 +87,14 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<HttpException, void>> setLanguage( SetLanguageInput input) async {
+  Future<Either<HttpException, void>> changePassword(
+      ChangePasswordInput input) async {
+    return await apiService.task<void>(ChangePasswordEndpoint(input));
+  }
+
+  @override
+  Future<Either<HttpException, void>> setLanguage(
+      SetLanguageInput input) async {
     return await apiService.task<void>(SetLanguageEndpoint(input));
   }
 
