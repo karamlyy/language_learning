@@ -13,6 +13,11 @@ class ApiRoutes {
 
   static const String deleteAccount = 'DeleteUser';
 
+  static const String changePassword = 'ChangePassword';
+
+  static const String getNotificationSettings = 'NotificationSetting/GetByUserId';
+  static const String changeNotificationSettings = 'NotificationSetting/Update';
+
   static const String getAllLanguages = 'Language/GetAll';
   static const String setUserLanguage = 'UserLanguage/Create';
   static const String setUserTiming = 'NotificationSetting/Create';

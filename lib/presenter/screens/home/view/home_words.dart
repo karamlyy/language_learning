@@ -49,7 +49,7 @@ class HomeWordsList extends StatelessWidget {
                     id: wordPair?.id,
                     word: wordPair?.source,
                     translation: wordPair?.translation,
-                    isAdded: wordPair?.isLearning,
+                    isAdded: wordPair?.isLearningNow,
                     //onTap: () {},
                     //onBookmarkTap: () {},
                   );

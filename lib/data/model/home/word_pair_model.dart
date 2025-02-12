@@ -3,14 +3,14 @@ class WordPairModel {
   final String source;
   final String translation;
   final bool? isMastered;
-  final bool? isLearning;
+  final bool? isLearningNow;
 
   WordPairModel({
     required this.id,
     required this.source,
     required this.translation,
     this.isMastered,
-    this.isLearning
+    this.isLearningNow
   });
 
   factory WordPairModel.fromJson(Map<String, dynamic> json) {
@@ -19,7 +19,7 @@ class WordPairModel {
       source: json['source'] ?? '',
       translation: json['translation'] ?? '',
       isMastered: json['isMastered'] ?? false,
-      isLearning: json['isLearning'] ?? false,
+      isLearningNow: json['isLearningNow'] ?? false,
     );
   }
 
@@ -29,7 +29,7 @@ class WordPairModel {
       'source': source,
       'translation': translation,
       'isMastered': isMastered,
-      'isLearning': isLearning,
+      'isLearningNow': isLearningNow,
     };
   }
 }

@@ -35,6 +35,7 @@ class AppColors {
   static const Color wrongInputBorder = Color(0xFFEB4335);
   static const Color itemBorder = Color(0xFFDCD3F8);
   static const Color buttonBorder = Color(0xFFF3F0FD);
+  static const Color bookMarkBorder = Color(0xFFD1C5F6);
 
   // Error and Warning Colors
   static const Color error = Color(0xFFF54135);
