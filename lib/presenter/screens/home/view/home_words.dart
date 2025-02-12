@@ -50,8 +50,7 @@ class HomeWordsList extends StatelessWidget {
                     word: wordPair?.source,
                     translation: wordPair?.translation,
                     isAdded: wordPair?.isLearningNow,
-                    //onTap: () {},
-                    //onBookmarkTap: () {},
+
                   );
                 },
               ),

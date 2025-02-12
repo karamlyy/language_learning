@@ -35,7 +35,7 @@ class VocabularyCubit extends Cubit<BaseState> {
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (_) {
-        getAllWords();
+        //getAllWords();
       },
     );
   }
