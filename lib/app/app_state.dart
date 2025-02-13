@@ -1,46 +1,16 @@
 import 'package:equatable/equatable.dart';
 
-class AppState extends Equatable {
+abstract class AppState extends Equatable {
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
-class Onboarding extends AppState {
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
+class Splash extends AppState {}
 
-class UnVerified extends AppState {
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
+class Onboarding extends AppState {}
 
-class Verified extends AppState {
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
+class Unauthorized extends AppState {}
 
-class SetLanguageCompleted extends AppState {
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
+class VerificationNeeded extends AppState {}
 
-class SetTimingCompleted extends AppState {
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
-
-class Authorized extends AppState {
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
-
-class Splash extends AppState {
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
-
-class UnAuthorized extends AppState {
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
+class Authorized extends AppState {}

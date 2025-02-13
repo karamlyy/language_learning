@@ -40,13 +40,21 @@ class QuizPage extends StatelessWidget {
                     return Row(
                       children: List.generate(
                         3,
-                            (index) => Icon(
-                          index < quizProvider.chances
-                              ? CupertinoIcons.heart_fill
-                              : CupertinoIcons.heart,
-                          color: AppColors.primary,
-                          size: 20.w,
-                        ),
+                        (index) {
+                          if (index < quizProvider.chances) {
+                            return Icon(
+                              CupertinoIcons.heart_fill,
+                              color: AppColors.primary,
+                              size: 20.w,
+                            );
+                          } else {
+                            return Icon(
+                              CupertinoIcons.heart,
+                              color: AppColors.primary,
+                              size: 20.w,
+                            );
+                          }
+                        },
                       ),
                     );
                   },
@@ -54,16 +62,19 @@ class QuizPage extends StatelessWidget {
               ),
             ],
           ),
-          body: BlocBuilder<QuizCubit, BaseState>(
-            builder: (context, state) {
-              if (state is LoadingState) {
-                return Center(child: CircularProgressIndicator());
-              } else if (state is SuccessState) {
-                final QuestionModel quizData = state.data;
-                return QuizBody(quizData: quizData);
-              }
-              return Center(child: Text('Failed to load quiz'));
-            },
+          body: BlocListener<QuizCubit, BaseState>(
+            listener: (context, state) {},
+            child: BlocBuilder<QuizCubit, BaseState>(
+              builder: (context, state) {
+                if (state is LoadingState) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (state is SuccessState) {
+                  final QuestionModel quizData = state.data;
+                  return QuizBody(quizData: quizData);
+                }
+                return Center(child: Text('Failed to load quiz'));
+              },
+            ),
           ),
         ),
       ),
@@ -74,7 +85,10 @@ class QuizPage extends StatelessWidget {
 class QuizBody extends StatelessWidget {
   final QuestionModel quizData;
 
-  const QuizBody({super.key, required this.quizData});
+  const QuizBody({
+    super.key,
+    required this.quizData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +106,8 @@ class QuizBody extends StatelessWidget {
               width: double.infinity,
               height: 100.h,
               decoration: BoxDecoration(
-                color: AppColors.unselectedItemBackground,
-                borderRadius: BorderRadius.circular(24).r,
-              ),
+                  color: AppColors.unselectedItemBackground,
+                  borderRadius: BorderRadius.circular(24).r),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
                 child: Column(
@@ -147,20 +160,20 @@ class QuizBody extends StatelessWidget {
                         toastification.show(
                           context: context,
                           closeButtonShowType: CloseButtonShowType.none,
-                          icon: SvgPicture.asset(
-                            isCorrect ? Images.happyFace : Images.sadFace,
-                            fit: BoxFit.cover,
-                            width: 36.w,
-                            height: 36.h,
-                          ),
+                          icon: isCorrect
+                              ? SvgPicture.asset(Images.happyFace,
+                                  fit: BoxFit.cover, width: 36.w, height: 36.h)
+                              : SvgPicture.asset(Images.sadFace,
+                                  fit: BoxFit.cover, width: 36.w, height: 36.h),
                           title: PrimaryText(
                             color:
-                            isCorrect ? AppColors.success : AppColors.wrong,
+                                isCorrect ? AppColors.success : AppColors.wrong,
                             fontWeight: FontWeight.w600,
-                            text: isCorrect ? 'Correct!' : 'Incorrect',
+                            text: isCorrect ? 'Correct !' : 'Incorrect',
                             fontSize: 22,
                           ),
                           autoCloseDuration: Duration(seconds: 2),
+                          showProgressBar: false,
                           backgroundColor: isCorrect
                               ? AppColors.successBackground
                               : AppColors.wrongBackground,
@@ -179,9 +192,10 @@ class QuizBody extends StatelessWidget {
                                 fontFamily: 'DMSerifDisplay',
                               ),
                               content: PrimaryText(
-                                color: AppColors.primaryText.withOpacity(0.7),
+                                color: AppColors.primaryText
+                                    .withValues(alpha: 0.7),
                                 fontWeight: FontWeight.w400,
-                                text: 'You made 3 mistakes',
+                                text: 'You did 3 mistakes',
                                 fontSize: 14,
                               ),
                               actions: [
@@ -205,21 +219,19 @@ class QuizBody extends StatelessWidget {
                 },
               ),
             ),
-
-            // "Add to Master words" Section (Only visible after selecting correct answer)
-            Visibility(
-              visible: quizProvider.showAddToMaster,
-              child: CupertinoButton(
+            if (quizProvider.showAddToMaster)
+              CupertinoButton(
                 pressedOpacity: 1,
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  quizCubit.addToMaster(quizData.id);
+                  quizCubit.addToMaster(quizData.id, quizProvider);
                 },
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
                   child: Row(
                     children: [
-                      const PrimaryText(
+                      PrimaryText(
                         haveUnderline: TextDecoration.underline,
                         text: 'Add to Master words',
                         color: AppColors.primary,
@@ -228,7 +240,9 @@ class QuizBody extends StatelessWidget {
                       ),
                       12.horizontalSpace,
                       Icon(
-                        Icons.bookmark_outline,
+                        quizProvider.isAddedToMaster
+                            ? Icons.bookmark
+                            : Icons.bookmark_outline,
                         color: AppColors.primary,
                         size: 20.w,
                       ),
@@ -236,15 +250,12 @@ class QuizBody extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-
-            // "Next" Button
             PrimaryButton(
               title: 'Next',
               hasBorder: false,
-              isActive: true,
+              isActive: true ,
               onTap: () {
-                quizProvider.resetChances();
+                quizProvider.setAddToMaster(false);
                 quizCubit.getQuizQuestion([]);
               },
             ),

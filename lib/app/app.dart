@@ -43,12 +43,17 @@ class App extends StatelessWidget {
             ],
             child: BlocConsumer<AppCubit, AppState>(
               builder: (context, state) {
-                if (state is Onboarding) {
+                if (state is Splash) {
+                  return const SplashPage();
+                } else if (state is Onboarding) {
                   return const OnboardingPage();
+                } else if (state is Unauthorized) {
+                  return const LoginPage();
+                } else if (state is VerificationNeeded) {
+                  return const SetLanguagePage();
                 } else if (state is Authorized) {
                   return const HomePage();
                 }
-
                 return const SplashPage();
               },
               listener: (context, state) {},

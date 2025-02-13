@@ -21,9 +21,6 @@ class TimingCubit extends Cubit<BaseState> {
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) async {
-        prefs.setAuthorizationPassed(true);
-        prefs.setOnBoardingPassed(true);
-        prefs.setLanguagePassed(true);
         prefs.setTimingPassed(true);
         Navigation.pushNamedAndRemoveUntil(Routes.home);
       },

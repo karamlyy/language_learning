@@ -35,6 +35,7 @@ class LanguageCubit extends Cubit<BaseState> {
         if (prefs.wasTimingPassed) {
           Navigation.pushReplacementNamed(Routes.settings);
         } else {
+          prefs.setLanguagePassed(true);
           Navigation.push(Routes.setTiming);
         }
       },

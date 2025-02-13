@@ -33,7 +33,7 @@ class SettingsFooterButtons extends StatelessWidget {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: PrimaryText(
-                        text: 'Account Deletion',
+                        text: 'Are you sure to delete account?',
                         color: AppColors.primaryText,
                         fontWeight: FontWeight.w400,
                         fontFamily: 'DMSerifDisplay',

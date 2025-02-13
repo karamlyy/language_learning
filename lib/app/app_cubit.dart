@@ -7,7 +7,7 @@ import 'package:language_learning/data/service/preferences/preferences.dart';
 
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(Splash()) {
-    check();
+    checkAppState();
   }
 
   final _languageRepository = getIt<UserConfigurationRepository>();
@@ -18,32 +18,50 @@ class AppCubit extends Cubit<AppState> {
   }
 
 
-  Future<void> setFcmToken(String token) async {
-    final result = await _languageRepository
-        .setFcmToken(FcmTokenInput(token: token, timeZone: 'Asia/Baku'));
+  Future<void> setFcmToken() async {
+    final prefs = await PreferencesService.instance;
+    final fcmToken = prefs.fcmToken;
 
-    result.fold(
-      (error) => print('fcm token did not set'),
-      (data) => print('fcm token set successfully'),
-    );
+    if (fcmToken != null) {
+      final result = await _languageRepository
+          .setFcmToken(FcmTokenInput(token: fcmToken, timeZone: 'Asia/Baku'));
+
+      result.fold(
+            (error) => print('FCM token failed to set'),
+            (data) => print('FCM token set successfully'),
+      );
+    }
   }
 
 
-
-  check() async {
+  Future<void> checkAppState() async {
     final prefs = await PreferencesService.instance;
+
     try {
       if (!prefs.wasOnBoardingPassed) {
         emit(Onboarding());
+        return;
       }
 
-      if (prefs.wasOnBoardingPassed &&
-          prefs.wasAuthorizationPassed &&
-          prefs.wasTimingPassed &&
-          prefs.wasLanguagePassed) {
-        setFcmToken(prefs.fcmToken ?? 'test fcm token');
-        emit(Authorized());
+      if (prefs.accessToken == null) {
+        emit(Unauthorized());
+        return;
       }
+
+      if(prefs.wasAuthorizationPassed){
+        emit(Authorized());
+        await setFcmToken();
+        return;
+      }
+
+      if (!prefs.wasConfirmationPassed) {
+        emit(VerificationNeeded());
+        return;
+      }
+
+      //emit(Authorized());
+
+      await setFcmToken();
     } catch (error) {
       prefs.clear();
       emit(Splash());

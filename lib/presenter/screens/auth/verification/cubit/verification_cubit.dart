@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:language_learning/data/endpoint/auth/fcm_token_endpoint.dart';
 import 'package:language_learning/data/endpoint/auth/verification_endpoint.dart';
 import 'package:language_learning/data/repository/auth_repository.dart';
 import 'package:language_learning/data/repository/language_repository.dart';
@@ -13,7 +14,6 @@ class VerificationCubit extends Cubit<VerificationState> {
 
   final _authRepository = getIt<AuthRepository>();
   final _languageRepository = getIt<UserConfigurationRepository>();
-
 
   void resendConfirmationEmail(String userId) async {
     emit(VerificationInitial());
@@ -35,15 +35,31 @@ class VerificationCubit extends Cubit<VerificationState> {
       (error) => emit(
         VerificationFailure(errorMessage: error.error),
       ),
-      (data) {
+      (data) async {
         prefs.setAccessToken(data.accessToken ?? '');
         prefs.setRefreshToken(data.refreshToken ?? '');
         prefs.setUserId(data.userId);
-
         prefs.setConfirmationPassed(true);
+
+        await setFcmToken();
         Navigation.pushNamedAndRemoveUntil(Routes.setLanguage, arguments: data);
         print('successful verification');
       },
     );
+  }
+
+  Future<void> setFcmToken() async {
+    final prefs = await PreferencesService.instance;
+    final fcmToken = prefs.fcmToken;
+
+    if (fcmToken != null) {
+      final result = await _languageRepository
+          .setFcmToken(FcmTokenInput(token: fcmToken, timeZone: 'Asia/Baku'));
+
+      result.fold(
+        (error) => print('FCM token failed to set'),
+        (data) => print('FCM token set successfully'),
+      );
+    }
   }
 }
