@@ -31,3 +31,5 @@ class QuizCubit extends Cubit<BaseState> {
     );
   }
 }
+
+//when quiz page open make add to master words part invisible, if user click correct answer make visible
