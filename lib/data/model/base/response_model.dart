@@ -46,10 +46,7 @@ class ResponseModel<T> {
           return (data["data"] as List)
               .map((e) => LanguageModel.fromJson(e))
               .toList() as T;
-        case const (List<SearchWordModel>):
-          return (data["data"] as List)
-              .map((e) => SearchWordModel.fromJson(e))
-              .toList() as T;
+
         case const (List<CategoryModel>):
           return (data["data"] as List)
               .map((e) => CategoryModel.fromJson(e))

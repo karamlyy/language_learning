@@ -5,19 +5,22 @@ class LanguagesProvider extends ChangeNotifier {
   bool isSourceLanguageSelected = false;
   bool isTranslationLanguageSelected = false;
 
-  String _selectedSourceLanguage = '';
-  String _selectedTranslationLanguage = '';
+
+
+  String? _selectedSourceLanguage;
+  String? _selectedTranslationLanguage;
 
   int? _selectedSourceLanguageId;
   int? _selectedTranslationLanguageId;
+
 
   int? get selectedSourceLanguageId => _selectedSourceLanguageId;
 
   int? get selectedTranslationLanguageId => _selectedTranslationLanguageId;
 
-  String get selectedSourceLanguage => _selectedSourceLanguage;
+  String? get selectedSourceLanguage => _selectedSourceLanguage;
 
-  String get selectedTranslationLanguage => _selectedTranslationLanguage;
+  String? get selectedTranslationLanguage => _selectedTranslationLanguage;
 
   SetLanguageInput get setLanguageInput => SetLanguageInput(
         sourceLanguageId: selectedSourceLanguageId,

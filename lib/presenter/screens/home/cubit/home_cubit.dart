@@ -104,7 +104,7 @@ class HomeCubit extends Cubit<BaseState> {
       },
     );
   }
-
+/*
 
   void getVocabulary() async {
     emit(LoadingState());
@@ -119,6 +119,8 @@ class HomeCubit extends Cubit<BaseState> {
     );
   }
 
+
+
   void getLearningVocabulary() async {
     emit(LoadingState());
     final result = await _vocabularyRepository.getAllLearningWords(1, 20);
@@ -127,9 +129,11 @@ class HomeCubit extends Cubit<BaseState> {
         FailureState(errorMessage: error.error),
       ),
       (data) {
-        Navigation.push(Routes.vocabulary, arguments: data);
+        Navigation.push(Routes.learningVocabulary, arguments: data);
       },
     );
   }
 
+
+ */
 }

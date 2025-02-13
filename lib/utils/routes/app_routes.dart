@@ -16,6 +16,7 @@ enum Routes {
   quiz('quiz'),
   wordList('word-list'),
   vocabulary('vocabulary'),
+  learningVocabulary('learning-vocabulary'),
   newWord('new-word'),
   settings('settings'),
   changePassword('change-password'),

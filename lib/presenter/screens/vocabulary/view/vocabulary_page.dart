@@ -48,7 +48,7 @@ class VocabularyPage extends StatelessWidget {
                   ),
                   onChanged: (query) {
                     provider.onSearchChanged(query, (word) {
-                      //vocabularyCubit.searchWord(word);
+                      vocabularyCubit.searchWord(word);
                     });
                   },
                 )

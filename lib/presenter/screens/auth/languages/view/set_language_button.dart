@@ -22,7 +22,10 @@ class SetLanguageButton extends StatelessWidget {
         return PrimaryButton(
           title: 'Continue',
           hasBorder: false,
-          isActive: languagesProvider.isSourceLanguageSelected && languagesProvider.isTranslationLanguageSelected,
+          isActive: (languagesProvider.isSourceLanguageSelected &&
+                  languagesProvider.isTranslationLanguageSelected) &&
+              (languagesProvider.selectedSourceLanguageId !=
+                  languagesProvider.selectedTranslationLanguageId),
           onTap: () {
             if (languagesProvider.isSourceLanguageSelected) {
               if (languagesProvider.isTranslationLanguageSelected) {

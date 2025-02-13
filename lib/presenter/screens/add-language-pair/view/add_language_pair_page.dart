@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/add-language-pair/cubit/add_language_pair_cubit.dart';
 import 'package:language_learning/presenter/screens/add-language-pair/provider/add_language_pair_provider.dart';
@@ -29,6 +30,7 @@ class AddLanguagePairPage extends StatelessWidget {
               icon: Icon(
                 Icons.add,
                 color: AppColors.primary,
+                size: 26.w,
               ),
             ),
           ],

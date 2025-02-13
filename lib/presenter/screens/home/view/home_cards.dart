@@ -94,7 +94,7 @@ class HomeCardsList extends StatelessWidget {
                         12.verticalSpace,
                         GestureDetector(
                           onTap: () {
-                            Navigation.push(Routes.vocabulary);
+                            Navigation.push(Routes.learningVocabulary);
                           },
                           child: Container(
                             decoration: BoxDecoration(

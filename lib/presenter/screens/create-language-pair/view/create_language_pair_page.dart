@@ -4,7 +4,6 @@ import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/auth/languages/cubit/language_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/languages/provider/languages_provider.dart';
 import 'package:language_learning/presenter/screens/create-language-pair/view/create_language_pair_body.dart';
-import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:provider/provider.dart';
@@ -29,14 +28,7 @@ class CreateLanguagePairPage extends StatelessWidget {
         body: ChangeNotifierProvider(
           create: (context) => LanguagesProvider(),
           child: BlocListener<LanguageCubit, BaseState>(
-            listener: (context, state) {
-              if (state is FailureState) {
-                PrimaryBottomSheet.show(
-                  context,
-                  text: 'Failed to fetch languages: ${state.errorMessage}',
-                );
-              }
-            },
+            listener: (context, state) {},
             child: CreateLanguagePairBody(),
           ),
         ),
