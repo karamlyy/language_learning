@@ -13,6 +13,7 @@ enum Routes {
   learningLanguage('learning-language'),
   setTiming('set-timing'),
   home('home'),
+  notification('notification'),
   quiz('quiz'),
   wordList('word-list'),
   vocabulary('vocabulary'),

@@ -8,6 +8,8 @@ import 'package:language_learning/presenter/screens/home/provider/home_provider.
 import 'package:language_learning/presenter/screens/home/view/home_languages_pairs.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
+import 'package:language_learning/utils/routes/app_routes.dart';
+import 'package:language_learning/utils/routes/navigation.dart';
 
 class HomeAppbar extends StatelessWidget {
   const HomeAppbar({super.key});
@@ -66,8 +68,13 @@ class HomeAppbar extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(CupertinoIcons.bell),
+                  icon: Badge(
+                    smallSize: 14.0,
+                    child: const Icon(CupertinoIcons.bell),
+                  ),
+                  onPressed: () {
+                    Navigation.push(Routes.notification);
+                  },
                   iconSize: 28.w,
                 ),
               ],

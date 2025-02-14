@@ -22,7 +22,6 @@ class HomeCubit extends Cubit<BaseState> {
   final _countController = BehaviorSubject<CardModel>();
   final _lastWordsController = BehaviorSubject<UserVocabularyModel>();
 
-
   Stream<List<CategoryModel>> get categoriesController =>
       _categoriesController.stream;
 
@@ -30,7 +29,6 @@ class HomeCubit extends Cubit<BaseState> {
 
   Stream<UserVocabularyModel> get lastWordsController =>
       _lastWordsController.stream;
-
 
   final _homeRepository = getIt<HomeRepository>();
   final _categoryRepository = getIt<CategoryRepository>();
@@ -101,39 +99,21 @@ class HomeCubit extends Cubit<BaseState> {
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
         Navigation.push(Routes.wordList, arguments: data);
+
       },
     );
   }
-/*
 
-  void getVocabulary() async {
+  void changeWordStatus(int vocabularyId) async {
     emit(LoadingState());
-    final result = await _homeRepository.getAllWords(1, 20);
+    final result =
+        await _categoryRepository.changeCategoryWordStatus(vocabularyId);
+
     result.fold(
-      (error) => emit(
-        FailureState(errorMessage: error.error),
-      ),
+      (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
-        Navigation.push(Routes.vocabulary, arguments: data);
+
       },
     );
   }
-
-
-
-  void getLearningVocabulary() async {
-    emit(LoadingState());
-    final result = await _vocabularyRepository.getAllLearningWords(1, 20);
-    result.fold(
-      (error) => emit(
-        FailureState(errorMessage: error.error),
-      ),
-      (data) {
-        Navigation.push(Routes.learningVocabulary, arguments: data);
-      },
-    );
-  }
-
-
- */
 }

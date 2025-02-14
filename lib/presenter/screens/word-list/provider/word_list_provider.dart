@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:language_learning/data/endpoint/vocabulary/category_word_endpoint.dart';
-import 'package:language_learning/presenter/screens/home/model/word.dart';
 
 class WordListProvider extends ChangeNotifier {
   int? _selectedWordId;
@@ -23,5 +21,12 @@ class WordListProvider extends ChangeNotifier {
 
   int? get categoryWordInput => selectedWordId;
 
+  bool _isAddedToMaster = false;
 
+  bool get isAddedToMaster => _isAddedToMaster;
+
+  void addToMaster(bool value) {
+    _isAddedToMaster = value;
+    notifyListeners();
+  }
 }
