@@ -31,7 +31,7 @@ class CategoryCubit extends Cubit<BaseState> {
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
-        print('status changed');
+        getCategoryWords();
       },
     );
   }

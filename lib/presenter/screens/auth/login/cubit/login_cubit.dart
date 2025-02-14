@@ -22,6 +22,7 @@ class LoginCubit extends Cubit<BaseState> {
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) async {
+        prefs.setOnBoardingPassed(true);
         prefs.setAccessToken(data.accessToken ?? "");
         prefs.setRefreshToken(data.refreshToken ?? "");
         prefs.setAuthorizationPassed(true);

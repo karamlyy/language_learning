@@ -11,6 +11,8 @@ class Onboarding extends AppState {}
 
 class Unauthorized extends AppState {}
 
-class VerificationNeeded extends AppState {}
+class LanguageNeeded extends AppState {}
+
+class TimingNeeded extends AppState {}
 
 class Authorized extends AppState {}

@@ -79,7 +79,7 @@ class HomeCardsList extends StatelessWidget {
                                       fontFamily: 'DMSerifDisplay',
                                     ),
                                     PrimaryText(
-                                      text: 'Vocabulary',
+                                      text: ' Vocabulary ',
                                       color: AppColors.primaryText
                                           .withValues(alpha: 0.8),
                                       fontWeight: FontWeight.w400,
@@ -137,36 +137,41 @@ class HomeCardsList extends StatelessWidget {
                   ),
                   12.horizontalSpace,
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(16).r),
-                        color: AppColors.unselectedItemBackground,
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12.0,
-                            vertical: 10.0,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              PrimaryText(
-                                text: '${snapshot.data?.masteredCount}',
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 36,
-                                fontFamily: 'DMSerifDisplay',
-                              ),
-                              PrimaryText(
-                                text: 'Mastered Words',
-                                color: AppColors.primaryText
-                                    .withValues(alpha: 0.8),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
-                            ],
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigation.push(Routes.masteredVocabulary);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(16).r),
+                          color: AppColors.unselectedItemBackground,
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                              vertical: 10.0,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                PrimaryText(
+                                  text: '${snapshot.data?.masteredCount}',
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 36,
+                                  fontFamily: 'DMSerifDisplay',
+                                ),
+                                PrimaryText(
+                                  text: 'Mastered Words',
+                                  color: AppColors.primaryText
+                                      .withValues(alpha: 0.8),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

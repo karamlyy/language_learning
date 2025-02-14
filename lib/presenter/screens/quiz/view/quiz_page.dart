@@ -161,10 +161,18 @@ class QuizBody extends StatelessWidget {
                           context: context,
                           closeButtonShowType: CloseButtonShowType.none,
                           icon: isCorrect
-                              ? SvgPicture.asset(Images.happyFace,
-                                  fit: BoxFit.cover, width: 36.w, height: 36.h)
-                              : SvgPicture.asset(Images.sadFace,
-                                  fit: BoxFit.cover, width: 36.w, height: 36.h),
+                              ? SvgPicture.asset(
+                                  Images.happyFace,
+                                  fit: BoxFit.cover,
+                                  width: 36.w,
+                                  height: 36.h,
+                                )
+                              : SvgPicture.asset(
+                                  Images.sadFace,
+                                  fit: BoxFit.cover,
+                                  width: 36.w,
+                                  height: 36.h,
+                                ),
                           title: PrimaryText(
                             color:
                                 isCorrect ? AppColors.success : AppColors.wrong,
@@ -172,6 +180,14 @@ class QuizBody extends StatelessWidget {
                             text: isCorrect ? 'Correct !' : 'Incorrect',
                             fontSize: 22,
                           ),
+                          description: isCorrect
+                              ? null
+                              : PrimaryText(
+                                  color: AppColors.wrong,
+                                  fontWeight: FontWeight.w400,
+                                  text: answer,
+                                  fontSize: 16,
+                                ),
                           autoCloseDuration: Duration(seconds: 2),
                           showProgressBar: false,
                           backgroundColor: isCorrect
@@ -253,7 +269,7 @@ class QuizBody extends StatelessWidget {
             PrimaryButton(
               title: 'Next',
               hasBorder: false,
-              isActive: true ,
+              isActive: true,
               onTap: () {
                 quizProvider.setAddToMaster(false);
                 quizCubit.getQuizQuestion([]);

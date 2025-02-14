@@ -31,7 +31,7 @@ class LoginHeader extends StatelessWidget {
               text: L10n.signIn,
               color: AppColors.primaryText,
               fontWeight: FontWeight.w400,
-              fontSize: isKeyboardVisible ? 20.sp : 24.sp,
+              fontSize: isKeyboardVisible ? 24 : 30,
               fontFamily: 'DMSerifDisplay',
             ),
           ),

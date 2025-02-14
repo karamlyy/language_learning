@@ -43,8 +43,12 @@ class AppCubit extends Cubit<AppState> {
         return;
       }
 
-      if (prefs.accessToken == null) {
-        emit(Unauthorized());
+      if (prefs.wasConfirmationPassed && !prefs.wasLanguagePassed && !prefs.wasTimingPassed) {
+        emit(LanguageNeeded());
+        return;
+      }
+      if (prefs.wasConfirmationPassed && prefs.wasLanguagePassed && !prefs.wasTimingPassed) {
+        emit(TimingNeeded());
         return;
       }
 
@@ -54,12 +58,16 @@ class AppCubit extends Cubit<AppState> {
         return;
       }
 
-      if (!prefs.wasConfirmationPassed) {
-        emit(VerificationNeeded());
+      if (prefs.accessToken == null) {
+        emit(Unauthorized());
         return;
       }
 
-      //emit(Authorized());
+
+
+
+
+      emit(Authorized());
 
       await setFcmToken();
     } catch (error) {

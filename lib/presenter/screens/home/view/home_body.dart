@@ -70,8 +70,8 @@ class HomeBody extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(bottom: 16.0).r,
                       child: Align(
-                        alignment: Alignment.bottomCenter,
                         child: SecondaryFloatingBottomNavbar(),
+
                       ),
                     ),
                   ],
@@ -86,7 +86,7 @@ class HomeBody extends StatelessWidget {
             ),
           );
         } else {
-          return const Center(child: Text('Initializing...'));
+          return const Center(child: Text('Initializing'));
         }
       },
     );

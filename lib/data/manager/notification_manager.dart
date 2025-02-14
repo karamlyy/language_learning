@@ -31,6 +31,7 @@ class NotificationService {
     // Get FCM token
     final prefs = await PreferencesService.instance;
     final token = await _messaging.getToken();
+
     prefs.setFcmToken(token ?? '');
 
     print('FCM Token: $token');

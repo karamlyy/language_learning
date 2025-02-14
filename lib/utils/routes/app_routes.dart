@@ -17,6 +17,7 @@ enum Routes {
   wordList('word-list'),
   vocabulary('vocabulary'),
   learningVocabulary('learning-vocabulary'),
+  masteredVocabulary('mastered-vocabulary'),
   newWord('new-word'),
   settings('settings'),
   changePassword('change-password'),

@@ -6,8 +6,6 @@ import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:language_learning/utils/routes/app_routes.dart';
 import 'package:language_learning/utils/routes/navigation.dart';
 
-
-
 class SecondaryFloatingBottomNavbar extends StatelessWidget {
   const SecondaryFloatingBottomNavbar({super.key});
 
@@ -36,9 +34,7 @@ class SecondaryFloatingBottomNavbar extends StatelessWidget {
               ),
               child: IconButton(
                 constraints: BoxConstraints(),
-                onPressed: () {
-                  print('home kliklendi');
-                },
+                onPressed: () {},
                 icon: Icon(
                   Icons.home_filled,
                   color: AppColors.primary,

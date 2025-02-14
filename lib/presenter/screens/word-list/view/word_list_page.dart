@@ -52,7 +52,6 @@ class WordListPage extends StatelessWidget {
                         onBookmarkTap: () {
                           categoryCubit.changeWordStatus(categoryWord.id);
                         },
-
                       );
                     },
                   );

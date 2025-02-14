@@ -36,29 +36,29 @@ class VocabularyPage extends StatelessWidget {
 
                 return provider.isSearchActive
                     ? TextField(
-                  controller: provider.searchController,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    hintText: 'Search',
-                    border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppColors.primaryText,
-                  ),
-                  onChanged: (query) {
-                    provider.onSearchChanged(query, (word) {
-                      vocabularyCubit.searchWord(word);
-                    });
-                  },
-                )
+                        controller: provider.searchController,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          hintText: 'Search',
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: AppColors.primaryText,
+                        ),
+                        onChanged: (query) {
+                          provider.onSearchChanged(query, (word) {
+                            vocabularyCubit.searchWord(word);
+                          });
+                        },
+                      )
                     : PrimaryText(
-                  text: 'Vocabulary',
-                  color: AppColors.primaryText,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'DMSerifDisplay',
-                  fontSize: 20,
-                );
+                        text: 'Vocabulary',
+                        color: AppColors.primaryText,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'DMSerifDisplay',
+                        fontSize: 20,
+                      );
               },
             ),
             actions: [
@@ -66,25 +66,25 @@ class VocabularyPage extends StatelessWidget {
                 builder: (context, provider, child) {
                   return provider.isSearchActive
                       ? TextButton(
-                    onPressed: () {
-                      provider.clearSearch();
-                      context.read<VocabularyCubit>().getAllWords();
-                    },
-                    child: PrimaryText(
-                      text: 'clear',
-                      color: AppColors.primaryText.withValues(alpha: 0.7),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                    ),
-                  )
+                          onPressed: () {
+                            provider.clearSearch();
+                            context.read<VocabularyCubit>().getAllWords();
+                          },
+                          child: PrimaryText(
+                            text: 'clear',
+                            color: AppColors.primaryText.withValues(alpha: 0.7),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                          ),
+                        )
                       : IconButton(
-                    icon: Icon(
-                      Icons.search,
-                      color: AppColors.primaryText,
-                      size: 20.w,
-                    ),
-                    onPressed: provider.toggleSearch,
-                  );
+                          icon: Icon(
+                            Icons.search,
+                            color: AppColors.primaryText,
+                            size: 20.w,
+                          ),
+                          onPressed: provider.toggleSearch,
+                        );
                 },
               ),
             ],
@@ -130,7 +130,6 @@ class VocabularyWordsBody extends StatelessWidget {
     );
   }
 }
-
 
 class VocabularyWordsList extends StatelessWidget {
   const VocabularyWordsList({super.key});

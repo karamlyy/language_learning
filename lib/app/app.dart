@@ -6,7 +6,6 @@ import 'package:language_learning/app/app_state.dart';
 import 'package:language_learning/presenter/screens/auth/languages/view/set_language_page.dart';
 import 'package:language_learning/presenter/screens/auth/login/view/login_page.dart';
 import 'package:language_learning/presenter/screens/auth/onboarding/view/onboarding_page.dart';
-import 'package:language_learning/presenter/screens/auth/splash/view/splash_page.dart';
 import 'package:language_learning/presenter/screens/auth/timing/view/timing_page.dart';
 import 'package:language_learning/presenter/screens/home/view/home_page.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
@@ -43,18 +42,18 @@ class App extends StatelessWidget {
             ],
             child: BlocConsumer<AppCubit, AppState>(
               builder: (context, state) {
-                if (state is Splash) {
-                  return const SplashPage();
-                } else if (state is Onboarding) {
+                if (state is Onboarding) {
                   return const OnboardingPage();
                 } else if (state is Unauthorized) {
                   return const LoginPage();
-                } else if (state is VerificationNeeded) {
+                } else if (state is LanguageNeeded) {
                   return const SetLanguagePage();
+                } else if (state is TimingNeeded) {
+                  return const TimingPage();
                 } else if (state is Authorized) {
                   return const HomePage();
                 }
-                return const SplashPage();
+                return const LoginPage();
               },
               listener: (context, state) {},
             ),

@@ -2,34 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/generic/base_state.dart';
-import 'package:language_learning/presenter/screens/learning-vocabulary/cubit/learning_vocabulary_cubit.dart';
-import 'package:language_learning/presenter/screens/learning-vocabulary/provider/learning_vocabulary_provider.dart';
+import 'package:language_learning/presenter/screens/mastered-vocabulary/cubit/mastered_vocabulary_cubit.dart';
+import 'package:language_learning/presenter/screens/mastered-vocabulary/provider/mastered_vocabulary.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:provider/provider.dart';
 
-class LearningVocabularyPage extends StatelessWidget {
-  const LearningVocabularyPage({super.key});
+class MasteredVocabularyPage extends StatelessWidget {
+  const MasteredVocabularyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LearningVocabularyCubit(),
+      create: (context) => MasteredVocabularyCubit(),
       child: ChangeNotifierProvider(
-        create: (context) => LearningVocabularyProvider(),
+        create: (context) => MasteredVocabularyProvider(),
         child: Scaffold(
           appBar: AppBar(
             title: PrimaryText(
-              text: 'Learning Vocabulary',
+              text: 'Mastered Vocabulary',
               color: AppColors.primaryText,
               fontWeight: FontWeight.w400,
               fontFamily: 'DMSerifDisplay',
               fontSize: 20,
             ),
           ),
-          body: BlocListener<LearningVocabularyCubit, BaseState>(
+          body: BlocListener<MasteredVocabularyCubit, BaseState>(
             listener: (context, state) {},
-            child: LearningVocabularyBody(),
+            child: MasteredVocabularyBody(),
           ),
         ),
       ),
@@ -37,12 +37,12 @@ class LearningVocabularyPage extends StatelessWidget {
   }
 }
 
-class LearningVocabularyBody extends StatelessWidget {
-  const LearningVocabularyBody({super.key});
+class MasteredVocabularyBody extends StatelessWidget {
+  const MasteredVocabularyBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LearningVocabularyCubit, BaseState>(
+    return BlocBuilder<MasteredVocabularyCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
           return Center(
@@ -52,7 +52,7 @@ class LearningVocabularyBody extends StatelessWidget {
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16.0).r,
-              child: LearningVocabularyList(),
+              child: MasteredVocabularyList(),
             ),
           );
         } else if (state is FailureState) {
@@ -69,14 +69,14 @@ class LearningVocabularyBody extends StatelessWidget {
   }
 }
 
-class LearningVocabularyList extends StatelessWidget {
-  const LearningVocabularyList({super.key});
+class MasteredVocabularyList extends StatelessWidget {
+  const MasteredVocabularyList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final learningVocabularyCubit = context.watch<LearningVocabularyCubit>();
+    final masteredVocabularyCubit = context.watch<MasteredVocabularyCubit>();
 
-    return BlocBuilder<LearningVocabularyCubit, BaseState>(
+    return BlocBuilder<MasteredVocabularyCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
           return const Center(child: CircularProgressIndicator());
@@ -101,12 +101,10 @@ class LearningVocabularyList extends StatelessWidget {
                   ),
                   trailing: IconButton(
                     onPressed: () async {
-                      learningVocabularyCubit.addToLearning(word.id);
+                      masteredVocabularyCubit.removeFromMastered(word.id);
                     },
                     icon: Icon(
-                      word.isLearningNow
-                          ? Icons.bookmark
-                          : Icons.bookmark_outline,
+                      word.isMastered ? Icons.bookmark : Icons.bookmark_outline,
                       size: 20.w,
                       color: AppColors.bookMarkBackground,
                     ),

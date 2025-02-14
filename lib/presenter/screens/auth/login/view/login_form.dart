@@ -59,6 +59,7 @@ class LoginForm extends StatelessWidget {
                     isObscureText: !loginProvider.isPasswordVisible,
                     hasError: loginProvider.passwordError != null,
                     suffixIcon: IconButton(
+
                       iconSize: 20.h,
                       padding: const EdgeInsets.all(16.0).r,
                       onPressed: () {
@@ -73,6 +74,7 @@ class LoginForm extends StatelessWidget {
                       ),
                     ),
                   ),
+                  12.verticalSpace,
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -90,6 +92,7 @@ class LoginForm extends StatelessWidget {
                       },
                     ),
                   ),
+                  42.verticalSpace,
                 ],
               ),
             ),

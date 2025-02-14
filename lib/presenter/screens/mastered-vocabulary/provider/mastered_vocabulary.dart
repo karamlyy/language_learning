@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LearningVocabularyProvider extends ChangeNotifier {
+class MasteredVocabularyProvider extends ChangeNotifier {
   bool _isAdded = false;
 
   bool get isAdded => _isAdded;

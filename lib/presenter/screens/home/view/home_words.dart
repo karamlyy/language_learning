@@ -40,6 +40,7 @@ class HomeWordsList extends StatelessWidget {
             child: SizedBox(
               height: 1000,
               child: ListView.builder(
+                physics: ClampingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 itemCount: snapshot.data?.items.length,
                 itemBuilder: (context, index) {
