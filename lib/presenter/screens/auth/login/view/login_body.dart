@@ -21,7 +21,7 @@ class LoginBody extends StatelessWidget {
                 children: [
                   LoginHeader(),
                   LoginForm(),
-                  LoginButton()
+                  LoginButton(),
                 ],
               ),
             ),

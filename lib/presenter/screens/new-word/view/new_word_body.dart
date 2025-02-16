@@ -11,14 +11,13 @@ class NewWordBody extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: ListView(
               children: [
                 NewWordInputs(),
-                NewWordButton(),
               ],
             ),
-          )
+          ),
+          NewWordButton(),
         ],
       ),
     );

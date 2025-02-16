@@ -76,7 +76,7 @@ class ApiInterceptor extends Interceptor {
       }
     }
 
-    String errorMessage = "SAKJSNA";
+    String errorMessage = "An error occured";
 
     if (err.response != null) {
       final data = err.response?.data;
