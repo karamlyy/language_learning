@@ -34,16 +34,21 @@ class HomeCubit extends Cubit<BaseState> {
   final _categoryRepository = getIt<CategoryRepository>();
   final _vocabularyRepository = getIt<VocabularyRepository>();
 
-  void getAllLanguagePairs() async {
+  Future<void> getAllLanguagePairs() async {
     emit(LoadingState());
     final result = await _homeRepository.getAllLanguagePairs();
     result.fold(
-      (error) => emit(FailureState(errorMessage: error.error)),
-      (data) {
+          (error) {
+        print('Error: ${error.error}');
+        emit(FailureState(errorMessage: error.error));
+      },
+          (data) {
+        print('New data fetched: $data');
         emit(SuccessState(data: data));
       },
     );
   }
+
 
   void setSelectedLanguagePair(int id) async {
     final result = await _homeRepository.setSelectedLanguagePair(id);

@@ -28,50 +28,55 @@ class HomeBody extends StatelessWidget {
                 Column(
                   children: [
                     Expanded(
-                      child: CustomScrollView(
-                        slivers: [
-                          SliverAppBar(
-                            floating: true,
-                            pinned: true,
-                            automaticallyImplyLeading: false,
-                            backgroundColor: AppColors.background,
-                            collapsedHeight: 50.h,
-                            expandedHeight: 50.h,
-                            toolbarHeight: 50.h,
-                            title: HomeAppbar(),
-                          ),
-                          SliverToBoxAdapter(
-                            child: HomeCategory(),
-                          ),
-                          SliverToBoxAdapter(
-                            child: HomeQuizButton(),
-                          ),
-                          SliverToBoxAdapter(
-                            child: HomeCards(),
-                          ),
-                          SliverToBoxAdapter(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 16).r,
-                              child: PrimaryText(
-                                text: 'Latest added words',
-                                color: AppColors.primaryText,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 26,
-                                fontFamily: 'DMSerifDisplay',
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          await context.read<HomeCubit>().getAllLanguagePairs();
+                        },
+                        child: CustomScrollView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          slivers: [
+                            SliverAppBar(
+                              floating: true,
+                              pinned: true,
+                              automaticallyImplyLeading: false,
+                              backgroundColor: AppColors.background,
+                              collapsedHeight: 50.h,
+                              expandedHeight: 50.h,
+                              toolbarHeight: 50.h,
+                              title: HomeAppbar(),
+                            ),
+                            SliverToBoxAdapter(
+                              child: HomeCategory(),
+                            ),
+                            SliverToBoxAdapter(
+                              child: HomeQuizButton(),
+                            ),
+                            SliverToBoxAdapter(
+                              child: HomeCards(),
+                            ),
+                            SliverToBoxAdapter(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 16).r,
+                                child: PrimaryText(
+                                  text: 'Latest added words',
+                                  color: AppColors.primaryText,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 26,
+                                  fontFamily: 'DMSerifDisplay',
+                                ),
                               ),
                             ),
-                          ),
-                          SliverToBoxAdapter(
-                            child: HomeWords(),
-                          ),
-                        ],
+                            SliverToBoxAdapter(
+                              child: HomeWords(),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: 16.0).r,
                       child: Align(
                         child: SecondaryFloatingBottomNavbar(),
-
                       ),
                     ),
                   ],

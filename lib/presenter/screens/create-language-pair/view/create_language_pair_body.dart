@@ -30,7 +30,7 @@ class CreateLanguagePairBody extends StatelessWidget {
                       context, languageCubit, languagesProvider,
                       isSourceLanguage: true);
                 },
-                hint: languagesProvider.selectedSourceLanguageId.toString(),
+                hint: 'Select a native language',
                 onChanged: (value) {},
                 headText: 'Native',
                 suffixIcon: Icon(
@@ -48,7 +48,7 @@ class CreateLanguagePairBody extends StatelessWidget {
                   );
                 },
                 hint:
-                    languagesProvider.selectedTranslationLanguageId.toString(),
+                    'Select a language you want to learn',
                 onChanged: (value) {},
                 headText: 'Learning',
                 suffixIcon: Icon(
@@ -76,7 +76,7 @@ class CreateLanguagePairBody extends StatelessWidget {
           bloc: languageCubit,
           builder: (context, state) {
             if (state is SuccessState) {
-              final languages = state.data as List<LanguageModel>;
+              final languages = state.data;
 
               return Padding(
                 padding: const EdgeInsets.all(16.0).r,
