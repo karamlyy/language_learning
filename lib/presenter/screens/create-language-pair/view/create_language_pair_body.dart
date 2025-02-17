@@ -15,7 +15,7 @@ class CreateLanguagePairBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final languageCubit = context.read<LanguageCubit>();
-    final languagesProvider = context.read<LanguagesProvider>();
+    final languagesProvider = context.watch<LanguagesProvider>();
 
     return Padding(
       padding: const EdgeInsets.all(16.0).r,
@@ -27,16 +27,18 @@ class CreateLanguagePairBody extends StatelessWidget {
               PrimaryTextFormField(
                 onTap: () {
                   _showLanguagesBottomSheet(
-                      context, languageCubit, languagesProvider,
-                      isSourceLanguage: true);
+                    context,
+                    languageCubit,
+                    languagesProvider,
+                    isSourceLanguage: true,
+                  );
                 },
-                hint: 'Select a native language',
+                hint: languagesProvider.selectedSourceLanguage ?? 'Select a native language',
                 onChanged: (value) {},
                 headText: 'Native',
-                suffixIcon: Icon(
-                  Icons.keyboard_arrow_down_outlined,
-                ),
+                suffixIcon: const Icon(Icons.keyboard_arrow_down_outlined),
               ),
+
               16.verticalSpace,
               PrimaryTextFormField(
                 onTap: () {
@@ -47,28 +49,26 @@ class CreateLanguagePairBody extends StatelessWidget {
                     isSourceLanguage: false,
                   );
                 },
-                hint:
-                    'Select a language you want to learn',
+                hint: languagesProvider.selectedTranslationLanguage ?? 'Select a language you want to learn',
                 onChanged: (value) {},
                 headText: 'Learning',
-                suffixIcon: Icon(
-                  Icons.keyboard_arrow_down_outlined,
-                ),
+                suffixIcon: const Icon(Icons.keyboard_arrow_down_outlined),
               ),
+
             ],
           ),
-          SetLanguageButton(),
+          const SetLanguageButton(),
         ],
       ),
     );
   }
 
   void _showLanguagesBottomSheet(
-    context,
-    LanguageCubit languageCubit,
-    LanguagesProvider languagesProvider, {
-    required bool isSourceLanguage,
-  }) {
+      BuildContext context,
+      LanguageCubit languageCubit,
+      LanguagesProvider languagesProvider, {
+        required bool isSourceLanguage,
+      }) {
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -76,7 +76,7 @@ class CreateLanguagePairBody extends StatelessWidget {
           bloc: languageCubit,
           builder: (context, state) {
             if (state is SuccessState) {
-              final languages = state.data;
+              final languages = state.data as List<LanguageModel>;
 
               return Padding(
                 padding: const EdgeInsets.all(16.0).r,
@@ -89,11 +89,19 @@ class CreateLanguagePairBody extends StatelessWidget {
                             ? languagesProvider.selectedSourceLanguageId
                             : languagesProvider.selectedTranslationLanguageId,
                         onLanguageSelected: (languageId) {
+                          final selectedLanguage = languages.firstWhere(
+                                  (lang) => lang.id == languageId,
+                              orElse: () => LanguageModel(
+                                  id: languageId, name: 'Unknown', image: ''));
+
                           if (isSourceLanguage) {
                             languagesProvider.selectSourceLanguage(languageId);
+                            languagesProvider.selectSourceLanguageName(
+                                selectedLanguage.name ?? 'Unknown');
                           } else {
-                            languagesProvider
-                                .selectTranslationLanguage(languageId);
+                            languagesProvider.selectTranslationLanguage(languageId);
+                            languagesProvider.selectTranslationLanguageName(
+                                selectedLanguage.name ?? 'Unknown');
                           }
                           Navigator.pop(context);
                         },

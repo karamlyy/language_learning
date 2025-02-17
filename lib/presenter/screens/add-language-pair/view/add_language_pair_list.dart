@@ -28,9 +28,8 @@ class AddLanguagePairList extends StatelessWidget {
               horizontal: 0.w,
               vertical: 5.h,
             ),
-
             child: Dismissible(
-              key: UniqueKey(),
+              key: ValueKey(languagePair.id),
               background: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(26.r),
@@ -49,6 +48,17 @@ class AddLanguagePairList extends StatelessWidget {
                   ],
                 ),
               ),
+              confirmDismiss: (direction) async {
+                if (languagePair.isSelected) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Cannot dismiss a selected language pair'),
+                    ),
+                  );
+                  return false;
+                }
+                return true;
+              },
               onDismissed: (direction) {
                 if (direction == DismissDirection.startToEnd) {
                   addLanguagePairCubit.deleteLanguagePair(languagePair.id);
