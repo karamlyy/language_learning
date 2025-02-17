@@ -20,7 +20,7 @@ class QuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => QuizCubit()..getQuizQuestion([]),
+      create: (context) => QuizCubit()..getQuizQuestion(),
       child: ChangeNotifierProvider(
         create: (context) => QuizProvider(),
         child: Scaffold(
@@ -40,7 +40,7 @@ class QuizPage extends StatelessWidget {
                     return Row(
                       children: List.generate(
                         3,
-                        (index) {
+                            (index) {
                           if (index < quizProvider.chances) {
                             return Icon(
                               CupertinoIcons.heart_fill,
@@ -63,14 +63,24 @@ class QuizPage extends StatelessWidget {
             ],
           ),
           body: BlocListener<QuizCubit, BaseState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+            },
             child: BlocBuilder<QuizCubit, BaseState>(
               builder: (context, state) {
                 if (state is LoadingState) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is SuccessState) {
                   final quizData = state.data;
-
+                  if (quizData == null) {
+                    return Center(
+                      child: PrimaryText(
+                        text: 'Quiz Finished',
+                        color: AppColors.primaryText,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 24,
+                      ),
+                    );
+                  }
                   return QuizBody(quizData: quizData);
                 }
                 return Center(child: Text('Failed to load quiz'));
@@ -84,7 +94,7 @@ class QuizPage extends StatelessWidget {
 }
 
 class QuizBody extends StatelessWidget {
-  final QuestionModel quizData;
+  final dynamic quizData;
 
   const QuizBody({
     super.key,
@@ -107,8 +117,9 @@ class QuizBody extends StatelessWidget {
               width: double.infinity,
               height: 100.h,
               decoration: BoxDecoration(
-                  color: AppColors.unselectedItemBackground,
-                  borderRadius: BorderRadius.circular(24).r),
+                color: AppColors.unselectedItemBackground,
+                borderRadius: BorderRadius.circular(24).r,
+              ),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
                 child: Column(
@@ -163,20 +174,19 @@ class QuizBody extends StatelessWidget {
                           closeButtonShowType: CloseButtonShowType.none,
                           icon: isCorrect
                               ? SvgPicture.asset(
-                                  Images.happyFace,
-                                  fit: BoxFit.cover,
-                                  width: 36.w,
-                                  height: 36.h,
-                                )
+                            Images.happyFace,
+                            fit: BoxFit.cover,
+                            width: 36.w,
+                            height: 36.h,
+                          )
                               : SvgPicture.asset(
-                                  Images.sadFace,
-                                  fit: BoxFit.cover,
-                                  width: 36.w,
-                                  height: 36.h,
-                                ),
+                            Images.sadFace,
+                            fit: BoxFit.cover,
+                            width: 36.w,
+                            height: 36.h,
+                          ),
                           title: PrimaryText(
-                            color:
-                                isCorrect ? AppColors.success : AppColors.wrong,
+                            color: isCorrect ? AppColors.success : AppColors.wrong,
                             fontWeight: FontWeight.w600,
                             text: isCorrect ? 'Correct !' : 'Incorrect',
                             fontSize: 22,
@@ -184,11 +194,11 @@ class QuizBody extends StatelessWidget {
                           description: isCorrect
                               ? null
                               : PrimaryText(
-                                  color: AppColors.wrong,
-                                  fontWeight: FontWeight.w400,
-                                  text: answer,
-                                  fontSize: 16,
-                                ),
+                            color: AppColors.wrong,
+                            fontWeight: FontWeight.w400,
+                            text: answer,
+                            fontSize: 16,
+                          ),
                           autoCloseDuration: Duration(seconds: 2),
                           showProgressBar: false,
                           backgroundColor: isCorrect
@@ -209,8 +219,7 @@ class QuizBody extends StatelessWidget {
                                 fontFamily: 'DMSerifDisplay',
                               ),
                               content: PrimaryText(
-                                color: AppColors.primaryText
-                                    .withValues(alpha: 0.7),
+                                color: AppColors.primaryText.withValues(alpha: 0.7),
                                 fontWeight: FontWeight.w400,
                                 text: 'You did 3 mistakes',
                                 fontSize: 14,
@@ -223,7 +232,7 @@ class QuizBody extends StatelessWidget {
                                   onTap: () {
                                     Navigator.of(context).pop();
                                     quizProvider.resetChances();
-                                    quizCubit.getQuizQuestion([]);
+                                    quizCubit.getQuizQuestion();
                                   },
                                 ),
                               ],
@@ -244,8 +253,7 @@ class QuizBody extends StatelessWidget {
                   quizCubit.addToMaster(quizData.id, quizProvider);
                 },
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
                   child: Row(
                     children: [
                       PrimaryText(
@@ -257,9 +265,7 @@ class QuizBody extends StatelessWidget {
                       ),
                       12.horizontalSpace,
                       Icon(
-                        quizProvider.isAddedToMaster
-                            ? Icons.bookmark
-                            : Icons.bookmark_outline,
+                        quizProvider.isAddedToMaster ? Icons.bookmark : Icons.bookmark_outline,
                         color: AppColors.primary,
                         size: 20.w,
                       ),
@@ -273,7 +279,7 @@ class QuizBody extends StatelessWidget {
               isActive: true,
               onTap: () {
                 quizProvider.setAddToMaster(false);
-                quizCubit.getQuizQuestion([]);
+                quizCubit.getQuizQuestion();
               },
             ),
           ],

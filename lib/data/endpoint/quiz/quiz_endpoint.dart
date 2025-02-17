@@ -13,6 +13,13 @@ class QuizEndpoint extends Endpoint {
   HttpMethod get httpMethod => HttpMethod.get;
 
   @override
-  Map<String, dynamic>? get queryParameters =>
-      excludeIds.isNotEmpty ? {'excludeIds': excludeIds.join(',')} : {};
+  Map<String, dynamic>? get queryParameters {
+    if (excludeIds.isNotEmpty) {
+      return {
+        'excludeIds': excludeIds.map((id) => id.toString()).toList(),
+      };
+    } else {
+      return null;
+    }
+  }
 }
