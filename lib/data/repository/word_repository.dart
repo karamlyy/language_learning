@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:language_learning/data/endpoint/home/user_vocabulary_endpoint.dart';
 import 'package:language_learning/data/endpoint/word/add_learning_endpoint.dart';
 import 'package:language_learning/data/endpoint/word/add_master_endpoint.dart';
+import 'package:language_learning/data/endpoint/word/delete_word_endpoint.dart';
 import 'package:language_learning/data/endpoint/word/new_word_endpoint.dart';
 import 'package:language_learning/data/endpoint/word/search_word_endpoint.dart';
 import 'package:language_learning/data/exception/error.dart';
@@ -13,6 +14,8 @@ abstract class WordRepository {
 
   Future<Either<HttpException, void>> addToLearning(int id);
   Future<Either<HttpException, void>> removeFromMastered(int id);
+  Future<Either<HttpException, void>> deleteWord(int id);
+
 
 
   Future<Either<HttpException, UserVocabularyModel>> getAllWords(
@@ -48,6 +51,12 @@ class WordRepositoryImpl extends WordRepository {
     return await apiService
         .task(GetAllWordsEndpoint(page: page, pageSize: pageSize));
   }
+
+  @override
+  Future<Either<HttpException, void>> deleteWord(int id) async {
+    return await apiService.task(DeleteWordEndpoint(id: id));
+  }
+
 
   @override
   Future<Either<HttpException, UserVocabularyModel>> searchWord(

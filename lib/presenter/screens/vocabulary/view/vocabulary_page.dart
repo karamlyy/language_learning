@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +7,7 @@ import 'package:language_learning/presenter/screens/vocabulary/cubit/vocabulary_
 import 'package:language_learning/presenter/screens/vocabulary/provider/vocabulary_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
+import 'package:language_learning/utils/routes/navigation.dart';
 import 'package:provider/provider.dart';
 
 class VocabularyPage extends StatelessWidget {
@@ -22,10 +24,12 @@ class VocabularyPage extends StatelessWidget {
             leading: Consumer<VocabularyProvider>(
               builder: (context, provider, child) {
                 return Visibility(
-                  visible: provider.isSearchActive,
+                  visible: true,
                   child: IconButton(
                     icon: Icon(Icons.arrow_back, color: AppColors.primaryText),
-                    onPressed: provider.toggleSearch,
+                    onPressed: provider.isSearchActive
+                        ? provider.toggleSearch
+                        : Navigation.pop,
                   ),
                 );
               },
@@ -153,30 +157,56 @@ class VocabularyWordsList extends StatelessWidget {
                   horizontal: 0.w,
                   vertical: 5.h,
                 ),
-                child: ListTile(
-                  contentPadding: EdgeInsets.all(12).r,
-                  tileColor: AppColors.unselectedItemBackground,
-                  shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24).r,
-                    borderSide: BorderSide(color: Colors.transparent),
-                  ),
-                  trailing: IconButton(
-                    onPressed: () async {
-                      vocabularyCubit.addToLearning(word.id);
-                    },
-                    icon: Icon(
-                      word.isLearningNow
-                          ? Icons.bookmark
-                          : Icons.bookmark_outline,
-                      size: 20.w,
-                      color: AppColors.bookMarkBackground,
+                child: Dismissible(
+                  key: UniqueKey(),
+                  background: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(26.r),
+                      color: AppColors.error,
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 16.w),
+                          child: Icon(
+                            CupertinoIcons.delete,
+                            color: AppColors.itemBackground,
+                            size: 20.w,
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  title: PrimaryText(
-                    text: '${word.source} - ${word.translation}',
-                    fontSize: 16,
-                    color: AppColors.primaryText,
-                    fontWeight: FontWeight.w400,
+                  onDismissed: (direction) {
+                    if (direction == DismissDirection.startToEnd) {
+                      vocabularyCubit.deleteWord(word.id);
+                    }
+                  },
+                  child: ListTile(
+                    contentPadding: EdgeInsets.all(12).r,
+                    tileColor: AppColors.unselectedItemBackground,
+                    shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24).r,
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    trailing: IconButton(
+                      onPressed: () async {
+                        vocabularyCubit.addToLearning(word.id);
+                      },
+                      icon: Icon(
+                        word.isLearningNow
+                            ? Icons.bookmark
+                            : Icons.bookmark_outline,
+                        size: 20.w,
+                        color: AppColors.bookMarkBackground,
+                      ),
+                    ),
+                    title: PrimaryText(
+                      text: '${word.source} - ${word.translation}',
+                      fontSize: 16,
+                      color: AppColors.primaryText,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               );

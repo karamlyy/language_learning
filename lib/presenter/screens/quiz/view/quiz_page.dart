@@ -69,7 +69,8 @@ class QuizPage extends StatelessWidget {
                 if (state is LoadingState) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is SuccessState) {
-                  final QuestionModel quizData = state.data;
+                  final quizData = state.data;
+
                   return QuizBody(quizData: quizData);
                 }
                 return Center(child: Text('Failed to load quiz'));

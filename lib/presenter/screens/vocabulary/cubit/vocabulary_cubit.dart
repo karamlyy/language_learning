@@ -16,15 +16,12 @@ class VocabularyCubit extends Cubit<BaseState> {
     emit(LoadingState());
     final result = await _homeRepository.getAllLanguagePairs();
     result.fold(
-          (error) => emit(FailureState(errorMessage: error.error)),
-          (data) {
+      (error) => emit(FailureState(errorMessage: error.error)),
+      (data) {
         emit(SuccessState(data: data));
       },
     );
   }
-
-
-
 
   void getAllWords() async {
     emit(LoadingState());
@@ -35,6 +32,17 @@ class VocabularyCubit extends Cubit<BaseState> {
       ),
       (data) {
         emit(SuccessState(data: data));
+      },
+    );
+  }
+
+  void deleteWord(int id) async {
+    emit(LoadingState());
+    final result = await _wordRepository.deleteWord(id);
+    result.fold(
+      (error) => emit(FailureState(errorMessage: error.error)),
+      (data) {
+        getAllWords();
       },
     );
   }

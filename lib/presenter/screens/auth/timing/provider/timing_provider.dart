@@ -12,7 +12,6 @@ class TimingProvider with ChangeNotifier {
 
   int? _selectedIntervalId;
   bool _isIntervalSelected = false;
-  String _userId = '';
 
   DateTime? _startTime;
   DateTime? _endTime;
@@ -21,7 +20,6 @@ class TimingProvider with ChangeNotifier {
 
   bool? get isIntervalSelected => _isIntervalSelected;
 
-  String get userId => _userId;
 
   DateTime? get startTime => _startTime;
 

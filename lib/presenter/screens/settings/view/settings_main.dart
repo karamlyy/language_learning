@@ -23,7 +23,7 @@ class SettingsMain extends StatelessWidget {
             title: setting.title,
             leadingIcon: Icon(setting.icon, color: AppColors.primary),
             onTap: () {
-              Navigation.push(setting.route);
+              Navigation.pushReplacementNamed(setting.route);
             },
           );
         },

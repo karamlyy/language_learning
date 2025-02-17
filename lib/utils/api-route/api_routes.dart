@@ -36,11 +36,13 @@ class ApiRoutes {
 
   static const String getAllWords = 'UserVocabulary/GetPaginatedByUserId';
 
+  static const String deleteWord = 'UserVocabulary/Delete';
+
   static const String getAllLearningWords = 'UserVocabulary/GetPaginatedLearningByUserId';
 
   static const String getAllMasteredWords = 'UserVocabulary/GetPaginatedMasteredByUserId';
   static const String getUserLanguagePairs = 'UserLanguage/GetAllByUserId';
-
+  static const String deleteLanguagePair = 'UserLanguage/Delete';
   static const String getQuizQuestion = 'Quiz/GetQuestion';
 
   static const String setSelectedLanguagePair = 'UserLanguage/SetSelected/';
