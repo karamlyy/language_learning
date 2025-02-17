@@ -39,7 +39,7 @@ class ChangeTimingForm extends StatelessWidget {
                     child: _buildTimePickerField(
                       context: context,
                       label: 'Start Time',
-                      selectedTime: _parseTimeString(data.startTime),
+                      selectedTime: changeTimingProvider.startTime ?? _parseTimeString(data.startTime),
                       onTimeSelected: (newTime) {
                         changeTimingProvider.setStartTime(newTime);
                       },
@@ -50,7 +50,7 @@ class ChangeTimingForm extends StatelessWidget {
                     child: _buildTimePickerField(
                       context: context,
                       label: 'Start Time',
-                      selectedTime: _parseTimeString(data.endTime),
+                      selectedTime: changeTimingProvider.endTime ?? _parseTimeString(data.endTime),
                       onTimeSelected: (newTime) {
                         changeTimingProvider.setEndTime(newTime);
                       },
@@ -79,11 +79,13 @@ class ChangeTimingForm extends StatelessWidget {
 
   DateTime? _parseTimeString(String timeString) {
     try {
-      return DateFormat.Hm().parse(timeString);
+      DateTime dt = DateFormat.Hm().parse(timeString, true);
+      return dt.add(Duration(hours: 0));
     } catch (e) {
       return null;
     }
   }
+
 
   Widget _buildTimePickerField({
     required BuildContext context,
@@ -109,8 +111,10 @@ class ChangeTimingForm extends StatelessWidget {
             pickedTime.hour,
             pickedTime.minute,
           );
+
           onTimeSelected(selectedDateTime);
         }
+
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,4 +155,6 @@ class ChangeTimingForm extends StatelessWidget {
       ),
     );
   }
+
+
 }

@@ -46,12 +46,13 @@ class ChangeTimingProvider with ChangeNotifier {
   void setStartTime(DateTime time) {
     _startTime = time;
     notifyListeners();
-    print('Start Time: $time');
+    print('Start Time (UTC+4): $time');
   }
 
   void setEndTime(DateTime time) {
     _endTime = time;
     notifyListeners();
-    print('End Time: $time');
+    print('End Time (UTC+4): $time');
   }
+
 }
