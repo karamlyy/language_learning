@@ -137,83 +137,16 @@ class ChangeTimingForm extends StatelessWidget {
                   fontSize: 16,
                   color: selectedTime != null
                       ? AppColors.primaryText
-                      : AppColors.primaryText.withOpacity(0.7),
-                  fontWeight: FontWeight.w500,
-                ),
-                Icon(
-                  Icons.access_time,
-                  size: 15.w,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTimePicker({
-    required BuildContext context,
-    required String label,
-    required DateTime? selectedTime,
-    required Function(DateTime) onTimeSelected,
-  }) {
-    return GestureDetector(
-      onTap: () async {
-        TimeOfDay? pickedTime = await showTimePicker(
-          context: context,
-          initialTime: selectedTime != null
-              ? TimeOfDay.fromDateTime(selectedTime)
-              : TimeOfDay.now(),
-        );
-
-        if (pickedTime != null) {
-          DateTime now = DateTime.now();
-          DateTime selectedDateTime = DateTime(
-            now.year,
-            now.month,
-            now.day,
-            pickedTime.hour,
-            pickedTime.minute,
-          );
-          onTimeSelected(selectedDateTime);
-        }
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PrimaryText(
-            text: label,
-            color: AppColors.primaryText,
-            fontWeight: FontWeight.w400,
-          ),
-          6.verticalSpace,
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              border: Border.all(color: AppColors.itemBorder),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                PrimaryText(
-                  text: selectedTime != null
-                      ? DateFormat.jm().format(selectedTime)
-                      : "00:00",
-                  fontSize: 16,
-                  color: selectedTime != null
-                      ? AppColors.primaryText
                       : AppColors.primaryText.withValues(alpha: 0.7),
                   fontWeight: FontWeight.w500,
                 ),
                 Icon(
                   Icons.access_time,
                   size: 15.w,
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

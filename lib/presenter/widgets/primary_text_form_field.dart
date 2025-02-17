@@ -13,6 +13,7 @@ class PrimaryTextFormField extends StatelessWidget {
   final bool isObscureText;
   final bool hasError;
   final bool isFilled;
+  final bool isReadOnly;
   final Color errorColor;
   final Color successColor;
   final Color defaultBorderColor;
@@ -29,6 +30,7 @@ class PrimaryTextFormField extends StatelessWidget {
     this.errorText,
     this.initialText,
     this.isFilled = true,
+    this.isReadOnly = false,
     required this.onChanged,
     this.onTap,
     this.isObscureText = false,
@@ -63,6 +65,7 @@ class PrimaryTextFormField extends StatelessWidget {
         6.verticalSpace,
         TextFormField(
           onTap: onTap,
+          readOnly: isReadOnly,
           initialValue: initialText,
           obscureText: isObscureText,
           style: TextStyle(fontSize: 16.sp),
