@@ -9,7 +9,7 @@ import 'package:language_learning/presenter/screens/timing/view/change_timing_ch
 import 'package:language_learning/presenter/screens/timing/view/change_timing_header.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
-
+import 'package:intl/intl.dart';
 class ChangeTimingForm extends StatelessWidget {
   const ChangeTimingForm({super.key});
 
@@ -49,7 +49,7 @@ class ChangeTimingForm extends StatelessWidget {
                   Expanded(
                     child: _buildTimePickerField(
                       context: context,
-                      label: 'Start Time',
+                      label: 'End Time',
                       selectedTime: changeTimingProvider.endTime ?? _parseTimeString(data.endTime),
                       onTimeSelected: (newTime) {
                         changeTimingProvider.setEndTime(newTime);
@@ -112,9 +112,10 @@ class ChangeTimingForm extends StatelessWidget {
             pickedTime.minute,
           );
 
-          onTimeSelected(selectedDateTime);
-        }
+          DateTime utc4Time = selectedDateTime.toUtc();
 
+          onTimeSelected(utc4Time);
+        }
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +137,7 @@ class ChangeTimingForm extends StatelessWidget {
               children: [
                 PrimaryText(
                   text: selectedTime != null
-                      ? DateFormat.jm().format(selectedTime)
+                      ? DateFormat.jm().format(selectedTime.toUtc().add(Duration(hours: 4))) // Convert to UTC+4 before displaying
                       : "00:00",
                   fontSize: 16,
                   color: selectedTime != null
