@@ -38,17 +38,16 @@ class HomeCubit extends Cubit<BaseState> {
     emit(LoadingState());
     final result = await _homeRepository.getAllLanguagePairs();
     result.fold(
-          (error) {
+      (error) {
         print('Error: ${error.error}');
         emit(FailureState(errorMessage: error.error));
       },
-          (data) {
+      (data) {
         print('New data fetched: $data');
         emit(SuccessState(data: data));
       },
     );
   }
-
 
   void setSelectedLanguagePair(int id) async {
     final result = await _homeRepository.setSelectedLanguagePair(id);
@@ -104,7 +103,6 @@ class HomeCubit extends Cubit<BaseState> {
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
         Navigation.push(Routes.wordList, arguments: data);
-
       },
     );
   }

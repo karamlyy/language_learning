@@ -120,7 +120,7 @@ class MasteredVocabularyList extends StatelessWidget {
             },
           );
         } else {
-          return Center(child: Text('Loading...'));
+          return Center(child: CircularProgressIndicator());
         }
       },
     );

@@ -88,7 +88,6 @@ class NotificationList extends StatelessWidget {
             itemCount: data.length,
             itemBuilder: (context, index) {
               final notification = data[index];
-              print(notification);
               return Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 0.w,
@@ -102,17 +101,17 @@ class NotificationList extends StatelessWidget {
                     borderSide: BorderSide(color: Colors.transparent),
                   ),
                   title: PrimaryText(
-                    text: 'New ${notification.name} Category Added ',
+                    text: '${notification.title}🔥',
                     fontSize: 16,
                     color: AppColors.primaryText,
                     fontWeight: FontWeight.w600,
                   ),
                   subtitle: PrimaryText(
-                    text: 'Let’s start learning now',
+                    text: '${notification.body}',
                     color: AppColors.primaryText.withValues(alpha: 0.8),
                     fontWeight: FontWeight.w400,
                   ),
-                  trailing: _buildCategoryImage(notification.image),
+
                 ),
               );
             },
@@ -124,33 +123,5 @@ class NotificationList extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryImage(String? base64String) {
-    if (base64String == null || base64String.isEmpty) {
-      return SizedBox(
-        width: 56.w,
-        height: 56.h,
-        child: Icon(Icons.language, size: 30, color: Colors.grey),
-      );
-    }
 
-    try {
-      Uint8List bytes = base64Decode(base64String);
-      return Image.memory(
-        bytes,
-        width: 56.w,
-        height: 56.h,
-        fit: BoxFit.cover,
-      );
-    } catch (e) {
-      return const SizedBox(
-        width: 36,
-        height: 36,
-        child: Icon(
-          Icons.broken_image,
-          size: 30,
-          color: AppColors.error,
-        ),
-      );
-    }
-  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class QuizProvider extends ChangeNotifier {
   int _chances = 3;
+  int _correctAnswerCount = 0;
   bool _isAddedToMaster = false;
   bool _isCorrectAnswerSelected = false;
   bool _isAnswerSelected = false;
@@ -9,6 +10,7 @@ class QuizProvider extends ChangeNotifier {
 
   bool get isCorrectAnswerSelected => _isCorrectAnswerSelected;
   int get chances => _chances;
+  int get correctAnswerCount => _correctAnswerCount;
   bool get isAddedToMaster => _isAddedToMaster;
   bool get isAnswerSelected => _isAnswerSelected;
   bool get showAddToMaster => _showAddToMaster;
@@ -19,6 +21,13 @@ class QuizProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void addCorrectAnswerCount(){
+    _correctAnswerCount++;
+    notifyListeners();
+  }
+
+
 
   void resetChances() {
     _chances = 3;

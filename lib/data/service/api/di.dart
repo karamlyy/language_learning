@@ -4,6 +4,7 @@ import 'package:language_learning/data/repository/auth_repository.dart';
 import 'package:language_learning/data/repository/category_repository.dart';
 import 'package:language_learning/data/repository/home_repository.dart';
 import 'package:language_learning/data/repository/language_repository.dart';
+import 'package:language_learning/data/repository/notification_repository.dart';
 import 'package:language_learning/data/repository/quiz_repository.dart';
 import 'package:language_learning/data/repository/settings_repository.dart';
 import 'package:language_learning/data/repository/vocabulary_repository.dart';
@@ -45,5 +46,8 @@ class Injector {
 
     getIt.registerFactory<SettingsRepository>(
         () => SettingsRepositoryImpl(getIt.get()));
+
+    getIt.registerFactory<NotificationRepository>(
+            () => NotificationRepositoryImpl(getIt.get()));
   }
 }

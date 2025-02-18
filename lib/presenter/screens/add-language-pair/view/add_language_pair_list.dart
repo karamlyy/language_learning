@@ -78,7 +78,7 @@ class AddLanguagePairList extends StatelessWidget {
                 ),
                 title: PrimaryText(
                   text:
-                      '${languagePair.id} - ${languagePair.sourceLanguage} - ${languagePair.translationLanguage}',
+                      '${languagePair.sourceLanguage} - ${languagePair.translationLanguage}',
                   color: AppColors.primaryText,
                   fontWeight: FontWeight.w500,
                   fontSize: 16,

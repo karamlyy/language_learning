@@ -9,6 +9,7 @@ import 'package:language_learning/data/model/home/language_pair_model.dart';
 import 'package:language_learning/data/model/home/search_word_model.dart';
 import 'package:language_learning/data/model/home/user_vocabulary_model.dart';
 import 'package:language_learning/data/model/language/language_model.dart';
+import 'package:language_learning/data/model/notification/notification_model.dart';
 import 'package:language_learning/data/model/quiz/question_model.dart';
 import 'package:language_learning/data/model/settings/timing_model.dart';
 
@@ -45,6 +46,10 @@ class ResponseModel<T> {
         case const (List<LanguageModel>):
           return (data["data"] as List)
               .map((e) => LanguageModel.fromJson(e))
+              .toList() as T;
+        case const (List<NotificationModel>):
+          return (data["data"] as List)
+              .map((e) => NotificationModel.fromJson(e))
               .toList() as T;
 
         case const (List<CategoryModel>):

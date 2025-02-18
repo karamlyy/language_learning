@@ -30,7 +30,7 @@ class NewWordCubit extends Cubit<BaseState> {
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (_) {
-        Navigation.push(Routes.home);
+        Navigation.pushReplacementNamed(Routes.newWord);
       },
     );
   }

@@ -34,6 +34,8 @@ class ApiRoutes {
 
   static const String getAllCardsCounts = 'UserVocabulary/GetCountByUserId';
 
+  static const String getAllNotification = 'UserNotification/GetAllByUserId';
+
   static const String getAllWords = 'UserVocabulary/GetPaginatedByUserId';
 
   static const String deleteWord = 'UserVocabulary/Delete';

@@ -24,7 +24,8 @@ enum Routes {
   changePassword('change-password'),
   changeTiming('change-timing'),
   addLanguagePair('add-language-pair'),
-  createLanguagePair('create-language-pair'),;
+  createLanguagePair('create-language-pair'),
+  termsConditions('terms-conditions');
 
   const Routes( this.path);
 

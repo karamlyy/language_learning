@@ -23,6 +23,7 @@ import 'package:language_learning/presenter/screens/new-word/view/new_word_page.
 import 'package:language_learning/presenter/screens/notification/view/notification_page.dart';
 import 'package:language_learning/presenter/screens/quiz/view/quiz_page.dart';
 import 'package:language_learning/presenter/screens/settings/view/settings_page.dart';
+import 'package:language_learning/presenter/screens/terms-conditions/view/terms_conditions_page.dart';
 import 'package:language_learning/presenter/screens/timing/view/change_timing_page.dart';
 import 'package:language_learning/presenter/screens/vocabulary/view/vocabulary_page.dart';
 import 'package:language_learning/presenter/screens/word-list/view/word_list_page.dart';
@@ -105,6 +106,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return createPageRoute(const AddLanguagePairPage(), settings);
     case Routes.createLanguagePair:
       return createPageRoute(const CreateLanguagePairPage(), settings);
+    case Routes.termsConditions:
+      return createPageRoute(const TermsConditionsPage(), settings);
     default:
       return createPageRoute(
         const Scaffold(

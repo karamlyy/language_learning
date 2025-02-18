@@ -6,7 +6,7 @@ enum SettingsOption {
   languages(title: 'Languages', icon: CupertinoIcons.globe, route: Routes.addLanguagePair),
   timing(title: 'Timing', icon: CupertinoIcons.clock, route: Routes.changeTiming),
   password(title: 'Password', icon: CupertinoIcons.lock_fill, route: Routes.changePassword),
-  terms(title: 'Terms and Conditions', icon: CupertinoIcons.book, route: Routes.changePassword),
+  terms(title: 'Terms and Conditions', icon: CupertinoIcons.book, route: Routes.termsConditions),
   deleteAccount(title: 'Delete Account', icon: CupertinoIcons.delete, route: Routes.changePassword),
   logout(title: 'Log out', icon: Icons.login_outlined, route: Routes.changePassword);
 
