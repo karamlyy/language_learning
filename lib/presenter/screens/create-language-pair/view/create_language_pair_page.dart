@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:language_learning/generic/base_state.dart';
+import 'package:language_learning/generic/generic_listener.dart';
 import 'package:language_learning/presenter/screens/auth/languages/cubit/language_cubit.dart';
 import 'package:language_learning/presenter/screens/auth/languages/provider/languages_provider.dart';
 import 'package:language_learning/presenter/screens/create-language-pair/view/create_language_pair_body.dart';
@@ -27,7 +28,7 @@ class CreateLanguagePairPage extends StatelessWidget {
         ),
         body: ChangeNotifierProvider(
           create: (context) => LanguagesProvider(),
-          child: BlocListener<LanguageCubit, BaseState>(
+          child: GenericListener<LanguageCubit, BaseState>(
             listener: (context, state) {},
             child: CreateLanguagePairBody(),
           ),

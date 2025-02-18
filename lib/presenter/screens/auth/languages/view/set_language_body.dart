@@ -20,42 +20,48 @@ class SetLanguageBody extends StatelessWidget {
     return BlocBuilder<LanguageCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state is SuccessState) {
           final languages = state.data as List<LanguageModel>;
 
-
           return SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0).r,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Header(),
-                  SetLanguageHeader(),
-                  42.verticalSpace,
-                  SetLanguagesList(
-                    languages: languages,
-                    selectedLanguageId: languagesProvider.isSourceLanguageSelected
-                        ? languagesProvider.selectedTranslationLanguageId
-                        : languagesProvider.selectedSourceLanguageId,
-                    onLanguageSelected: (id) {
-                      if (languagesProvider.isSourceLanguageSelected) {
-                        languagesProvider.selectTranslationLanguage(id);
-                      } else {
-                        languagesProvider.selectSourceLanguage(id);
-                      }
-                    },
+            child: Column(
+              children: [
+                const Header(),
+
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0).r,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SetLanguageHeader(),
+                        42.verticalSpace,
+                        SetLanguagesList(
+                          languages: languages,
+                          selectedLanguageId: languagesProvider.isSourceLanguageSelected
+                              ? languagesProvider.selectedTranslationLanguageId
+                              : languagesProvider.selectedSourceLanguageId,
+                          onLanguageSelected: (id) {
+                            if (languagesProvider.isSourceLanguageSelected) {
+                              languagesProvider.selectTranslationLanguage(id);
+                            } else {
+                              languagesProvider.selectSourceLanguage(id);
+                            }
+                          },
+                        ),
+                        const SetLanguageButton(),
+                      ],
+                    ),
                   ),
-                  SetLanguageButton(),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         } else if (state is FailureState) {
-          return Center(child: Text('Failed to load languages'));
+          return const Center(child: Text('Failed to load languages'));
         } else {
-          return Center(child: Text('Initializing...'));
+          return const Center(child: Text('Initializing...'));
         }
       },
     );

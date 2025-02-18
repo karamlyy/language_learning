@@ -41,7 +41,7 @@ class NewWordInputs extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GenericBuilder<NewWordCubit, BaseState>(
+                  BlocBuilder<NewWordCubit, BaseState>(
                     builder: (context, state) {
                       if (state is LoadingState) {
                         return const CircularProgressIndicator();
@@ -86,7 +86,7 @@ class NewWordInputs extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GenericBuilder<NewWordCubit, BaseState>(
+                  BlocBuilder<NewWordCubit, BaseState>(
                     builder: (context, state) {
                       if (state is LoadingState) {
                         return const CircularProgressIndicator();
