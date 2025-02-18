@@ -44,6 +44,7 @@ class WordListPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final categoryWord = categoryWords[index];
                   final wordListProvider = context.watch<WordListProvider>();
+                  final categoryCubit = context.read<CategoryCubit>();
                   final currentStatus = wordListProvider.getBookmarkStatus(
                     categoryWord.id,
                     categoryWord.isAdded,
@@ -55,7 +56,7 @@ class WordListPage extends StatelessWidget {
                       vertical: 5.h,
                     ),
                     child: ListTile(
-                      contentPadding: EdgeInsets.all(12).r,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
                       tileColor: AppColors.unselectedItemBackground,
                       shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24).r,
@@ -63,13 +64,11 @@ class WordListPage extends StatelessWidget {
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          context.read<WordListProvider>().toggleBookmarkStatus(
+                          wordListProvider.toggleBookmarkStatus(
                             categoryWord.id,
                             currentStatus,
                           );
-                          context
-                              .read<CategoryCubit>()
-                              .changeWordStatus(categoryWord.id);
+                          categoryCubit.changeWordStatus(categoryWord.id);
                         },
                         icon: Icon(
                           currentStatus
@@ -79,13 +78,25 @@ class WordListPage extends StatelessWidget {
                           size: 20.w,
                         ),
                       ),
-                      title: PrimaryText(
-                        text:
-                        '${categoryWord.source} - ${categoryWord.translation}',
-                        fontSize: 16,
-                        color: AppColors.primaryText,
-                        fontWeight: FontWeight.w400,
+                      title: RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: AppColors.primaryText,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: categoryWord.source,
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(
+                              text: ' - ${categoryWord.translation}',
+                              style: TextStyle(fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
                       ),
+
                     ),
                   );
                 },

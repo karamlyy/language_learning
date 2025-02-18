@@ -32,7 +32,7 @@ class WordCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(24.0).r,
         ),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

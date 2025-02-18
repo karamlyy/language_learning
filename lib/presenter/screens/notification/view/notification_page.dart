@@ -9,6 +9,7 @@ import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/notification/cubit/notification_cubit.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -55,9 +56,7 @@ class NotificationBody extends StatelessWidget {
     return BlocBuilder<NotificationCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
-          return Center(
-            child: const CircularProgressIndicator(),
-          );
+          return const ShimmerLoading(); // Show shimmer effect while loading
         } else if (state is SuccessState) {
           return SafeArea(
             child: Padding(
@@ -81,7 +80,7 @@ class NotificationList extends StatelessWidget {
     return BlocBuilder<NotificationCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
-          return const Center(child: CircularProgressIndicator());
+          return const ShimmerLoading(); // Show shimmer effect while loading
         } else if (state is SuccessState) {
           final notifications = state.data;
 
@@ -116,28 +115,30 @@ class NotificationList extends StatelessWidget {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
+                    EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
                     child: PrimaryText(
                       text: day,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
                       color: AppColors.primaryText,
                     ),
                   ),
                   ...dayNotifications.map(
-                    (notification) {
+                        (notification) {
                       DateTime time = DateTime.parse(notification.createdOn);
                       String formattedTime = DateFormat.jm().format(time);
 
                       return Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 0.w, vertical: 5.h),
+                          horizontal: 0.w,
+                          vertical: 5.h,
+                        ),
                         child: ListTile(
                           contentPadding: EdgeInsets.all(12).r,
                           tileColor: AppColors.unselectedItemBackground,
                           shape: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(24).r,
-                            borderSide: BorderSide(color: Colors.transparent),
+                            borderSide: const BorderSide(color: Colors.transparent),
                           ),
                           title: PrimaryText(
                             text: '${notification.title} 🔥',
@@ -147,7 +148,7 @@ class NotificationList extends StatelessWidget {
                           ),
                           subtitle: PrimaryText(
                             text: '${notification.body} - $formattedTime',
-                            color: AppColors.primaryText.withValues(alpha: 0.8),
+                            color: AppColors.primaryText.withOpacity(0.8),
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -159,8 +160,67 @@ class NotificationList extends StatelessWidget {
             },
           );
         } else {
-          return Center(child: Text('Loading...'));
+          return const Center(child: Text('Loading...'));
         }
+      },
+    );
+  }
+}
+
+// Shimmer loading widget
+class ShimmerLoading extends StatelessWidget {
+  const ShimmerLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: 6,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          child: Shimmer.fromColors(
+            baseColor: AppColors.itemBackground,
+            highlightColor: AppColors.itemBorder,
+            child: Container(
+              padding: EdgeInsets.all(12).r,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24).r,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 120.w,
+                    height: 16.h,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300]!,
+                      borderRadius: BorderRadius.circular(4).r,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Container(
+                    width: double.infinity,
+                    height: 14.h,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300]!,
+                      borderRadius: BorderRadius.circular(4).r,
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+                  Container(
+                    width: 150.w,
+                    height: 14.h,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300]!,
+                      borderRadius: BorderRadius.circular(4).r,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
       },
     );
   }

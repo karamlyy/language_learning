@@ -38,10 +38,10 @@ class QuizProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setAddToMaster(bool value) {
-    _showAddToMaster = value;
-    notifyListeners();
-  }
+  // void setAddToMaster(bool value) {
+  //   _showAddToMaster = value;
+  //   notifyListeners();
+  // }
 
   void setCorrectAnswerSelected(bool value) {
     _isCorrectAnswerSelected = value;
@@ -54,4 +54,11 @@ class QuizProvider extends ChangeNotifier {
     notifyListeners();
     return _isAnswerSelected;
   }
+
+  bool setAddToMaster(bool value) {
+    _isAddedToMaster = value;
+    notifyListeners();
+    return _showAddToMaster;
+  }
+
 }
