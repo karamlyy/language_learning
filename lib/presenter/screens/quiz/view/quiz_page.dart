@@ -262,7 +262,6 @@ class QuizBody extends StatelessWidget {
                                     Navigator.of(context).pop();
                                     quizProvider.resetChances();
                                     quizCubit.getQuizQuestion();
-
                                   },
                                 ),
                                 5.verticalSpace,
