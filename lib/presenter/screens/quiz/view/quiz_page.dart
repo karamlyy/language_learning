@@ -169,6 +169,8 @@ class QuizBody extends StatelessWidget {
                           quizProvider.decrementChance();
                         }
 
+                        quizProvider.selectAnswer(true);
+
                         toastification.show(
                           context: context,
                           closeButtonShowType: CloseButtonShowType.none,
@@ -276,10 +278,11 @@ class QuizBody extends StatelessWidget {
             PrimaryButton(
               title: 'Next',
               hasBorder: false,
-              isActive: true,
+              isActive: quizProvider.isAnswerSelected,
               onTap: () {
                 quizProvider.setAddToMaster(false);
                 quizCubit.getQuizQuestion();
+                quizProvider.selectAnswer(false);
               },
             ),
           ],
