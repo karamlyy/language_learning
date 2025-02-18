@@ -1,15 +1,20 @@
+import 'dart:developer';
+
 class QuestionModel {
-  final int id;
-  final String question;
-  final Map<String, bool> answers;
+  int? id;
+  String? question;
+  Map<String, bool>? answers;
 
   QuestionModel({
-    required this.id,
-    required this.question,
-    required this.answers,
+    this.id,
+    this.question,
+    this.answers,
   });
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) {
+    if (json['id'] == null) {
+      return QuestionModel();
+    }
     return QuestionModel(
       id: json['id'],
       question: json['question'],

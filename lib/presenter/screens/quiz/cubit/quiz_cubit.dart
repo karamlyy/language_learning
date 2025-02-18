@@ -3,6 +3,8 @@ import 'package:language_learning/data/repository/quiz_repository.dart';
 import 'package:language_learning/data/service/api/di.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/quiz/provider/quiz_provider.dart';
+import 'package:language_learning/utils/routes/app_routes.dart';
+import 'package:language_learning/utils/routes/navigation.dart';
 
 class QuizCubit extends Cubit<BaseState> {
   QuizCubit() : super(InitialState());
@@ -16,14 +18,10 @@ class QuizCubit extends Cubit<BaseState> {
       _askedQuestionIds.isEmpty ? [0] : _askedQuestionIds,
     );
     result.fold(
-          (error) => emit(FailureState(errorMessage: error.error)),
-          (data) {
-        if (data == null) {
-          emit(SuccessState(data: null));
-        } else {
-          _askedQuestionIds.add(data.id ?? 0);
-          emit(SuccessState(data: data));
-        }
+      (error) => emit(FailureState(errorMessage: error.error)),
+      (data) {
+        _askedQuestionIds.add(data.id ?? 0);
+        emit(SuccessState(data: data));
       },
     );
   }
@@ -34,6 +32,16 @@ class QuizCubit extends Cubit<BaseState> {
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
         quizProvider.addToMaster(true);
+      },
+    );
+  }
+
+  void createQuizReport(int correctAnswerCount) async {
+    final result = await _quizRepository.createQuizReport(correctAnswerCount);
+    result.fold(
+      (error) => emit(FailureState(errorMessage: error.error)),
+      (data) {
+        Navigation.pushNamedAndRemoveUntil(Routes.home);
       },
     );
   }

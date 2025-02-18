@@ -27,8 +27,6 @@ class QuizProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   void resetChances() {
     _chances = 3;
     _showAddToMaster = false;

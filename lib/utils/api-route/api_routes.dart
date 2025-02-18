@@ -46,6 +46,7 @@ class ApiRoutes {
   static const String getUserLanguagePairs = 'UserLanguage/GetAllByUserId';
   static const String deleteLanguagePair = 'UserLanguage/Delete';
   static const String getQuizQuestion = 'Quiz/GetQuestion';
+  static const String createQuizReport = 'Quiz/CreateReport';
 
   static const String setSelectedLanguagePair = 'UserLanguage/SetSelected/';
 

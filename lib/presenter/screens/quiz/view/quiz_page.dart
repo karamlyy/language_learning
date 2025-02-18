@@ -69,17 +69,48 @@ class QuizPage extends StatelessWidget {
                 if (state is LoadingState) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is SuccessState) {
-                  final quizData = state.data;
-                  if (quizData == null) {
-                    return Center(
-                      child: PrimaryText(
-                        text: 'Quiz Finished',
-                        color: AppColors.primaryText,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 24,
-                      ),
-                    );
+                  final quizData = state.data as QuestionModel;
+                  final quizProvider = context.read<QuizProvider>();
+                  final quizCubit = context.read<QuizCubit>();
+
+                  if (quizData.answers == null) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => AlertDialog(
+                          title: PrimaryText(
+                            text: 'Quiz Finished',
+                            color: AppColors.primaryText,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 22,
+                          ),
+                          content: PrimaryText(
+                            text:
+                                'You got ${quizProvider.correctAnswerCount} correct answer(s).',
+                            color: AppColors.primaryText.withValues(alpha: 0.8),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                          ),
+                          actions: [
+                            PrimaryButton(
+                              title: 'Finish',
+                              hasBorder: false,
+                              isActive: true,
+                              onTap: () {
+                                quizCubit.createQuizReport(
+                                    quizProvider.correctAnswerCount);
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    });
+
+                    return Container();
                   }
+
                   return QuizBody(quizData: quizData);
                 }
                 return Center(child: Text('Failed to load quiz'));
@@ -231,6 +262,19 @@ class QuizBody extends StatelessWidget {
                                     Navigator.of(context).pop();
                                     quizProvider.resetChances();
                                     quizCubit.getQuizQuestion();
+
+                                  },
+                                ),
+                                5.verticalSpace,
+                                PrimaryButton(
+                                  title: 'Finish',
+                                  hasBorder: true,
+                                  isActive: true,
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+
+                                    quizCubit.createQuizReport(
+                                        quizProvider.correctAnswerCount);
                                   },
                                 ),
                               ],
