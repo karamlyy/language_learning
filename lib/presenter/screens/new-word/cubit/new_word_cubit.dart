@@ -34,5 +34,4 @@ class NewWordCubit extends Cubit<BaseState> {
       },
     );
   }
-
 }
