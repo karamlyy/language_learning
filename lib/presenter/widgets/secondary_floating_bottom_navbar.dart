@@ -11,78 +11,87 @@ class SecondaryFloatingBottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTablet = MediaQuery.sizeOf(context).width > 600;
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        SvgPicture.asset(
-          Images.bottomNavigationBackground,
-          fit: BoxFit.cover,
-          width: 208.w,
-          height: 72.h,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 48.w,
-              height: 48.h,
-              decoration: const BoxDecoration(
-                color: AppColors.background,
-                shape: BoxShape.circle,
+    return Positioned(
+      bottom: 8.h,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: Container(
+          width: 212.w,
+          padding: EdgeInsets.symmetric(vertical: 4.h),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            image: const DecorationImage(
+              image: AssetImage('assets/images/buttonBg.png'),
+              fit: BoxFit.cover,
+              opacity: 0.5,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              // Home button
+              Container(
+                width: 48.w,
+                height: 48.h,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  constraints: const BoxConstraints(),
+                  onPressed: () {
+                    // Handle Home tap
+                  },
+                  icon: Icon(
+                    Icons.home_filled,
+                    color: AppColors.primary,
+                    size: 24.w,
+                  ),
+                ),
               ),
-              child: IconButton(
-                constraints: BoxConstraints(),
-                onPressed: () {},
-                icon: Icon(
-                  Icons.home_filled,
+              30.horizontalSpace,
+              Container(
+                width: 48.w,
+                height: 48.h,
+                decoration: const BoxDecoration(
                   color: AppColors.primary,
-                  size: 24.w,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    Navigation.push(Routes.newWord);
+                  },
+                  icon: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 28.w,
+                  ),
                 ),
               ),
-            ),
-            if (!isTablet) 18.horizontalSpace,
-            Container(
-              width: isTablet ? 58.w : 64.h,
-              height: 64.h,
-              decoration: const BoxDecoration(
-                color: AppColors.primary,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                onPressed: () {
-                  Navigation.push(Routes.newWord);
-                },
-                icon: Icon(
-                  Icons.add,
-                  color: AppColors.background,
-                  size: 28.w,
+              30.horizontalSpace,
+              Container(
+                width: 48.w,
+                height: 48.h,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    Navigation.push(Routes.settings);
+                  },
+                  icon: Icon(
+                    Icons.settings_rounded,
+                    color: AppColors.primary,
+                    size: 24.w,
+                  ),
                 ),
               ),
-            ),
-            if (!isTablet) 18.horizontalSpace,
-            Container(
-              width: 48.w,
-              height: 48.h,
-              decoration: const BoxDecoration(
-                color: AppColors.background,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                onPressed: () {
-                  Navigation.push(Routes.settings);
-                },
-                icon: Icon(
-                  Icons.settings_rounded,
-                  color: AppColors.primary,
-                  size: 24.w,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ],
+      ),
     );
   }
 }

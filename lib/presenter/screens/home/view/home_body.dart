@@ -43,6 +43,8 @@ class HomeBody extends StatelessWidget {
                               collapsedHeight: 50.h,
                               expandedHeight: 50.h,
                               toolbarHeight: 50.h,
+                              elevation: 0,
+                              surfaceTintColor: Colors.transparent,
                               title: HomeAppbar(),
                             ),
                             SliverToBoxAdapter(
@@ -71,12 +73,6 @@ class HomeBody extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 16.0).r,
-                      child: Align(
-                        child: SecondaryFloatingBottomNavbar(),
                       ),
                     ),
                   ],
