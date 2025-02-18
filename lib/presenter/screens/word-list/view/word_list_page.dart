@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/data/model/home/category_word_model.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
+import 'package:language_learning/presenter/screens/word-list/cubit/category_cubit.dart';
 import 'package:language_learning/presenter/screens/word-list/provider/word_list_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
@@ -20,7 +21,7 @@ class WordListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(),
+      create: (context) => CategoryCubit(),
       child: Scaffold(
         appBar: AppBar(
           title: PrimaryText(
@@ -33,52 +34,59 @@ class WordListPage extends StatelessWidget {
         ),
         body: ChangeNotifierProvider(
           create: (context) => WordListProvider(),
-          child: BlocListener<HomeCubit, BaseState>(
-            listener: (context, state) {},
+          child: BlocListener<CategoryCubit, BaseState>(
+            listener: (context, state) {
+            },
             child: Padding(
               padding: const EdgeInsets.all(16.0).r,
               child: ListView.builder(
                 itemCount: categoryWords.length,
                 itemBuilder: (context, index) {
                   final categoryWord = categoryWords[index];
-                  final categoryProvider = context.watch<WordListProvider>();
-                  final categoryCubit = context.read<HomeCubit>();
-                  return BlocBuilder<HomeCubit, BaseState>(
-                    builder: (context, state) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 0.w,
-                          vertical: 5.h,
+                  final wordListProvider = context.watch<WordListProvider>();
+                  final currentStatus = wordListProvider.getBookmarkStatus(
+                    categoryWord.id,
+                    categoryWord.isAdded,
+                  );
+
+                  return Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 0.w,
+                      vertical: 5.h,
+                    ),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(12).r,
+                      tileColor: AppColors.unselectedItemBackground,
+                      shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(24).r,
+                        borderSide: const BorderSide(color: Colors.transparent),
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {
+                          context.read<WordListProvider>().toggleBookmarkStatus(
+                            categoryWord.id,
+                            currentStatus,
+                          );
+                          context
+                              .read<CategoryCubit>()
+                              .changeWordStatus(categoryWord.id);
+                        },
+                        icon: Icon(
+                          currentStatus
+                              ? Icons.bookmark
+                              : Icons.bookmark_outline,
+                          color: AppColors.bookMarkBackground,
+                          size: 20.w,
                         ),
-                        child: ListTile(
-                          contentPadding: EdgeInsets.all(12).r,
-                          tileColor: AppColors.unselectedItemBackground,
-                          shape: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(24).r,
-                            borderSide: BorderSide(color: Colors.transparent),
-                          ),
-                          trailing: IconButton(
-                            onPressed: () async {
-                              categoryCubit.changeWordStatus(categoryWord.id);
-                            },
-                            icon: Icon(
-                              categoryWord.isAdded
-                                  ? Icons.bookmark
-                                  : Icons.bookmark_outline,
-                              color: AppColors.bookMarkBackground,
-                              size: 20.w,
-                            ),
-                          ),
-                          title: PrimaryText(
-                            text:
-                                '${categoryWord.source} - ${categoryWord.translation}',
-                            fontSize: 16,
-                            color: AppColors.primaryText,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      );
-                    },
+                      ),
+                      title: PrimaryText(
+                        text:
+                        '${categoryWord.source} - ${categoryWord.translation}',
+                        fontSize: 16,
+                        color: AppColors.primaryText,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   );
                 },
               ),

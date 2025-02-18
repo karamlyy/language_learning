@@ -26,13 +26,12 @@ class CategoryCubit extends Cubit<BaseState> {
 
   void changeWordStatus(int vocabularyId) async {
     emit(LoadingState());
-    final result = await _categoryRepository.changeCategoryWordStatus(vocabularyId);
+    final result =
+        await _categoryRepository.changeCategoryWordStatus(vocabularyId);
 
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
-      (data) {
-        //getCategoryWords();
-      },
+      (data) {},
     );
   }
 }
