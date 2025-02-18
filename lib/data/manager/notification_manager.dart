@@ -1,13 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:language_learning/data/service/preferences/preferences.dart';
+import 'package:language_learning/utils/routes/app_routes.dart';
+import 'package:language_learning/utils/routes/navigation.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await NotificationService.instance.setupFlutterNotifications();
   await NotificationService.instance.showNotification(message);
+  NotificationService.instance._handleBackgroundMessage(message);
 }
 
 class NotificationService {
@@ -15,25 +19,21 @@ class NotificationService {
 
   static final NotificationService instance = NotificationService._();
 
-  final _messaging = FirebaseMessaging.instance;
-  final _localNotifications = FlutterLocalNotificationsPlugin();
+  final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  final FlutterLocalNotificationsPlugin _localNotifications =
+      FlutterLocalNotificationsPlugin();
   bool _isFlutterLocalNotificationsInitialized = false;
 
   Future<void> initialize() async {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    // Request permission
     await _requestPermission();
 
-    // Setup message handlers
     await _setupMessageHandlers();
 
-    // Get FCM token
     final prefs = await PreferencesService.instance;
     final token = await _messaging.getToken();
-
     prefs.setFcmToken(token ?? '');
-
     print('FCM Token: $token');
   }
 
@@ -56,7 +56,6 @@ class NotificationService {
       return;
     }
 
-    // android setup
     const channel = AndroidNotificationChannel(
       'high_importance_channel',
       'High Importance Notifications',
@@ -76,18 +75,28 @@ class NotificationService {
       android: initializationSettingsAndroid,
     );
 
-    // flutter notification setup
     await _localNotifications.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: (details) {},
+      onDidReceiveNotificationResponse: (NotificationResponse details) {
+        if (details.payload != null && details.payload!.isNotEmpty) {
+          try {
+            final data = jsonDecode(details.payload!);
+            if (data['route'] == 'quiz') {
+              Navigation.push(Routes.quiz);
+            }
+          } catch (e) {
+            print('Error decoding notification payload: $e');
+          }
+        }
+      },
     );
 
     _isFlutterLocalNotificationsInitialized = true;
   }
 
   Future<void> showNotification(RemoteMessage message) async {
-    RemoteNotification? notification = message.notification;
-    AndroidNotification? android = message.notification?.android;
+    final RemoteNotification? notification = message.notification;
+    final AndroidNotification? android = message.notification?.android;
     if (notification != null && android != null) {
       await _localNotifications.show(
         notification.hashCode,
@@ -109,21 +118,18 @@ class NotificationService {
             presentSound: true,
           ),
         ),
-        payload: message.data.toString(),
+        payload: jsonEncode(message.data),
       );
     }
   }
 
   Future<void> _setupMessageHandlers() async {
-    //foreground message
     FirebaseMessaging.onMessage.listen((message) {
       showNotification(message);
     });
 
-    // background message
     FirebaseMessaging.onMessageOpenedApp.listen(_handleBackgroundMessage);
 
-    // opened app
     final initialMessage = await _messaging.getInitialMessage();
     if (initialMessage != null) {
       _handleBackgroundMessage(initialMessage);
@@ -131,8 +137,8 @@ class NotificationService {
   }
 
   void _handleBackgroundMessage(RemoteMessage message) {
-    if (message.data['type'] == 'home') {
-      // open chat screen
+    if (message.data['route'] == 'quiz') {
+      Navigation.push(Routes.quiz);
     }
   }
 }

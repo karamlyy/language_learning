@@ -39,11 +39,9 @@ class HomeCubit extends Cubit<BaseState> {
     final result = await _homeRepository.getAllLanguagePairs();
     result.fold(
       (error) {
-        print('Error: ${error.error}');
         emit(FailureState(errorMessage: error.error));
       },
       (data) {
-        print('New data fetched: $data');
         emit(SuccessState(data: data));
       },
     );
