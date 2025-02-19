@@ -7,6 +7,7 @@ import 'package:language_learning/presenter/screens/auth/languages/view/set_lang
 import 'package:language_learning/presenter/screens/auth/login/view/login_page.dart';
 import 'package:language_learning/presenter/screens/auth/onboarding/view/onboarding_page.dart';
 import 'package:language_learning/presenter/screens/auth/timing/view/timing_page.dart';
+import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
 import 'package:language_learning/presenter/screens/home/view/home_page.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:language_learning/utils/routes/navigation.dart';
@@ -21,26 +22,27 @@ class App extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 852),
       builder: (context, child) {
-        return MaterialApp(
-          theme: ThemeData(
-            fontFamily: 'DMSans',
-            useMaterial3: true,
-            scaffoldBackgroundColor: AppColors.appBarBackground,
-            pageTransitionsTheme: const PageTransitionsTheme(
-              builders: {
-                TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-                TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-              },
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => AppCubit()),
+            BlocProvider(create: (_) => HomeCubit()),
+          ],
+          child: MaterialApp(
+            theme: ThemeData(
+              fontFamily: 'DMSans',
+              useMaterial3: true,
+              scaffoldBackgroundColor: AppColors.appBarBackground,
+              pageTransitionsTheme: const PageTransitionsTheme(
+                builders: {
+                  TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+                  TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+                },
+              ),
             ),
-          ),
-          debugShowCheckedModeBanner: false,
-          navigatorKey: Navigation.navigatorKey,
-          onGenerateRoute: generateRoute,
-          home: MultiProvider(
-            providers: [
-              BlocProvider(create: (_) => AppCubit()),
-            ],
-            child: BlocConsumer<AppCubit, AppState>(
+            debugShowCheckedModeBanner: false,
+            navigatorKey: Navigation.navigatorKey,
+            onGenerateRoute: generateRoute,
+            home: BlocConsumer<AppCubit, AppState>(
               builder: (context, state) {
                 if (state is Onboarding) {
                   return const OnboardingPage();

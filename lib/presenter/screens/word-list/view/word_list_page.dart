@@ -20,6 +20,8 @@ class WordListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
+
     return BlocProvider(
       create: (context) => CategoryCubit(),
       child: Scaffold(
@@ -35,8 +37,7 @@ class WordListPage extends StatelessWidget {
         body: ChangeNotifierProvider(
           create: (context) => WordListProvider(),
           child: BlocListener<CategoryCubit, BaseState>(
-            listener: (context, state) {
-            },
+            listener: (context, state) {},
             child: Padding(
               padding: const EdgeInsets.all(16.0).r,
               child: ListView.builder(
@@ -56,19 +57,22 @@ class WordListPage extends StatelessWidget {
                       vertical: 5.h,
                     ),
                     child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
                       tileColor: AppColors.unselectedItemBackground,
                       shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24).r,
                         borderSide: const BorderSide(color: Colors.transparent),
                       ),
                       trailing: IconButton(
-                        onPressed: () {
+                        onPressed: () async {
                           wordListProvider.toggleBookmarkStatus(
                             categoryWord.id,
                             currentStatus,
                           );
-                          categoryCubit.changeWordStatus(categoryWord.id);
+                          await categoryCubit.changeWordStatus(categoryWord.id);
+                          homeCubit.getCardCounts();
+                          homeCubit.getAllLanguagePairs();
                         },
                         icon: Icon(
                           currentStatus
@@ -96,7 +100,6 @@ class WordListPage extends StatelessWidget {
                           ],
                         ),
                       ),
-
                     ),
                   );
                 },

@@ -25,7 +25,7 @@ class MasteredVocabularyCubit extends Cubit<BaseState> {
     );
   }
 
-  void removeFromMastered(int id) async {
+  Future<void> removeFromMastered(int id) async {
     final result = await _wordRepository.removeFromMastered(id);
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),

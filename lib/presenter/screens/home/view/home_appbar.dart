@@ -17,13 +17,13 @@ class HomeAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeProvider = context.read<HomeProvider>();
+    final homeCubit = context.read<HomeCubit>();
 
     return BlocBuilder<HomeCubit, BaseState>(
       builder: (context, state) {
         if (state is SuccessState) {
           final selectedPair = homeProvider.selectedLanguagePair ??
               homeProvider.getSelectedLanguagePair(state.data);
-          final homeCubit = context.read<HomeCubit>();
 
           return Padding(
             padding: const EdgeInsets.all(8.0).r,
@@ -45,15 +45,16 @@ class HomeAppbar extends StatelessWidget {
                       fontSize: 16,
                     ),
                     IconButton(
-                      onPressed: () {
+                      onPressed: () async {
                         showModalBottomSheet(
                           context: context,
                           builder: (context) {
                             return HomeLanguagesPairs(
                               languagePairs: state.data,
                               homeProvider: homeProvider,
-                              onLanguagePairSelected: (id) {
-                                homeCubit.setSelectedLanguagePair(id);
+                              onLanguagePairSelected: (id) async {
+                                await homeCubit.setSelectedLanguagePair(id);
+                                homeCubit.getCardCounts();
                               },
                             );
                           },

@@ -39,7 +39,7 @@ class LearningVocabularyCubit extends Cubit<BaseState> {
     );
   }
 
-  void addToLearning(int id) async {
+  Future<void> addToLearning(int id) async {
     final result = await _wordRepository.addToLearning(id);
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),

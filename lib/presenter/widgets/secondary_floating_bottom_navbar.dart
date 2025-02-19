@@ -30,7 +30,6 @@ class SecondaryFloatingBottomNavbar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // Home button
               Container(
                 width: 48.w,
                 height: 48.h,
@@ -79,7 +78,9 @@ class SecondaryFloatingBottomNavbar extends StatelessWidget {
                 ),
                 child: IconButton(
                   onPressed: () {
-                    Navigation.push(Routes.settings);
+                    Navigation.push(Routes.settings).then((onValue) {
+
+                    });
                   },
                   icon: Icon(
                     Icons.settings_rounded,

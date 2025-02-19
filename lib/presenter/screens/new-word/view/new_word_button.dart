@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/generic/generic_builder.dart';
+import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
 import 'package:language_learning/presenter/screens/new-word/cubit/new_word_cubit.dart';
 import 'package:language_learning/presenter/screens/new-word/provider/new_word_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_bottom_sheet.dart';
@@ -49,6 +50,8 @@ class NewWordButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final newWordProvider = context.watch<NewWordProvider>();
     final newWordCubit = context.read<NewWordCubit>();
+    final homeCubit = context.read<HomeCubit>();
+
     return GenericBuilder<NewWordCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
@@ -61,10 +64,10 @@ class NewWordButton extends StatelessWidget {
             title: 'Save',
             hasBorder: false,
             isActive: newWordProvider.isWordFormValid(),
-            onTap: () {
-              newWordCubit.addNewWord(
-                newWordProvider.newWordInput,
-              );
+            onTap: () async {
+              await newWordCubit.addNewWord(newWordProvider.newWordInput);
+              homeCubit.getLastWords();
+              homeCubit.getCardCounts();
             },
           ),
         );

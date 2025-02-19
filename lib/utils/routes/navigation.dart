@@ -6,7 +6,7 @@ import 'app_routes.dart';
 class Navigation {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  static push(Routes route, {Object? arguments}) {
+  static Future push(Routes route, {Object? arguments}) {
     return navigatorKey.currentState!.pushNamed(route.path, arguments: arguments);
   }
 

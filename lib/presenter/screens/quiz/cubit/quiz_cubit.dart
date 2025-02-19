@@ -26,7 +26,7 @@ class QuizCubit extends Cubit<BaseState> {
     );
   }
 
-  void addToMaster(int id, QuizProvider quizProvider) async {
+  Future<void> addToMaster(int id, QuizProvider quizProvider) async {
     final result = await _quizRepository.addToMaster(id);
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),

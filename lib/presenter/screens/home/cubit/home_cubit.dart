@@ -16,6 +16,9 @@ import 'package:rxdart/rxdart.dart';
 class HomeCubit extends Cubit<BaseState> {
   HomeCubit() : super(InitialState()) {
     getAllLanguagePairs();
+    getAllCategories();
+    getLastWords();
+    getCardCounts();
   }
 
   final _categoriesController = BehaviorSubject<List<CategoryModel>>();
@@ -47,7 +50,7 @@ class HomeCubit extends Cubit<BaseState> {
     );
   }
 
-  void setSelectedLanguagePair(int id) async {
+  Future<void> setSelectedLanguagePair(int id) async {
     final result = await _homeRepository.setSelectedLanguagePair(id);
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
@@ -69,7 +72,7 @@ class HomeCubit extends Cubit<BaseState> {
     );
   }
 
-  void getCardCounts() async {
+  Future<void> getCardCounts() async {
     final result = await _homeRepository.getCardCounts();
     result.fold(
       (error) => emit(
@@ -81,7 +84,7 @@ class HomeCubit extends Cubit<BaseState> {
     );
   }
 
-  void getLastWords() async {
+  Future<void> getLastWords() async {
     final result = await _homeRepository.getAllWords(1, 20);
     result.fold(
       (error) => emit(

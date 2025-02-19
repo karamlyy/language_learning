@@ -16,21 +16,18 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit(),
-      child: Scaffold(
-        body: Stack(
-          children: [
-            ChangeNotifierProvider(
-              create: (context) => HomeProvider(),
-              child: BlocListener<HomeCubit, BaseState>(
-                listener: (context, state) {},
-                child: const HomeBody(),
-              ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          ChangeNotifierProvider(
+            create: (context) => HomeProvider(),
+            child: BlocListener<HomeCubit, BaseState>(
+              listener: (context, state) {},
+              child: const HomeBody(),
             ),
-            SecondaryFloatingBottomNavbar()
-          ],
-        ),
+          ),
+          SecondaryFloatingBottomNavbar()
+        ],
       ),
     );
   }

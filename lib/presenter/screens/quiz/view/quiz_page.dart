@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:language_learning/data/model/quiz/question_model.dart';
 import 'package:language_learning/generic/base_state.dart';
+import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
 import 'package:language_learning/presenter/screens/quiz/cubit/quiz_cubit.dart';
 import 'package:language_learning/presenter/screens/quiz/provider/quiz_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_button.dart';
@@ -135,6 +136,7 @@ class QuizBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final quizCubit = context.read<QuizCubit>();
     final quizProvider = context.watch<QuizProvider>();
+    final homeCubit = context.read<HomeCubit>();
 
     return SafeArea(
       child: Padding(
@@ -290,8 +292,10 @@ class QuizBody extends StatelessWidget {
               CupertinoButton(
                 pressedOpacity: 1,
                 padding: EdgeInsets.zero,
-                onPressed: () {
-                  quizCubit.addToMaster(quizData.id, quizProvider);
+                onPressed: () async {
+                  await quizCubit.addToMaster(quizData.id, quizProvider);
+                  homeCubit.getCardCounts();
+
                 },
                 child: Padding(
                   padding:
@@ -324,7 +328,6 @@ class QuizBody extends StatelessWidget {
               onTap: () {
                 if (quizProvider.isCorrectAnswerSelected) {
                   quizProvider.addCorrectAnswerCount();
-                  print('Correct answers: ${quizProvider.correctAnswerCount}');
                 }
 
                 quizProvider.setAddToMaster(false);

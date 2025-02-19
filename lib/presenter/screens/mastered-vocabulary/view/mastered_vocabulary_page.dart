@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/generic/base_state.dart';
+import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
 import 'package:language_learning/presenter/screens/mastered-vocabulary/cubit/mastered_vocabulary_cubit.dart';
 import 'package:language_learning/presenter/screens/mastered-vocabulary/provider/mastered_vocabulary.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
@@ -75,6 +76,7 @@ class MasteredVocabularyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final masteredVocabularyCubit = context.watch<MasteredVocabularyCubit>();
+    final homeCubit = context.read<HomeCubit>();
 
     return BlocBuilder<MasteredVocabularyCubit, BaseState>(
       builder: (context, state) {
@@ -101,7 +103,9 @@ class MasteredVocabularyList extends StatelessWidget {
                   ),
                   trailing: IconButton(
                     onPressed: () async {
-                      masteredVocabularyCubit.removeFromMastered(word.id);
+                      await masteredVocabularyCubit.removeFromMastered(word.id);
+                      homeCubit.getCardCounts();
+
                     },
                     icon: Icon(
                       word.isMastered ? Icons.bookmark : Icons.bookmark_outline,

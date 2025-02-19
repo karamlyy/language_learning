@@ -15,14 +15,11 @@ class HomeCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit()..getAllCategories(),
-      child: ChangeNotifierProvider(
-        create: (context) => HomeProvider(),
-        child: BlocListener<HomeCubit, BaseState>(
-          listener: (context, state) {},
-          child: HomeCategoriesList(),
-        ),
+    return ChangeNotifierProvider(
+      create: (context) => HomeProvider(),
+      child: BlocListener<HomeCubit, BaseState>(
+        listener: (context, state) {},
+        child: HomeCategoriesList(),
       ),
     );
   }

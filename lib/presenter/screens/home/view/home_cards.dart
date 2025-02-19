@@ -17,14 +17,11 @@ class HomeCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit()..getCardCounts(),
-      child: ChangeNotifierProvider(
-        create: (context) => HomeProvider(),
-        child: BlocListener<HomeCubit, BaseState>(
-          listener: (context, state) {},
-          child: HomeCardsList(),
-        ),
+    return ChangeNotifierProvider(
+      create: (context) => HomeProvider(),
+      child: BlocListener<HomeCubit, BaseState>(
+        listener: (context, state) {},
+        child: HomeCardsList(),
       ),
     );
   }

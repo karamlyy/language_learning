@@ -24,7 +24,7 @@ class CategoryCubit extends Cubit<BaseState> {
     );
   }
 
-  void changeWordStatus(int vocabularyId) async {
+  Future<void> changeWordStatus(int vocabularyId) async {
     emit(LoadingState());
     final result =
         await _categoryRepository.changeCategoryWordStatus(vocabularyId);
