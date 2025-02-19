@@ -46,10 +46,6 @@ class App extends StatelessWidget {
                   return const OnboardingPage();
                 } else if (state is Unauthorized) {
                   return const LoginPage();
-                } else if (state is LanguageNeeded) {
-                  return const SetLanguagePage();
-                } else if (state is TimingNeeded) {
-                  return const TimingPage();
                 } else if (state is Authorized) {
                   return const HomePage();
                 }

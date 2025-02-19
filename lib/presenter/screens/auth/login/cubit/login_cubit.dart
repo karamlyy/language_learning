@@ -25,14 +25,20 @@ class LoginCubit extends Cubit<BaseState> {
         prefs.setOnBoardingPassed(true);
         prefs.setAccessToken(data.accessToken ?? "");
         prefs.setRefreshToken(data.refreshToken ?? "");
-        prefs.setAuthorizationPassed(true);
-        prefs.setLanguagePassed(true);
-        prefs.setTimingPassed(true);
 
         await setFcmToken();
 
         emit(SuccessState(data: data));
-        Navigation.pushNamedAndRemoveUntil(Routes.home);
+        if(data.hasLanguage == false && data.hasNotificationSetting == false){
+          Navigation.pushNamedAndRemoveUntil(Routes.setLanguage);
+        } else if (data.hasLanguage == true && data.hasNotificationSetting == false){
+          Navigation.pushNamedAndRemoveUntil(Routes.setTiming);
+        } else if (data.hasLanguage == true && data.hasNotificationSetting == true){
+          prefs.setAuthorizationPassed(true);
+          await Navigation.pushNamedAndRemoveUntil(Routes.home);
+
+
+        }
       },
     );
   }

@@ -43,14 +43,14 @@ class AppCubit extends Cubit<AppState> {
         return;
       }
 
-      if (prefs.wasConfirmationPassed && !prefs.wasLanguagePassed && !prefs.wasTimingPassed) {
-        emit(LanguageNeeded());
-        return;
-      }
-      if (prefs.wasConfirmationPassed && prefs.wasLanguagePassed && !prefs.wasTimingPassed) {
-        emit(TimingNeeded());
-        return;
-      }
+      // if (prefs.wasConfirmationPassed && !prefs.wasLanguagePassed && !prefs.wasTimingPassed) {
+      //   emit(LanguageNeeded());
+      //   return;
+      // }
+      // if (prefs.wasConfirmationPassed && prefs.wasLanguagePassed && !prefs.wasTimingPassed) {
+      //   emit(TimingNeeded());
+      //   return;
+      // }
 
       if(prefs.wasAuthorizationPassed){
         emit(Authorized());
@@ -58,7 +58,7 @@ class AppCubit extends Cubit<AppState> {
         return;
       }
 
-      if (prefs.accessToken == null) {
+      if (!prefs.wasAuthorizationPassed) {
         emit(Unauthorized());
         return;
       }

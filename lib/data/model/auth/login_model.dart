@@ -4,6 +4,7 @@ class LoginModel {
   String? userId;
   bool? hasLanguage;
   bool? emailConfirmed;
+  bool? hasNotificationSetting;
 
   LoginModel({
     this.accessToken,
@@ -11,6 +12,7 @@ class LoginModel {
     this.hasLanguage,
     this.userId,
     this.emailConfirmed,
+    this.hasNotificationSetting,
   });
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
@@ -19,5 +21,6 @@ class LoginModel {
         userId: json["userId"],
         hasLanguage: json["hasLanguage"],
         emailConfirmed: json["emailConfirmed"],
+        hasNotificationSetting: json["hasNotificationSetting"],
       );
 }
