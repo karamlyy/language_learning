@@ -96,28 +96,28 @@ class HomeCubit extends Cubit<BaseState> {
     );
   }
 
-  void getCategoryVocabulary(int id) async {
-    emit(LoadingState());
-    final result = await _categoryRepository.getAllCategoryWords(id);
-
-    result.fold(
-      (error) => emit(FailureState(errorMessage: error.error)),
-      (data) {
-        Navigation.push(Routes.wordList, arguments: data);
-      },
-    );
-  }
-
-  void changeWordStatus(int vocabularyId) async {
-    emit(LoadingState());
-    final result =
-        await _categoryRepository.changeCategoryWordStatus(vocabularyId);
-
-    result.fold(
-      (error) => emit(FailureState(errorMessage: error.error)),
-      (data) {
-
-      },
-    );
-  }
+  // void getCategoryVocabulary(int id) async {
+  //   emit(LoadingState());
+  //   final result = await _categoryRepository.getAllCategoryWords(id);
+  //
+  //   result.fold(
+  //     (error) => emit(FailureState(errorMessage: error.error)),
+  //     (data) {
+  //       Navigation.push(Routes.wordList, arguments: data);
+  //     },
+  //   );
+  // }
+  //
+  // void changeWordStatus(int vocabularyId) async {
+  //   emit(LoadingState());
+  //   final result =
+  //       await _categoryRepository.changeCategoryWordStatus(vocabularyId);
+  //
+  //   result.fold(
+  //     (error) => emit(FailureState(errorMessage: error.error)),
+  //     (data) {
+  //
+  //     },
+  //   );
+  // }
 }

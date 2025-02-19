@@ -85,7 +85,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.wordList:
       return createPageRoute(
           WordListPage(
-            categoryWords: settings.arguments as List<CategoryWordModel>,
+            categoryId: settings.arguments as int,
           ),
           settings);
     case Routes.vocabulary:
