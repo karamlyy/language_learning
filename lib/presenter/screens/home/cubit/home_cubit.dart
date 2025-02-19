@@ -9,8 +9,6 @@ import 'package:language_learning/data/repository/home_repository.dart';
 import 'package:language_learning/data/repository/vocabulary_repository.dart';
 import 'package:language_learning/data/service/api/di.dart';
 import 'package:language_learning/generic/base_state.dart';
-import 'package:language_learning/utils/routes/app_routes.dart';
-import 'package:language_learning/utils/routes/navigation.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeCubit extends Cubit<BaseState> {
@@ -34,8 +32,6 @@ class HomeCubit extends Cubit<BaseState> {
       _lastWordsController.stream;
 
   final _homeRepository = getIt<HomeRepository>();
-  final _categoryRepository = getIt<CategoryRepository>();
-  final _vocabularyRepository = getIt<VocabularyRepository>();
 
   Future<void> getAllLanguagePairs() async {
     emit(LoadingState());
@@ -95,29 +91,4 @@ class HomeCubit extends Cubit<BaseState> {
       },
     );
   }
-
-  // void getCategoryVocabulary(int id) async {
-  //   emit(LoadingState());
-  //   final result = await _categoryRepository.getAllCategoryWords(id);
-  //
-  //   result.fold(
-  //     (error) => emit(FailureState(errorMessage: error.error)),
-  //     (data) {
-  //       Navigation.push(Routes.wordList, arguments: data);
-  //     },
-  //   );
-  // }
-  //
-  // void changeWordStatus(int vocabularyId) async {
-  //   emit(LoadingState());
-  //   final result =
-  //       await _categoryRepository.changeCategoryWordStatus(vocabularyId);
-  //
-  //   result.fold(
-  //     (error) => emit(FailureState(errorMessage: error.error)),
-  //     (data) {
-  //
-  //     },
-  //   );
-  // }
 }

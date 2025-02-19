@@ -297,7 +297,6 @@ class QuizBody extends StatelessWidget {
 
                   await quizCubit.addToMaster(quizData.id, quizProvider);
                   homeCubit.getCardCounts();
-
                 },
                 child: Padding(
                   padding:
