@@ -32,7 +32,7 @@ class LanguageCubit extends Cubit<BaseState> {
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
-        if (prefs.wasTimingPassed) {
+        if (prefs.wasAuthorizationPassed) {
           Navigation.pushReplacementNamed(Routes.settings);
         } else {
           prefs.setLanguagePassed(true);

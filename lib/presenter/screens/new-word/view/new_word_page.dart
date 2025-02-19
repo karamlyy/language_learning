@@ -9,7 +9,7 @@ import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:provider/provider.dart';
 
 import 'new_word_body.dart';
-
+/*
 class NewWordPage extends StatelessWidget {
   const NewWordPage({super.key});
 
@@ -17,6 +17,36 @@ class NewWordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NewWordCubit()..getAllLanguagePairs(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: PrimaryText(
+            text: 'New word',
+            color: AppColors.primaryText,
+            fontWeight: FontWeight.w400,
+            fontSize: 20,
+            fontFamily: 'DMSerifDisplay',
+          ),
+        ),
+        body: ChangeNotifierProvider(
+          create: (context) => NewWordProvider(),
+          child: GenericListener<NewWordCubit, BaseState>(
+            listener: (context, state) {},
+            child: NewWordBody(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+*/
+
+class NewWordPage extends StatelessWidget {
+  const NewWordPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => NewWordCubit(),
       child: Scaffold(
         appBar: AppBar(
           title: PrimaryText(
