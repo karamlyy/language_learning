@@ -293,6 +293,8 @@ class QuizBody extends StatelessWidget {
                 pressedOpacity: 1,
                 padding: EdgeInsets.zero,
                 onPressed: () async {
+                  quizProvider.toggleAddToMaster();
+
                   await quizCubit.addToMaster(quizData.id, quizProvider);
                   homeCubit.getCardCounts();
 

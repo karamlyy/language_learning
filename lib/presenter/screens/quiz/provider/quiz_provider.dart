@@ -38,14 +38,19 @@ class QuizProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void setAddToMaster(bool value) {
-  //   _showAddToMaster = value;
-  //   notifyListeners();
-  // }
+  void toggleAddToMaster() {
+    _isAddedToMaster = !_isAddedToMaster;
+    notifyListeners();
+  }
 
   void setCorrectAnswerSelected(bool value) {
     _isCorrectAnswerSelected = value;
     _showAddToMaster = value;
+    notifyListeners();
+  }
+
+  void changeBookmarkIcon(bool value){
+    _isAddedToMaster = value;
     notifyListeners();
   }
 

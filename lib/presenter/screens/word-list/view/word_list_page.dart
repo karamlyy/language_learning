@@ -72,6 +72,7 @@ class WordListPage extends StatelessWidget {
                           );
                           await categoryCubit.changeWordStatus(categoryWord.id);
                           homeCubit.getAllLanguagePairs();
+                          homeCubit.getLastWords();
                           homeCubit.getCardCounts();
 
                         },

@@ -7,9 +7,7 @@ import 'package:language_learning/presenter/screens/create-language-pair/cubit/c
 import 'package:language_learning/presenter/screens/create-language-pair/provider/create_language_provider.dart';
 import 'package:language_learning/presenter/screens/create-language-pair/view/create_language_list.dart';
 import 'package:language_learning/presenter/screens/create-language-pair/view/create_language_pair_button.dart';
-import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
 import 'package:language_learning/presenter/widgets/primary_text_form_field.dart';
-import 'package:language_learning/utils/routes/navigation.dart';
 
 class CreateLanguagePairBody extends StatelessWidget {
   const CreateLanguagePairBody({super.key});
@@ -40,6 +38,7 @@ class CreateLanguagePairBody extends StatelessWidget {
                 onChanged: (value) {},
                 headText: 'Native',
                 suffixIcon: const Icon(Icons.keyboard_arrow_down_outlined),
+                isReadOnly: true,
               ),
 
               16.verticalSpace,
@@ -56,6 +55,7 @@ class CreateLanguagePairBody extends StatelessWidget {
                 onChanged: (value) {},
                 headText: 'Learning',
                 suffixIcon: const Icon(Icons.keyboard_arrow_down_outlined),
+                isReadOnly: true,
               ),
 
             ],
