@@ -51,47 +51,51 @@ class CreateLanguageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: languages.length,
-        itemBuilder: (context, index) {
-          final language = languages[index];
-          final isSelected = selectedLanguageId == language.id;
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: languages.length,
+            itemBuilder: (context, index) {
+              final language = languages[index];
+              final isSelected = selectedLanguageId == language.id;
 
-          return GestureDetector(
-            onTap: () {
-              onLanguageSelected(language.id);
-            },
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12).r,
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? AppColors.itemBackground
-                    : AppColors.unselectedItemBackground,
-                borderRadius: BorderRadius.circular(8).r,
-                border: Border.all(
-                  color: isSelected ? AppColors.itemBorder : Colors.transparent,
-                ),
-              ),
-              child: Row(
-                children: [
-                  _buildLanguageImage(language.image),
-                  16.horizontalSpace,
-                  PrimaryText(
-                    text: language.name,
+              return GestureDetector(
+                onTap: () {
+                  onLanguageSelected(language.id);
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.all(12).r,
+                  decoration: BoxDecoration(
                     color: isSelected
-                        ? AppColors.primaryText
-                        : AppColors.primaryText.withValues(alpha: 0.7),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
+                        ? AppColors.itemBackground
+                        : AppColors.unselectedItemBackground,
+                    borderRadius: BorderRadius.circular(8).r,
+                    border: Border.all(
+                      color: isSelected ? AppColors.itemBorder : Colors.transparent,
+                    ),
                   ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+                  child: Row(
+                    children: [
+                      _buildLanguageImage(language.image),
+                      16.horizontalSpace,
+                      PrimaryText(
+                        text: language.name,
+                        color: isSelected
+                            ? AppColors.primaryText
+                            : AppColors.primaryText.withValues(alpha: 0.7),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

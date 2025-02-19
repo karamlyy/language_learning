@@ -21,7 +21,7 @@ class AddLanguagePairCubit extends Cubit<BaseState> {
     );
   }
 
-  void deleteLanguagePair(int id) async {
+  Future<void> deleteLanguagePair(int id) async {
     emit(LoadingState());
     final result = await _settingsRepository.deleteLanguagePair(id);
     result.fold(

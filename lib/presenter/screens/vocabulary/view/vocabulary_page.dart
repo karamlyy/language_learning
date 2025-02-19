@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/generic/base_state.dart';
+import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
 import 'package:language_learning/presenter/screens/vocabulary/cubit/vocabulary_cubit.dart';
 import 'package:language_learning/presenter/screens/vocabulary/provider/vocabulary_provider.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
@@ -140,6 +141,8 @@ class VocabularyWordsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
+
     return BlocBuilder<VocabularyCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
@@ -177,9 +180,11 @@ class VocabularyWordsList extends StatelessWidget {
                       ],
                     ),
                   ),
-                  onDismissed: (direction) {
+                  onDismissed: (direction) async {
                     if (direction == DismissDirection.startToEnd) {
-                      vocabularyCubit.deleteWord(word.id);
+                      await vocabularyCubit.deleteWord(word.id);
+                      homeCubit.getLastWords();
+                      homeCubit.getCardCounts();
                     }
                   },
                   child: ListTile(
@@ -191,8 +196,10 @@ class VocabularyWordsList extends StatelessWidget {
                     ),
                     trailing: IconButton(
                       onPressed: () async {
-                        vocabularyCubit.addToLearning(word.id);
-                      },
+                        await vocabularyCubit.addToLearning(word.id);
+                        homeCubit.getLastWords();
+                        homeCubit.getCardCounts();
+                        },
                       icon: Icon(
                         word.isLearningNow
                             ? Icons.bookmark

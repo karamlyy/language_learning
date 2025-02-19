@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/generic/base_state.dart';
+import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
 import 'package:language_learning/presenter/screens/vocabulary/cubit/vocabulary_cubit.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
@@ -12,6 +13,8 @@ class VocabularyWordsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
+
     return BlocBuilder<VocabularyCubit, BaseState>(
       builder: (context, state) {
         if (state is SuccessState) {
@@ -64,7 +67,9 @@ class VocabularyWordsList extends StatelessWidget {
                           ),
                           trailing: IconButton(
                             onPressed: () async {
-                              vocabularyCubit.addToLearning(word.id);
+                              await vocabularyCubit.addToLearning(word.id);
+                              homeCubit.getLastWords();
+                              homeCubit.getCardCounts();
                             },
                             icon: Icon(
                               word.isLearningNow == true

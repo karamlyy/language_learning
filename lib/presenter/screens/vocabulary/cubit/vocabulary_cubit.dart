@@ -36,7 +36,7 @@ class VocabularyCubit extends Cubit<BaseState> {
     );
   }
 
-  void deleteWord(int id) async {
+  Future<void> deleteWord(int id) async {
     emit(LoadingState());
     final result = await _wordRepository.deleteWord(id);
     result.fold(
@@ -47,7 +47,7 @@ class VocabularyCubit extends Cubit<BaseState> {
     );
   }
 
-  void addToLearning(int id) async {
+  Future<void> addToLearning(int id) async {
     final result = await _wordRepository.addToLearning(id);
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),

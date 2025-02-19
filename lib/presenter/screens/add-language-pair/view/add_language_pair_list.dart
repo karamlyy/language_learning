@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:language_learning/data/model/home/language_pair_model.dart';
 import 'package:language_learning/presenter/screens/add-language-pair/cubit/add_language_pair_cubit.dart';
+import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 
@@ -18,6 +19,8 @@ class AddLanguagePairList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addLanguagePairCubit = context.watch<AddLanguagePairCubit>();
+    final homeCubit = context.read<HomeCubit>();
+
     return Expanded(
       child: ListView.builder(
         itemCount: languagePairs.length,
@@ -59,9 +62,10 @@ class AddLanguagePairList extends StatelessWidget {
                 }
                 return true;
               },
-              onDismissed: (direction) {
+              onDismissed: (direction) async {
                 if (direction == DismissDirection.startToEnd) {
-                  addLanguagePairCubit.deleteLanguagePair(languagePair.id);
+                  await addLanguagePairCubit.deleteLanguagePair(languagePair.id);
+                  homeCubit.getAllLanguagePairs();
                 }
               },
               child: ListTile(

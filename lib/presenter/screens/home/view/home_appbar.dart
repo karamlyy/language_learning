@@ -55,6 +55,7 @@ class HomeAppbar extends StatelessWidget {
                               onLanguagePairSelected: (id) async {
                                 await homeCubit.setSelectedLanguagePair(id);
                                 homeCubit.getCardCounts();
+                                homeCubit.getLastWords();
                               },
                             );
                           },
@@ -69,10 +70,7 @@ class HomeAppbar extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                  icon: Badge(
-                    smallSize: 14.0,
-                    child: const Icon(CupertinoIcons.bell),
-                  ),
+                  icon: Icon(CupertinoIcons.bell),
                   onPressed: () {
                     Navigation.push(Routes.notification);
                   },

@@ -71,8 +71,9 @@ class WordListPage extends StatelessWidget {
                             currentStatus,
                           );
                           await categoryCubit.changeWordStatus(categoryWord.id);
-                          homeCubit.getCardCounts();
                           homeCubit.getAllLanguagePairs();
+                          homeCubit.getCardCounts();
+
                         },
                         icon: Icon(
                           currentStatus
