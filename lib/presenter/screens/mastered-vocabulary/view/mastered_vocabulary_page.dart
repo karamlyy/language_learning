@@ -95,7 +95,7 @@ class MasteredVocabularyList extends StatelessWidget {
                   vertical: 5.h,
                 ),
                 child: ListTile(
-                  contentPadding: EdgeInsets.all(12).r,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
                   tileColor: AppColors.unselectedItemBackground,
                   shape: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24).r,

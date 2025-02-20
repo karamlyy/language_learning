@@ -40,7 +40,7 @@ class ChangeTimingProvider with ChangeNotifier {
   }
 
   bool isSelectedInterval() {
-    return _isIntervalSelected;
+    return _isIntervalSelected && _selectedIntervalId != null && _startTime != null && _endTime != null;
   }
 
   void setStartTime(DateTime time) {

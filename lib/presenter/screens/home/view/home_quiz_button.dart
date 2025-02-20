@@ -46,8 +46,11 @@ class HomeQuizButton extends StatelessWidget {
                         fontSize: 20,
                         fontFamily: 'DMSerifDisplay',
                       ),
-                      content: const Text(
-                        "There are no learning words available to start the quiz.",
+                      content: const PrimaryText(
+                        text:
+                            "There are no learning words available to start the quiz.",
+                        color: AppColors.primaryText,
+                        fontWeight: FontWeight.w400,
                       ),
                       actions: [
                         TextButton(

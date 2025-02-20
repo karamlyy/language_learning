@@ -30,6 +30,8 @@ class NotificationService {
     await _requestPermission();
 
     await _setupMessageHandlers();
+    await handleTerminatedNotification();
+
 
     final prefs = await PreferencesService.instance;
     final token = await _messaging.getToken();
@@ -130,6 +132,13 @@ class NotificationService {
 
     FirebaseMessaging.onMessageOpenedApp.listen(_handleBackgroundMessage);
 
+    final initialMessage = await _messaging.getInitialMessage();
+    if (initialMessage != null) {
+      _handleBackgroundMessage(initialMessage);
+    }
+  }
+
+  Future<void> handleTerminatedNotification() async {
     final initialMessage = await _messaging.getInitialMessage();
     if (initialMessage != null) {
       _handleBackgroundMessage(initialMessage);

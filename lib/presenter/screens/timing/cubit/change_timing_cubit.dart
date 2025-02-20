@@ -32,7 +32,7 @@ class ChangeTimingCubit extends Cubit<BaseState> {
     result.fold(
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
-        Navigation.push(Routes.settings);
+        Navigation.pushNamedAndRemoveUntil(Routes.home);
       },
     );
   }

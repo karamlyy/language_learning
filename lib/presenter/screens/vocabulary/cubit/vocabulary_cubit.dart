@@ -47,6 +47,8 @@ class VocabularyCubit extends Cubit<BaseState> {
     );
   }
 
+  
+
   Future<void> addToLearning(int id) async {
     final result = await _wordRepository.addToLearning(id);
     result.fold(

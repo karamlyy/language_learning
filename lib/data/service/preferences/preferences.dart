@@ -77,6 +77,9 @@ class PreferencesService {
   final _setTimingPassed = "setTimingPassed";
   final _accessToken = "accessToken";
   final _refreshToken = "refreshToken";
+  final _langTitle = "langTitle";
+  final _appLanguage = "az";
+
   final _userId = "userId";
   final _fullName = "fullname";
   final _onBoardingPassed = "onBoardingPassed";
@@ -86,7 +89,8 @@ class PreferencesService {
   setConfirmationPassed(bool value) async => await _preferences?.setBool(_confirmationPassed, value);
   setLanguagePassed(bool value) async => await _preferences?.setBool(_setLanguagePassed, value);
   setTimingPassed(bool value) async => await _preferences?.setBool(_setTimingPassed, value);
-
+  setLanguageTitle(String value) async => await _preferences?.setString(_langTitle, value);
+  setLanguage(String value) async => await _preferences?.setString(_appLanguage, value);
   setAccessToken(String value) async => await _preferences?.setString(_accessToken, value);
   setRefreshToken(String value) async => await _preferences?.setString(_refreshToken, value);
   setFullName(String value) async => await _preferences?.setString(_fullName, value);
@@ -104,6 +108,8 @@ class PreferencesService {
   bool get wasOnBoardingPassed => _preferences?.getBool(_onBoardingPassed) ?? false;
   String? get userId => _preferences?.getString(_userId);
   String? get fullName => _preferences?.getString(_fullName);
+  String? get langTitle => _preferences?.getString(_langTitle);
+  String? get appLanguage => _preferences?.getString(_appLanguage);
 
   Future<bool?> clear() async {
     final String? fcmTokenValue = _preferences?.getString(_fcmToken);

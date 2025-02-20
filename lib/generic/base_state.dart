@@ -21,6 +21,7 @@ class SuccessState<T> extends BaseState<T> {
 
 class FailureState<T> extends BaseState<T> {
   final ErrorMessage errorMessage;
+  
 
   FailureState({required this.errorMessage});
 

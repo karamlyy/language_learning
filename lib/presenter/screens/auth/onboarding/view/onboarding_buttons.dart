@@ -35,7 +35,7 @@ class OnboardingButtons extends StatelessWidget {
               ),
               14.verticalSpace,
               PrimaryButton(
-                title: L10n.createAccount,
+                title: L10n.signUp,
                 isActive: true,
                 hasBorder: true,
                 onTap: () {

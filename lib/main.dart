@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:language_learning/app/app.dart';
 import 'package:language_learning/data/manager/notification_manager.dart';
 import 'package:language_learning/data/service/api/di.dart';
+import 'package:language_learning/data/service/preferences/preferences.dart';
 
 import 'firebase_options.dart';
 
@@ -18,6 +19,8 @@ void main() async {
   );
   await NotificationService.instance.initialize();
   await Injector.register();
+  final prefs = await PreferencesService.instance;
+  final savedLanguageCode = prefs.appLanguage ?? 'en';
 
-  runApp(const App());
+  runApp(App(initialLang: savedLanguageCode));
 }

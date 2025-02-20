@@ -56,7 +56,7 @@ class NotificationBody extends StatelessWidget {
     return BlocBuilder<NotificationCubit, BaseState>(
       builder: (context, state) {
         if (state is LoadingState) {
-          return const ShimmerLoading(); // Show shimmer effect while loading
+          return const ShimmerLoading();
         } else if (state is SuccessState) {
           return SafeArea(
             child: Padding(

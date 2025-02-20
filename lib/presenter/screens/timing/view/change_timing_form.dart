@@ -10,6 +10,7 @@ import 'package:language_learning/presenter/screens/timing/view/change_timing_he
 import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:intl/intl.dart';
+
 class ChangeTimingForm extends StatelessWidget {
   const ChangeTimingForm({super.key});
 
@@ -39,7 +40,8 @@ class ChangeTimingForm extends StatelessWidget {
                     child: _buildTimePickerField(
                       context: context,
                       label: 'Start Time',
-                      selectedTime: changeTimingProvider.startTime ?? _parseTimeString(data.startTime),
+                      selectedTime: changeTimingProvider.startTime ??
+                          _parseTimeString(data.startTime),
                       onTimeSelected: (newTime) {
                         changeTimingProvider.setStartTime(newTime);
                       },
@@ -50,7 +52,8 @@ class ChangeTimingForm extends StatelessWidget {
                     child: _buildTimePickerField(
                       context: context,
                       label: 'End Time',
-                      selectedTime: changeTimingProvider.endTime ?? _parseTimeString(data.endTime),
+                      selectedTime: changeTimingProvider.endTime ??
+                          _parseTimeString(data.endTime),
                       onTimeSelected: (newTime) {
                         changeTimingProvider.setEndTime(newTime);
                       },
@@ -85,7 +88,6 @@ class ChangeTimingForm extends StatelessWidget {
       return null;
     }
   }
-
 
   Widget _buildTimePickerField({
     required BuildContext context,
@@ -137,7 +139,11 @@ class ChangeTimingForm extends StatelessWidget {
               children: [
                 PrimaryText(
                   text: selectedTime != null
-                      ? DateFormat.jm().format(selectedTime.toUtc().add(Duration(hours: 4))) // Convert to UTC+4 before displaying
+                      ? DateFormat.jm().format(
+                          selectedTime.toUtc().add(
+                                Duration(hours: 4),
+                              ),
+                        )
                       : "00:00",
                   fontSize: 16,
                   color: selectedTime != null
@@ -156,6 +162,4 @@ class ChangeTimingForm extends StatelessWidget {
       ),
     );
   }
-
-
 }

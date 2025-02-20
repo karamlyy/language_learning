@@ -6,6 +6,8 @@ import 'package:language_learning/generic/base_state.dart';
 import 'package:language_learning/presenter/screens/home/cubit/home_cubit.dart';
 import 'package:language_learning/presenter/screens/home/provider/home_provider.dart';
 import 'package:language_learning/presenter/screens/home/widgets/word_card.dart';
+import 'package:language_learning/presenter/widgets/primary_text.dart';
+import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:provider/provider.dart';
 
 class HomeWords extends StatelessWidget {
@@ -32,10 +34,19 @@ class HomeWordsList extends StatelessWidget {
       stream: context.read<HomeCubit>().lastWordsController,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          if (snapshot.data!.items.isEmpty) {
+            return Center(
+              child: PrimaryText(
+                text: 'You have not added words yet',
+                color: AppColors.primaryText,
+                fontWeight: FontWeight.w400,
+              ),
+            );
+          }
           return Padding(
             padding: const EdgeInsets.all(16.0).r,
             child: SizedBox(
-              height: 1000,
+              height: 2000,
               child: ListView.builder(
                 physics: ClampingScrollPhysics(),
                 scrollDirection: Axis.vertical,
@@ -48,7 +59,6 @@ class HomeWordsList extends StatelessWidget {
                     word: wordPair?.source,
                     translation: wordPair?.translation,
                     isAdded: wordPair?.isLearningNow,
-
                   );
                 },
               ),
