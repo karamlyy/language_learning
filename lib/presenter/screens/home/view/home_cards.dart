@@ -76,7 +76,7 @@ class HomeCardsList extends StatelessWidget {
                                       fontFamily: 'DMSerifDisplay',
                                     ),
                                     PrimaryText(
-                                      text: ' Vocabulary ',
+                                      text: 'Vocabulary',
                                       color: AppColors.primaryText
                                           .withValues(alpha: 0.8),
                                       fontWeight: FontWeight.w400,
@@ -117,11 +117,12 @@ class HomeCardsList extends StatelessWidget {
                                       fontFamily: 'DMSerifDisplay',
                                     ),
                                     PrimaryText(
-                                      text: 'Learning now',
+                                      text: 'Learning\n now',
                                       color: AppColors.primaryText
                                           .withValues(alpha: 0.8),
                                       fontWeight: FontWeight.w400,
                                       fontSize: 16,
+                                      textAlign: TextAlign.end,
                                     ),
                                   ],
                                 ),

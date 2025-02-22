@@ -15,6 +15,7 @@ class ApiRoutes {
 
   static const String changePassword = 'ChangePassword';
 
+
   static const String getNotificationSettings = 'NotificationSetting/GetByUserId';
   static const String changeNotificationSettings = 'NotificationSetting/Update';
 
@@ -39,6 +40,13 @@ class ApiRoutes {
   static const String getAllWords = 'UserVocabulary/GetPaginatedByUserId';
 
   static const String deleteWord = 'UserVocabulary/Delete';
+
+  static const String updateWord = 'UserVocabulary/Update';
+
+  static const String downloadTemplate = 'UserVocabularyDownloadTemplate';
+
+  static const String uploadTemplate = 'UserVocabulary/AddFromFile';
+
 
   static const String getAllLearningWords = 'UserVocabulary/GetPaginatedLearningByUserId';
 

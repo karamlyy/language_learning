@@ -61,6 +61,7 @@ class HomeBody extends StatelessWidget {
                                 fontWeight: FontWeight.w400,
                                 fontSize: 26,
                                 fontFamily: 'DMSerifDisplay',
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),

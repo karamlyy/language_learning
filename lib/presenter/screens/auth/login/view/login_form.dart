@@ -36,19 +36,16 @@ class LoginForm extends StatelessWidget {
                     isObscureText: false,
                     hasError: loginProvider.emailError != null,
                     suffixIcon: Padding(
-                      padding: const EdgeInsets.all(16.0).r,
-                      child: Lottie.asset(
+                      padding: EdgeInsets.all(16.0).r,
+                      child: Icon(
                         loginProvider.emailError != null
-                            ? 'assets/lotties/error_icon.json'
+                            ? Icons.error
                             : (loginProvider.email.isNotEmpty
-                            ? 'assets/lotties/done.json'
-                            : 'assets/lotties/mail.json'),
-                        width: 20.w,
-                        height: 20.h,
+                                ? Icons.done
+                                : Icons.mail),
+                        color: AppColors.primaryText.withValues(alpha: 0.6),
                       ),
                     ),
-
-
                   ),
                   16.verticalSpace,
                   PrimaryTextFormField(
@@ -59,7 +56,6 @@ class LoginForm extends StatelessWidget {
                     isObscureText: !loginProvider.isPasswordVisible,
                     hasError: loginProvider.passwordError != null,
                     suffixIcon: IconButton(
-
                       iconSize: 20.h,
                       padding: const EdgeInsets.all(16.0).r,
                       onPressed: () {

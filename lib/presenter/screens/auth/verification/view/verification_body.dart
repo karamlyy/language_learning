@@ -26,7 +26,7 @@ class VerificationBody extends StatelessWidget {
               ],
             ),
           ),
-          const VerificationFooter(),
+          //const VerificationFooter(),
         ],
       ),
     );

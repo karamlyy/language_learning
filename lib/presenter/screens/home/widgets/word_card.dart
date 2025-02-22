@@ -21,6 +21,11 @@ class WordCard extends StatelessWidget {
     this.onBookmarkTap,
   });
 
+  String _truncateText(String? text, int maxLength) {
+    if (text == null) return '';
+    return text.length > maxLength ? '${text.substring(0, maxLength)}...' : text;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,20 +37,20 @@ class WordCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(24.0).r,
         ),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2 .h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   PrimaryText(
-                    text: '$word - ',
+                    text: '${_truncateText(word, 10)} - ',
                     color: AppColors.primaryText,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
                   PrimaryText(
-                    text: translation,
+                    text: _truncateText(translation, 10),
                     color: AppColors.primaryText,
                     fontWeight: FontWeight.w400,
                     fontSize: 16,

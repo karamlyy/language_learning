@@ -27,56 +27,57 @@ class HomeAppbar extends StatelessWidget {
 
           return Padding(
             padding: const EdgeInsets.all(8.0).r,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    PrimaryText(
-                      text: selectedPair?.sourceLanguage ?? 'N/A',
-                      color: AppColors.primaryText,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
-                    PrimaryText(
-                      text: ' - ${selectedPair?.translationLanguage ?? 'N/A'}',
-                      color: AppColors.primaryText,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
-                    IconButton(
-                      onPressed: () async {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return HomeLanguagesPairs(
-                              languagePairs: state.data,
-                              homeProvider: homeProvider,
-                              onLanguagePairSelected: (id) async {
-                                await homeCubit.setSelectedLanguagePair(id);
-                                homeCubit.getCardCounts();
-                                homeCubit.getLastWords();
-                              },
-                            );
-                          },
-                        );
+            child: CupertinoButton(
+              onPressed: () async {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return HomeLanguagesPairs(
+                      languagePairs: state.data,
+                      homeProvider: homeProvider,
+                      onLanguagePairSelected: (id) async {
+                        await homeCubit.setSelectedLanguagePair(id);
+                        homeCubit.getCardCounts();
+                        homeCubit.getLastWords();
                       },
-                      icon: Icon(
+                    );
+                  },
+                );
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      PrimaryText(
+                        text: selectedPair?.sourceLanguage ?? 'N/A',
+                        color: AppColors.primaryText,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                      PrimaryText(
+                        text:
+                            ' - ${selectedPair?.translationLanguage ?? 'N/A'}',
+                        color: AppColors.primaryText,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                      Icon(
                         Icons.keyboard_arrow_down_outlined,
                         color: AppColors.primaryText,
                         size: 24.w,
                       ),
-                    ),
-                  ],
-                ),
-                IconButton(
-                  icon: Icon(CupertinoIcons.bell),
-                  onPressed: () {
-                    Navigation.push(Routes.notification);
-                  },
-                  iconSize: 28.w,
-                ),
-              ],
+                    ],
+                  ),
+                  IconButton(
+                    icon: Icon(CupertinoIcons.bell),
+                    onPressed: () {
+                      Navigation.push(Routes.notification);
+                    },
+                    iconSize: 28.w,
+                  ),
+                ],
+              ),
             ),
           );
         } else if (state is LoadingState) {

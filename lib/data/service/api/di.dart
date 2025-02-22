@@ -2,6 +2,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:language_learning/data/repository/auth_repository.dart';
 import 'package:language_learning/data/repository/category_repository.dart';
+import 'package:language_learning/data/repository/file_repository.dart';
 import 'package:language_learning/data/repository/home_repository.dart';
 import 'package:language_learning/data/repository/language_repository.dart';
 import 'package:language_learning/data/repository/notification_repository.dart';
@@ -49,5 +50,8 @@ class Injector {
 
     getIt.registerFactory<NotificationRepository>(
             () => NotificationRepositoryImpl(getIt.get()));
+
+    getIt.registerFactory<FileRepository>(
+            () => FileRepositoryImpl(getIt.get()));
   }
 }

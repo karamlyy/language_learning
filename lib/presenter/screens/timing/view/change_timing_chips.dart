@@ -52,7 +52,7 @@ class ChangeTimingChips extends StatelessWidget {
                 ),
                 selectedColor: AppColors.primary,
                 backgroundColor: data.intervalId == interval.id
-                    ? AppColors.itemBackground
+                    ? AppColors.primary.withValues(alpha: 0.4)
                     : AppColors.unselectedItemBackground,
               );
             } else {

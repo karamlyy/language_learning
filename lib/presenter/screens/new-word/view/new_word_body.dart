@@ -4,6 +4,7 @@ import 'package:language_learning/presenter/screens/new-word/view/new_word_input
 
 import 'package:language_learning/presenter/screens/new-word/cubit/new_word_cubit.dart';
 import 'package:language_learning/presenter/screens/new-word/provider/new_word_provider.dart';
+import 'package:language_learning/presenter/screens/new-word/view/new_word_upload.dart';
 import 'package:provider/provider.dart';
 class NewWordBody extends StatelessWidget {
   const NewWordBody({super.key});
@@ -18,6 +19,7 @@ class NewWordBody extends StatelessWidget {
             child: ListView(
               children: [
                 NewWordInputs(),
+                //NewWordUpload(),
               ],
             ),
           ),

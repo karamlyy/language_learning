@@ -22,9 +22,9 @@ class ChangeTimingInput {
   final DateTime? endTime;
 
   ChangeTimingInput({
-    required this.intervalId,
-    required this.startTime,
-    required this.endTime,
+    this.intervalId,
+    this.startTime,
+    this.endTime,
   });
 
   Map<String, dynamic> toJson() => {

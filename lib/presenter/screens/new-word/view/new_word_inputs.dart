@@ -225,7 +225,7 @@ class NewWordInputs extends StatelessWidget {
                   // Text field for entering the word.
                   PrimaryTextFormField(
                     initialText: newWordProvider.word,
-                    onChanged: (value) => newWordProvider.updateWord(value),
+                    onChanged: (value) => newWordProvider.updateWord(value.trim()),
                     isFilled: false,
                     defaultBorderColor: Colors.transparent,
                     defaultEnabledBorderColor: Colors.transparent,
@@ -284,7 +284,7 @@ class NewWordInputs extends StatelessWidget {
                   ),
                   PrimaryTextFormField(
                     initialText: newWordProvider.translation,
-                    onChanged: (value) => newWordProvider.updateTranslation(value),
+                    onChanged: (value) => newWordProvider.updateTranslation(value.trim()),
                     isFilled: false,
                     defaultBorderColor: Colors.transparent,
                     defaultEnabledBorderColor: Colors.transparent,

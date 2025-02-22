@@ -35,18 +35,21 @@ class HomeWordsList extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.items.isEmpty) {
-            return Center(
-              child: PrimaryText(
-                text: 'You have not added words yet',
-                color: AppColors.primaryText,
-                fontWeight: FontWeight.w400,
+            return Padding(
+              padding: const EdgeInsets.all(50.0).r,
+              child: Center(
+                child: PrimaryText(
+                  text: 'You have not added words yet',
+                  color: AppColors.primaryText,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             );
           }
           return Padding(
             padding: const EdgeInsets.all(16.0).r,
             child: SizedBox(
-              height: 2000,
+              height: 1000,
               child: ListView.builder(
                 physics: ClampingScrollPhysics(),
                 scrollDirection: Axis.vertical,

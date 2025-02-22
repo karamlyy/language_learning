@@ -21,7 +21,7 @@ class ChangeTimingButton extends StatelessWidget {
         return PrimaryButton(
           title: 'Change',
           hasBorder: false,
-          isActive: changeTimingProvider.isIntervalSelected ?? false,
+          isActive: changeTimingProvider.isFormValid,
           onTap: () {
             changeTimingCubit.changeTiming(changeTimingProvider.timingInput);
           },

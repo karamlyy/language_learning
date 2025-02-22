@@ -31,6 +31,11 @@ class HomeQuizButton extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
               borderRadius: BorderRadius.circular(16).r,
+              border: Border.all(
+                color: AppColors.primary,
+                width: 2,
+              ),
+
             ),
             child: CupertinoButton(
               padding: EdgeInsets.all(12).r,
@@ -48,7 +53,7 @@ class HomeQuizButton extends StatelessWidget {
                       ),
                       content: const PrimaryText(
                         text:
-                            "There are no learning words available to start the quiz.",
+                        "There are no learning words available to start the quiz.",
                         color: AppColors.primaryText,
                         fontWeight: FontWeight.w400,
                       ),
@@ -66,10 +71,8 @@ class HomeQuizButton extends StatelessWidget {
               },
               child: Center(
                 child: PrimaryText(
-                  text: 'Lets start quiz',
-                  color: learningCount == 0
-                      ? AppColors.primaryText
-                      : AppColors.primaryText,
+                  text: 'Let’s start quiz',
+                  color: AppColors.primaryText,
                   fontWeight: FontWeight.w400,
                   fontSize: 24,
                   fontFamily: 'DMSerifDisplay',

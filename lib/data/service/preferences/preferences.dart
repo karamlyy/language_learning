@@ -78,7 +78,7 @@ class PreferencesService {
   final _accessToken = "accessToken";
   final _refreshToken = "refreshToken";
   final _langTitle = "langTitle";
-  final _appLanguage = "az";
+  final _appLanguage = "appLanguage";
 
   final _userId = "userId";
   final _fullName = "fullname";

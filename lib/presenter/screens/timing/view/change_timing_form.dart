@@ -22,6 +22,15 @@ class ChangeTimingForm extends StatelessWidget {
       builder: (context, state) {
         if (state is SuccessState) {
           final data = state.data;
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            changeTimingProvider.initialize(
+              intervalId: data.intervalId,
+              startTime: data.startTime,
+              endTime: data.endTime,
+            );
+          });
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

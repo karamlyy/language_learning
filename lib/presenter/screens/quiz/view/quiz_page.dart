@@ -158,18 +158,20 @@ class QuizBody extends StatelessWidget {
                   horizontal: 12.w,
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     PrimaryText(
                       text: 'Tap the right answer:',
                       color: AppColors.inputHeading,
                       fontWeight: FontWeight.w600,
                     ),
-                    8.verticalSpace,
+                    12.verticalSpace,
                     PrimaryText(
                       text: quizData.question,
                       color: AppColors.primaryText,
                       fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
@@ -193,49 +195,37 @@ class QuizBody extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                       ),
-                      tileColor: AppColors.unselectedItemBackground,
+                      tileColor: quizProvider.selectedAnswer != null &&
+                          quizProvider.selectedAnswer == answer &&
+                          !(quizProvider.selectedAnswerCorrect ?? false)
+                          ? AppColors.wrong
+                          : AppColors.unselectedItemBackground,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(44.0).r,
+                        side: BorderSide(
+                          color: quizProvider.selectedAnswer != null &&
+                              quizProvider.correctAnswer == answer
+                              ? AppColors.success
+                              : Colors.transparent,
+                          width: 2,
+                        ),
                       ),
-                      onTap: () {
+                      onTap: quizProvider.isAnswerLocked
+                          ? null
+                          : () {
+                        String correctAnswer = quizData.answers.entries
+                            .firstWhere((entry) => entry.value == true)
+                            .key;
+
+                        quizProvider.setSelectedAnswer(answer, isCorrect, correctAnswer);
+
                         if (isCorrect) {
                           quizProvider.setCorrectAnswerSelected(true);
+                          quizProvider.addCorrectAnswerCount();
                         } else {
                           quizProvider.decrementChance();
                         }
-
                         quizProvider.selectAnswer(true);
-
-                        toastification.show(
-                          context: context,
-                          closeButtonShowType: CloseButtonShowType.none,
-                          icon: isCorrect
-                              ? SvgPicture.asset(
-                                  Images.happyFace,
-                                  fit: BoxFit.cover,
-                                  width: 36.w,
-                                  height: 36.h,
-                                )
-                              : SvgPicture.asset(
-                                  Images.sadFace,
-                                  fit: BoxFit.cover,
-                                  width: 36.w,
-                                  height: 36.h,
-                                ),
-                          title: PrimaryText(
-                            color:
-                                isCorrect ? AppColors.success : AppColors.wrong,
-                            fontWeight: FontWeight.w600,
-                            text: isCorrect ? 'Correct !' : 'Incorrect',
-                            fontSize: 22,
-                          ),
-                          autoCloseDuration: Duration(seconds: 2),
-                          showProgressBar: false,
-                          backgroundColor: isCorrect
-                              ? AppColors.successBackground
-                              : AppColors.wrongBackground,
-                          alignment: Alignment.bottomCenter,
-                        );
 
                         if (quizProvider.chances == 0) {
                           showDialog(
@@ -293,7 +283,7 @@ class QuizBody extends StatelessWidget {
                 pressedOpacity: 1,
                 padding: EdgeInsets.zero,
                 onPressed: () async {
-                  quizProvider.toggleAddToMaster();
+                  //quizProvider.toggleAddToMaster();
 
                   await quizCubit.addToMaster(quizData.id, quizProvider);
                   homeCubit.getCardCounts();
@@ -327,14 +317,13 @@ class QuizBody extends StatelessWidget {
               hasBorder: false,
               isActive: quizProvider.isAnswerSelected,
               onTap: () {
-                if (quizProvider.isCorrectAnswerSelected) {
-                  quizProvider.addCorrectAnswerCount();
-                }
 
+                quizProvider.unlockAnswerSelection();
                 quizProvider.setAddToMaster(false);
                 quizCubit.getQuizQuestion();
                 quizProvider.selectAnswer(false);
                 quizProvider.setCorrectAnswerSelected(false);
+
               },
             ),
           ],

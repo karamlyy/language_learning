@@ -79,7 +79,7 @@ class HomeCubit extends Cubit<BaseState> {
   }
 
   Future<void> getLastWords() async {
-    final result = await _homeRepository.getAllWords(1, 20);
+    final result = await _homeRepository.getAllWords(1, 10);
     result.fold(
       (error) => emit(
         FailureState(errorMessage: error.error),

@@ -51,6 +51,25 @@ class AddLanguagePairList extends StatelessWidget {
                   ],
                 ),
               ),
+              secondaryBackground: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(26.r),
+                  color: AppColors.success,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 16.w),
+                      child: Icon(
+                        CupertinoIcons.add_circled,
+                        color: AppColors.itemBackground,
+                        size: 20.w,
+                      ),
+                    )
+                  ],
+                ),
+              ),
               confirmDismiss: (direction) async {
                 if (languagePair.isSelected) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -60,12 +79,26 @@ class AddLanguagePairList extends StatelessWidget {
                   );
                   return false;
                 }
+                if (direction == DismissDirection.endToStart) {
+                  await homeCubit.setSelectedLanguagePair(languagePair.id);
+                  homeCubit.getAllLanguagePairs();
+                  homeCubit.getLastWords();
+                  homeCubit.getCardCounts();
+                  homeCubit.setSelectedLanguagePair(languagePair.id);
+                }
                 return true;
               },
               onDismissed: (direction) async {
                 if (direction == DismissDirection.startToEnd) {
                   await addLanguagePairCubit.deleteLanguagePair(languagePair.id);
                   homeCubit.getAllLanguagePairs();
+                }
+                if (direction == DismissDirection.endToStart) {
+                  await homeCubit.setSelectedLanguagePair(languagePair.id);
+                  homeCubit.getAllLanguagePairs();
+                  homeCubit.getLastWords();
+                  homeCubit.getCardCounts();
+                  homeCubit.setSelectedLanguagePair(languagePair.id);
                 }
               },
               child: ListTile(
