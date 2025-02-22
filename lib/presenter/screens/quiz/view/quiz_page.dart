@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -179,103 +181,136 @@ class QuizBody extends StatelessWidget {
             ),
             10.verticalSpace,
             Expanded(
-              child: ListView.builder(
-                itemCount: quizData.answers.length,
-                itemBuilder: (context, index) {
-                  String answer = quizData.answers.keys.elementAt(index);
-                  bool isCorrect = quizData.answers[answer] ?? false;
+              child: Stack(
+                children: [
+                  ListView.builder(
+                    itemCount: quizData.answers.length,
+                    itemBuilder: (context, index) {
+                      String answer = quizData.answers.keys.elementAt(index);
+                      bool isCorrect = quizData.answers[answer] ?? false;
 
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
-                      title: PrimaryText(
-                        text: answer,
-                        color: AppColors.primaryText,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
-                      tileColor: quizProvider.selectedAnswer != null &&
-                          quizProvider.selectedAnswer == answer &&
-                          !(quizProvider.selectedAnswerCorrect ?? false)
-                          ? AppColors.wrong
-                          : AppColors.unselectedItemBackground,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(44.0).r,
-                        side: BorderSide(
-                          color: quizProvider.selectedAnswer != null &&
-                              quizProvider.correctAnswer == answer
-                              ? AppColors.success
-                              : Colors.transparent,
-                          width: 2,
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.h),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
+                          title: PrimaryText(
+                            text: answer,
+                            color: AppColors.primaryText,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                          tileColor: quizProvider.selectedAnswer != null &&
+                              quizProvider.selectedAnswer == answer &&
+                              !(quizProvider.selectedAnswerCorrect ?? false)
+                              ? AppColors.wrong
+                              : AppColors.unselectedItemBackground,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(44.0).r,
+                            side: BorderSide(
+                              color: quizProvider.selectedAnswer != null &&
+                                  quizProvider.correctAnswer == answer
+                                  ? AppColors.success
+                                  : Colors.transparent,
+                              width: 2,
+                            ),
+                          ),
+                          onTap: quizProvider.isAnswerLocked
+                              ? null
+                              : () {
+                            String correctAnswer = quizData.answers.entries
+                                .firstWhere((entry) => entry.value == true)
+                                .key;
+
+                            quizProvider.setSelectedAnswer(answer, isCorrect, correctAnswer);
+
+                            if (isCorrect) {
+                              quizProvider.setCorrectAnswerSelected(true);
+                              quizProvider.addCorrectAnswerCount();
+                            } else {
+                              quizProvider.decrementChance();
+                            }
+                            quizProvider.selectAnswer(true);
+
+                            if (quizProvider.chances == 0) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: PrimaryText(
+                                    color: AppColors.primaryText,
+                                    fontWeight: FontWeight.w400,
+                                    text: 'Finished',
+                                    fontSize: 20,
+                                    fontFamily: 'DMSerifDisplay',
+                                  ),
+                                  content: PrimaryText(
+                                    color: AppColors.primaryText
+                                        .withValues(alpha: 0.7),
+                                    fontWeight: FontWeight.w400,
+                                    text: 'You did 3 mistakes',
+                                    fontSize: 14,
+                                  ),
+                                  actions: [
+                                    PrimaryButton(
+                                      title: 'Restart',
+                                      hasBorder: false,
+                                      isActive: true,
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                        quizProvider.resetChances();
+                                        quizCubit.getQuizQuestion();
+                                      },
+                                    ),
+                                    5.verticalSpace,
+                                    PrimaryButton(
+                                      title: 'Finish',
+                                      hasBorder: true,
+                                      isActive: true,
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+
+                                        quizCubit.createQuizReport(
+                                            quizProvider.correctAnswerCount);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      );
+                    },
+                  ),
+
+                  // Blurred Overlay
+                  if (!quizProvider.isAnswersUnblurred)
+                    Positioned.fill(
+                      bottom: 40.h,
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.r),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+                          child: Container(
+                            color: Colors.black.withOpacity(0.1),
+                          ),
                         ),
                       ),
-                      onTap: quizProvider.isAnswerLocked
-                          ? null
-                          : () {
-                        String correctAnswer = quizData.answers.entries
-                            .firstWhere((entry) => entry.value == true)
-                            .key;
-
-                        quizProvider.setSelectedAnswer(answer, isCorrect, correctAnswer);
-
-                        if (isCorrect) {
-                          quizProvider.setCorrectAnswerSelected(true);
-                          quizProvider.addCorrectAnswerCount();
-                        } else {
-                          quizProvider.decrementChance();
-                        }
-                        quizProvider.selectAnswer(true);
-
-                        if (quizProvider.chances == 0) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: PrimaryText(
-                                color: AppColors.primaryText,
-                                fontWeight: FontWeight.w400,
-                                text: 'Finished',
-                                fontSize: 20,
-                                fontFamily: 'DMSerifDisplay',
-                              ),
-                              content: PrimaryText(
-                                color: AppColors.primaryText
-                                    .withValues(alpha: 0.7),
-                                fontWeight: FontWeight.w400,
-                                text: 'You did 3 mistakes',
-                                fontSize: 14,
-                              ),
-                              actions: [
-                                PrimaryButton(
-                                  title: 'Restart',
-                                  hasBorder: false,
-                                  isActive: true,
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-                                    quizProvider.resetChances();
-                                    quizCubit.getQuizQuestion();
-                                  },
-                                ),
-                                5.verticalSpace,
-                                PrimaryButton(
-                                  title: 'Finish',
-                                  hasBorder: true,
-                                  isActive: true,
-                                  onTap: () {
-                                    Navigator.of(context).pop();
-
-                                    quizCubit.createQuizReport(
-                                        quizProvider.correctAnswerCount);
-                                  },
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                      },
                     ),
-                  );
-                },
+
+                  // Unblur Button
+                  if (!quizProvider.isAnswersUnblurred)
+                    Positioned(
+                      top: 20,
+                      right: 20,
+                      child: IconButton(
+                        icon: Icon(Icons.remove_red_eye, color: AppColors.primary, size: 32),
+                        onPressed: () {
+                          quizProvider.unblurAnswers();
+                        },
+                      ),
+                    ),
+                ],
               ),
             ),
             if (quizProvider.showAddToMaster)
@@ -308,6 +343,8 @@ class QuizBody extends StatelessWidget {
                         color: AppColors.primary,
                         size: 20.w,
                       ),
+
+
                     ],
                   ),
                 ),
@@ -323,7 +360,7 @@ class QuizBody extends StatelessWidget {
                 quizCubit.getQuizQuestion();
                 quizProvider.selectAnswer(false);
                 quizProvider.setCorrectAnswerSelected(false);
-
+                quizProvider.blurAnswers();
               },
             ),
           ],
