@@ -18,6 +18,7 @@ import 'package:language_learning/presenter/screens/change-password/view/change_
 import 'package:language_learning/presenter/screens/create-language-pair/view/create_language_pair_page.dart';
 import 'package:language_learning/presenter/screens/home/view/home_page.dart';
 import 'package:language_learning/presenter/screens/learning-vocabulary/view/learning_vocabulary_page.dart';
+import 'package:language_learning/presenter/screens/master_quiz/view/master_quiz_page.dart';
 import 'package:language_learning/presenter/screens/mastered-vocabulary/view/mastered_vocabulary_page.dart';
 import 'package:language_learning/presenter/screens/new-word/view/new_word_page.dart';
 import 'package:language_learning/presenter/screens/notification/view/notification_page.dart';
@@ -82,6 +83,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return createPageRoute(const NotificationPage(), settings);
     case Routes.quiz:
       return createPageRoute(const QuizPage(), settings);
+    case Routes.masterQuiz:
+      return createPageRoute(const MasterQuizPage(), settings);
     case Routes.wordList:
       return createPageRoute(
           WordListPage(

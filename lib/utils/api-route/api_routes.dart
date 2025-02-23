@@ -6,6 +6,7 @@ class ApiRoutes {
   static const String confirmEmail = 'ConfirmEmail';
   static const String resendConfirmationEmail = 'ResendEmailConfirmationCode';
   static const String verifyCode = 'ConfirmPasswordResetCode';
+  static const String googleAuth = 'GoogleAuth';
   static const String refreshToken = 'RefreshToken';
   static const String forgotPassword = 'ForgotPassword';
   static const String confirmResetToken = 'ConfirmPasswordResetToken';

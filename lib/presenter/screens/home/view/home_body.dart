@@ -53,6 +53,9 @@ class HomeBody extends StatelessWidget {
                             child: HomeCards(),
                           ),
                           SliverToBoxAdapter(
+                            child: HomeMasterQuizButton(),
+                          ),
+                          SliverToBoxAdapter(
                             child: Padding(
                               padding: EdgeInsets.only(left: 16).r,
                               child: PrimaryText(

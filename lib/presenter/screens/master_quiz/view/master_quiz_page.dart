@@ -13,8 +13,8 @@ import 'package:language_learning/presenter/widgets/primary_text.dart';
 import 'package:language_learning/utils/colors/app_colors.dart';
 import 'package:provider/provider.dart';
 
-class QuizPage extends StatelessWidget {
-  const QuizPage({super.key});
+class MasterQuizPage extends StatelessWidget {
+  const MasterQuizPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class QuizPage extends StatelessWidget {
                     return Row(
                       children: List.generate(
                         3,
-                        (index) {
+                            (index) {
                           if (index < quizProvider.chances) {
                             return Icon(
                               CupertinoIcons.heart_fill,
@@ -86,7 +86,7 @@ class QuizPage extends StatelessWidget {
                           ),
                           content: PrimaryText(
                             text:
-                                'You got ${quizProvider.correctAnswerCount} correct answer(s).',
+                            'You got ${quizProvider.correctAnswerCount} correct answer(s).',
                             color: AppColors.primaryText.withValues(alpha: 0.8),
                             fontWeight: FontWeight.w400,
                             fontSize: 16,
@@ -110,7 +110,7 @@ class QuizPage extends StatelessWidget {
                     return Container();
                   }
 
-                  return QuizBody(quizData: quizData);
+                  return MasterQuizBody(quizData: quizData);
                 }
                 return Center(child: Text('Failed to load quiz'));
               },
@@ -122,10 +122,10 @@ class QuizPage extends StatelessWidget {
   }
 }
 
-class QuizBody extends StatelessWidget {
+class MasterQuizBody extends StatelessWidget {
   final dynamic quizData;
 
-  const QuizBody({
+  const MasterQuizBody({
     super.key,
     required this.quizData,
   });
@@ -189,7 +189,7 @@ class QuizBody extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: 8.h),
                         child: ListTile(
                           contentPadding:
-                              EdgeInsets.symmetric(horizontal: 12.w),
+                          EdgeInsets.symmetric(horizontal: 12.w),
                           title: PrimaryText(
                             text: answer,
                             color: AppColors.primaryText,
@@ -197,15 +197,15 @@ class QuizBody extends StatelessWidget {
                             fontSize: 16,
                           ),
                           tileColor: quizProvider.selectedAnswer != null &&
-                                  quizProvider.selectedAnswer == answer &&
-                                  !(quizProvider.selectedAnswerCorrect ?? false)
+                              quizProvider.selectedAnswer == answer &&
+                              !(quizProvider.selectedAnswerCorrect ?? false)
                               ? AppColors.wrong
                               : AppColors.unselectedItemBackground,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(44.0).r,
                             side: BorderSide(
                               color: quizProvider.selectedAnswer != null &&
-                                      quizProvider.correctAnswer == answer
+                                  quizProvider.correctAnswer == answer
                                   ? AppColors.success
                                   : Colors.transparent,
                               width: 2,
@@ -214,70 +214,70 @@ class QuizBody extends StatelessWidget {
                           onTap: quizProvider.isAnswerLocked
                               ? null
                               : () {
-                                  String correctAnswer = quizData
-                                      .answers.entries
-                                      .firstWhere(
-                                          (entry) => entry.value == true)
-                                      .key;
+                            String correctAnswer = quizData
+                                .answers.entries
+                                .firstWhere(
+                                    (entry) => entry.value == true)
+                                .key;
 
-                                  quizProvider.setSelectedAnswer(
-                                      answer, isCorrect, correctAnswer);
+                            quizProvider.setSelectedAnswer(
+                                answer, isCorrect, correctAnswer);
 
-                                  if (isCorrect) {
-                                    quizProvider.setCorrectAnswerSelected(true);
-                                    quizProvider.addCorrectAnswerCount();
-                                  } else {
-                                    quizProvider.decrementChance();
-                                  }
-                                  quizProvider.selectAnswer(true);
+                            if (isCorrect) {
+                              quizProvider.setCorrectAnswerSelected(true);
+                              quizProvider.addCorrectAnswerCount();
+                            } else {
+                              quizProvider.decrementChance();
+                            }
+                            quizProvider.selectAnswer(true);
 
-                                  if (quizProvider.chances == 0) {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: PrimaryText(
-                                          color: AppColors.primaryText,
-                                          fontWeight: FontWeight.w400,
-                                          text: 'Finished',
-                                          fontSize: 20,
-                                          fontFamily: 'DMSerifDisplay',
-                                        ),
-                                        content: PrimaryText(
-                                          color: AppColors.primaryText
-                                              .withValues(alpha: 0.7),
-                                          fontWeight: FontWeight.w400,
-                                          text: 'You did 3 mistakes',
-                                          fontSize: 14,
-                                        ),
-                                        actions: [
-                                          PrimaryButton(
-                                            title: 'Restart',
-                                            hasBorder: false,
-                                            isActive: true,
-                                            onTap: () {
-                                              Navigator.of(context).pop();
-                                              quizProvider.resetChances();
-                                              quizCubit.getQuizQuestion();
-                                            },
-                                          ),
-                                          5.verticalSpace,
-                                          PrimaryButton(
-                                            title: 'Finish',
-                                            hasBorder: true,
-                                            isActive: true,
-                                            onTap: () {
-                                              Navigator.of(context).pop();
+                            if (quizProvider.chances == 0) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: PrimaryText(
+                                    color: AppColors.primaryText,
+                                    fontWeight: FontWeight.w400,
+                                    text: 'Finished',
+                                    fontSize: 20,
+                                    fontFamily: 'DMSerifDisplay',
+                                  ),
+                                  content: PrimaryText(
+                                    color: AppColors.primaryText
+                                        .withValues(alpha: 0.7),
+                                    fontWeight: FontWeight.w400,
+                                    text: 'You did 3 mistakes',
+                                    fontSize: 14,
+                                  ),
+                                  actions: [
+                                    PrimaryButton(
+                                      title: 'Restart',
+                                      hasBorder: false,
+                                      isActive: true,
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                        quizProvider.resetChances();
+                                        quizCubit.getQuizQuestion();
+                                      },
+                                    ),
+                                    5.verticalSpace,
+                                    PrimaryButton(
+                                      title: 'Finish',
+                                      hasBorder: true,
+                                      isActive: true,
+                                      onTap: () {
+                                        Navigator.of(context).pop();
 
-                                              quizCubit.createQuizReport(
-                                                  quizProvider
-                                                      .correctAnswerCount);
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }
-                                },
+                                        quizCubit.createQuizReport(
+                                            quizProvider
+                                                .correctAnswerCount);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          },
                         ),
                       );
                     },
@@ -313,38 +313,6 @@ class QuizBody extends StatelessWidget {
                 ],
               ),
             ),
-            if (quizProvider.showAddToMaster)
-              CupertinoButton(
-                pressedOpacity: 1,
-                padding: EdgeInsets.zero,
-                onPressed: () async {
-                  await quizCubit.addToMaster(quizData.id, quizProvider);
-                  homeCubit.getCardCounts();
-                },
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
-                  child: Row(
-                    children: [
-                      PrimaryText(
-                        haveUnderline: TextDecoration.underline,
-                        text: 'Add to Master words',
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                      12.horizontalSpace,
-                      Icon(
-                        quizProvider.isAddedToMaster
-                            ? Icons.bookmark
-                            : Icons.bookmark_outline,
-                        color: AppColors.primary,
-                        size: 20.w,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
             PrimaryButton(
               title: 'Next',
               hasBorder: false,

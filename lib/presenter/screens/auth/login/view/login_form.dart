@@ -41,7 +41,7 @@ class LoginForm extends StatelessWidget {
                         loginProvider.emailError != null
                             ? Icons.error
                             : (loginProvider.email.isNotEmpty
-                                ? Icons.done
+                                ? CupertinoIcons.check_mark_circled_solid
                                 : Icons.mail),
                         color: AppColors.primaryText.withValues(alpha: 0.6),
                       ),

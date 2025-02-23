@@ -32,6 +32,7 @@ class QuizCubit extends Cubit<BaseState> {
       (error) => emit(FailureState(errorMessage: error.error)),
       (data) {
         quizProvider.addToMaster(!quizProvider.isAddedToMaster);
+
       },
     );
   }

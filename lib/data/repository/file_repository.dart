@@ -1,14 +1,14 @@
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:language_learning/data/endpoint/file/download_file_endpoint.dart';
+import 'package:language_learning/data/endpoint/file/upload_file_endpoint.dart';
 import 'package:language_learning/data/exception/error.dart';
 import 'package:language_learning/data/service/api/api.dart';
 
 abstract class FileRepository {
   Future<Either<HttpException, File>> downloadTemplate();
 
-  Future<Either<HttpException, void>> uploadTemplate();
+  Future<Either<HttpException, void>> uploadTemplate(File file);
 }
 
 class FileRepositoryImpl extends FileRepository {
@@ -22,7 +22,7 @@ class FileRepositoryImpl extends FileRepository {
   }
 
   @override
-  Future<Either<HttpException, void>> uploadTemplate() async {
-    return await apiService.task(DownloadFileEndpoint());
+  Future<Either<HttpException, void>> uploadTemplate(File file) async {
+    return await apiService.task(UploadFileEndpoint(file));
   }
 }

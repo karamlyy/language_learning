@@ -15,6 +15,7 @@ enum Routes {
   home('home'),
   notification('notification'),
   quiz('quiz'),
+  masterQuiz('master-quiz'),
   wordList('word-list'),
   vocabulary('vocabulary'),
   learningVocabulary('learning-vocabulary'),
