@@ -14,7 +14,7 @@ class MasteredVocabularyCubit extends Cubit<BaseState> {
 
   void getMasteredVocabulary() async {
     emit(LoadingState());
-    final result = await _vocabularyRepository.getAllMasterWords(1, 20);
+    final result = await _vocabularyRepository.getAllMasterWords();
     result.fold(
       (error) => emit(
         FailureState(errorMessage: error.error),

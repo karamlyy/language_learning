@@ -12,6 +12,7 @@ import 'package:language_learning/data/model/language/language_model.dart';
 import 'package:language_learning/data/model/notification/notification_model.dart';
 import 'package:language_learning/data/model/quiz/question_model.dart';
 import 'package:language_learning/data/model/settings/timing_model.dart';
+import 'package:language_learning/data/model/word/list_word_model.dart';
 
 class ResponseModel<T> {
   int status;
@@ -52,6 +53,7 @@ class ResponseModel<T> {
               .map((e) => NotificationModel.fromJson(e))
               .toList() as T;
 
+
         case const (List<CategoryModel>):
           return (data["data"] as List)
               .map((e) => CategoryModel.fromJson(e))
@@ -66,6 +68,8 @@ class ResponseModel<T> {
               .toList() as T;
         case const (UserVocabularyModel):
           return UserVocabularyModel.fromJson(data) as T;
+        case const (ListWordModel):
+          return ListWordModel.fromJson(data) as T;
         case const (QuestionModel):
           return QuestionModel.fromJson(data) as T;
         case const (CardModel):

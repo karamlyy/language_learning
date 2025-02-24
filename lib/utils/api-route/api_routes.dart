@@ -39,6 +39,7 @@ class ApiRoutes {
   static const String getAllNotification = 'UserNotification/GetAllByUserId';
 
   static const String getAllWords = 'UserVocabulary/GetPaginatedByUserId';
+  static const String getAllWordsList = 'UserVocabulary/GetAllByUserId';
 
   static const String deleteWord = 'UserVocabulary/Delete';
 
@@ -49,9 +50,11 @@ class ApiRoutes {
   static const String uploadTemplate = 'UserVocabulary/AddFromFile';
 
 
-  static const String getAllLearningWords = 'UserVocabulary/GetPaginatedLearningByUserId';
+  //static const String getAllLearningWords = 'UserVocabulary/GetPaginatedLearningByUserId';
 
-  static const String getAllMasteredWords = 'UserVocabulary/GetPaginatedMasteredByUserId';
+  static const String getAllLearningWords = 'UserVocabulary/GetAllLearningByUserId';
+
+  static const String getAllMasteredWords = 'UserVocabulary/GetAllMasteredByUserId';
   static const String getUserLanguagePairs = 'UserLanguage/GetAllByUserId';
   static const String deleteLanguagePair = 'UserLanguage/Delete';
   static const String getQuizQuestion = 'Quiz/GetQuestion';

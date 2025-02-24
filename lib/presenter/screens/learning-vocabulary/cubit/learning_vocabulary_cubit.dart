@@ -28,7 +28,7 @@ class LearningVocabularyCubit extends Cubit<BaseState> {
 
   void getLearningVocabulary() async {
     emit(LoadingState());
-    final result = await _vocabularyRepository.getAllLearningWords(1, 20);
+    final result = await _vocabularyRepository.getAllLearningWords();
     result.fold(
       (error) => emit(
         FailureState(errorMessage: error.error),
