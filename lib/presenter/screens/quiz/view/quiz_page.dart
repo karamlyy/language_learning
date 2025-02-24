@@ -145,7 +145,7 @@ class QuizBody extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: 100.h,
+              height: 110.h,
               decoration: BoxDecoration(
                 color: AppColors.unselectedItemBackground,
                 borderRadius: BorderRadius.circular(24).r,
@@ -168,7 +168,7 @@ class QuizBody extends StatelessWidget {
                       text: quizData.question,
                       color: AppColors.primaryText,
                       fontWeight: FontWeight.w600,
-                      fontSize: 18,
+                      fontSize: 22,
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -197,17 +197,17 @@ class QuizBody extends StatelessWidget {
                             fontSize: 16,
                           ),
                           tileColor: quizProvider.selectedAnswer != null &&
-                                  quizProvider.selectedAnswer == answer &&
-                                  !(quizProvider.selectedAnswerCorrect ?? false)
-                              ? AppColors.wrong
+                              quizProvider.correctAnswer == answer
+                              ? AppColors.success.withValues(alpha: 0.3)
                               : AppColors.unselectedItemBackground,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(44.0).r,
                             side: BorderSide(
-                              color: quizProvider.selectedAnswer != null &&
-                                      quizProvider.correctAnswer == answer
+                              color: quizProvider.selectedAnswer == answer
+                                  ? (quizProvider.selectedAnswerCorrect ?? false
                                   ? AppColors.success
-                                  : Colors.transparent,
+                                  : AppColors.wrong)
+                                  : AppColors.itemBorder,
                               width: 2,
                             ),
                           ),

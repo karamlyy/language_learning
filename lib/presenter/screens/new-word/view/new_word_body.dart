@@ -17,7 +17,7 @@ class NewWordBody extends StatelessWidget {
             child: ListView(
               children: [
                 NewWordInputs(),
-                NewWordDownload(),
+                //NewWordDownload(),
                 NewWordUpload()
               ],
             ),

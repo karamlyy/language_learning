@@ -25,4 +25,5 @@ class FileRepositoryImpl extends FileRepository {
   Future<Either<HttpException, void>> uploadTemplate(File file) async {
     return await apiService.task(UploadFileEndpoint(file));
   }
+
 }

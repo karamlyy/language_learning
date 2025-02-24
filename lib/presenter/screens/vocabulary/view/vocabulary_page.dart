@@ -128,7 +128,7 @@ class VocabularyWordsBody extends StatelessWidget {
         } else if (state is FailureState) {
           return Center(
             child: Text(
-              'Failed to load home data: ${state.errorMessage}',
+              'Failed to load vocabulary data: ${state.errorMessage}',
             ),
           );
         } else {
@@ -220,7 +220,9 @@ class VocabularyWordsList extends StatelessWidget {
                   ),
                   confirmDismiss: (direction) async {
                     if (direction == DismissDirection.startToEnd) {
-                      vocabularyCubit.deleteWord(word.id);
+                      await vocabularyCubit.deleteWord(word.id);
+                      homeCubit.getLastWords();
+                      homeCubit.getCardCounts();
                       return true;
                     }
                     if (direction == DismissDirection.endToStart) {

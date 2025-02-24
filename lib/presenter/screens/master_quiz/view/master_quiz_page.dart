@@ -19,7 +19,7 @@ class MasterQuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => QuizCubit()..getQuizQuestion(),
+      create: (context) => QuizCubit()..getMasterQuizQuestion(),
       child: ChangeNotifierProvider(
         create: (context) => QuizProvider(),
         child: Scaffold(
@@ -257,7 +257,7 @@ class MasterQuizBody extends StatelessWidget {
                                       onTap: () {
                                         Navigator.of(context).pop();
                                         quizProvider.resetChances();
-                                        quizCubit.getQuizQuestion();
+                                        quizCubit.getMasterQuizQuestion();
                                       },
                                     ),
                                     5.verticalSpace,
@@ -320,7 +320,7 @@ class MasterQuizBody extends StatelessWidget {
               onTap: () {
                 quizProvider.unlockAnswerSelection();
                 quizProvider.setAddToMaster(false);
-                quizCubit.getQuizQuestion();
+                quizCubit.getMasterQuizQuestion();
                 quizProvider.selectAnswer(false);
                 quizProvider.setCorrectAnswerSelected(false);
                 quizProvider.blurAnswers();

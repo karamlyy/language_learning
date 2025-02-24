@@ -3,8 +3,9 @@ import 'package:language_learning/utils/api-route/api_routes.dart';
 
 class QuizEndpoint extends Endpoint {
   final List<int> excludeIds;
+  final bool? isMastered;
 
-  QuizEndpoint({required this.excludeIds});
+  QuizEndpoint({required this.excludeIds, this.isMastered});
 
   @override
   String get route => ApiRoutes.getQuizQuestion;
@@ -14,12 +15,16 @@ class QuizEndpoint extends Endpoint {
 
   @override
   Map<String, dynamic>? get queryParameters {
+    final params = <String, dynamic>{};
+
     if (excludeIds.isNotEmpty) {
-      return {
-        'excludeIds': excludeIds.map((id) => id.toString()).toList(),
-      };
-    } else {
-      return null;
+      params['excludeIds'] = excludeIds.map((id) => id.toString()).toList();
     }
+
+    if (isMastered != null) {
+      params['isMastered'] = isMastered.toString();
+    }
+
+    return params.isNotEmpty ? params : null;
   }
 }

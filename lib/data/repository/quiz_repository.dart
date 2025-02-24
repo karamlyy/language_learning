@@ -7,7 +7,7 @@ import 'package:language_learning/data/model/quiz/question_model.dart';
 import 'package:language_learning/data/service/api/api.dart';
 
 abstract class QuizRepository {
-  Future<Either<HttpException, QuestionModel>> getQuizQuestion(List<int> excludeIds);
+  Future<Either<HttpException, QuestionModel>> getQuizQuestion(List<int> excludeIds, {bool? isMastered});
   Future<Either<HttpException, void>> addToMaster(int id);
   Future<Either<HttpException, void>> createQuizReport(int correctAnswerCount);
 }
@@ -18,8 +18,8 @@ class QuizRepositoryImpl extends QuizRepository {
   QuizRepositoryImpl(this.apiService);
 
   @override
-  Future<Either<HttpException, QuestionModel>> getQuizQuestion(List<int> excludeIds) async {
-    return await apiService.task(QuizEndpoint(excludeIds: excludeIds));
+  Future<Either<HttpException, QuestionModel>> getQuizQuestion(List<int> excludeIds, {bool? isMastered}) async {
+    return await apiService.task(QuizEndpoint(excludeIds: excludeIds, isMastered: isMastered));
   }
 
   @override

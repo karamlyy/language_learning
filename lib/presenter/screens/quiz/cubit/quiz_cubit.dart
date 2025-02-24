@@ -26,6 +26,21 @@ class QuizCubit extends Cubit<BaseState> {
     );
   }
 
+  void getMasterQuizQuestion() async {
+    emit(LoadingState());
+    final result = await _quizRepository.getQuizQuestion(
+      _askedQuestionIds.isEmpty ? [0] : _askedQuestionIds,
+      isMastered: true,
+    );
+    result.fold(
+          (error) => emit(FailureState(errorMessage: error.error)),
+          (data) {
+        _askedQuestionIds.add(data.id ?? 0);
+        emit(SuccessState(data: data));
+      },
+    );
+  }
+
   Future<void> addToMaster(int id, QuizProvider quizProvider) async {
     final result = await _quizRepository.addToMaster(id);
     result.fold(
